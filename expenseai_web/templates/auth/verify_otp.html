@@ -89,7 +89,7 @@
             {{ form.hidden_tag() }}
             {{ form.email(type='hidden') }}
             {{ form.purpose(type='hidden') }}
-            {{ render_field(form.otp, icon='grid-fill', placeholder='Enter your 6-digit code', autocomplete='one-time-code', **{'data-bs-toggle': 'tooltip', 'data-bs-placement': 'left', 'title': 'Enter the code from your email. It expires soon.'}) }}
+            {{ render_field(form.otp, icon='grid-fill', placeholder='Enter your 6-digit code', autocomplete='one-time-code', attributes={'data-bs-toggle': 'tooltip', 'data-bs-placement': 'left', 'title': 'Enter the code from your email. It expires soon.'}) }}
             <button type="submit" class="btn btn-gradient-primary w-100 btn-lg text-white d-flex align-items-center justify-content-center gap-2 mt-3" data-loading-button>
               <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" data-loading-spinner></span>
               <span data-loading-label>{{ cta_label }}</span>
