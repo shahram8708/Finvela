@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% from 'macros/forms.html' import render_field %}
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  .team-management-viewport {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, rgba(21, 101, 192, 0.08), rgba(123, 31, 162, 0.08));
+    min-height: 100vh;
+  }
+
+  .tm-glass-card {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .tm-shadow-xl {
+    box-shadow: 0 20px 60px -25px rgba(18, 38, 63, 0.35);
+  }
+
+  .tm-section-title {
+    letter-spacing: 0.02em;
+  }
+
+  .tm-instruction {
+    border-left: 4px solid rgba(21, 101, 192, 0.5);
+    background: linear-gradient(135deg, rgba(21, 101, 192, 0.12), rgba(123, 31, 162, 0.12));
+  }
+
+  .tm-chip {
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .tm-subtle-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+  }
+
+  @media (max-width: 991.98px) {
+    .tm-hero {
+      text-align: center;
+    }
+  }
+</style>
+<div>
+  <div class="container-xl">
+    <section class="tm-hero tm-shadow-xl rounded-4 p-4 p-md-5 mb-5 position-relative overflow-hidden">
+      <div class="position-absolute top-0 end-0 opacity-25" style="transform: translate(30%, -30%);">
+        <div class="rounded-circle bg-primary" style="width: 180px; height: 180px; filter: blur(80px);"></div>
+      </div>
+      <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-4">
+        <div>
+          <span class="badge bg-primary-subtle text-primary-emphasis tm-chip px-3 py-2 text-uppercase">Team Operations Hub</span>
+          <h1 class="display-6 fw-bold mt-3 mb-2 tm-section-title">Team management</h1>
+          <p class="lead text-secondary mb-3">Oversee every teammate joining {{ organization.name }}. Issue invites, approve requests, and keep an eye on your seat allocation.</p>
+          <div class="alert tm-instruction border-0 text-primary-emphasis shadow-sm" role="alert">
+            <div class="d-flex gap-3 align-items-start">
+              <span class="fs-4">🧭</span>
+              <div>
+                <h2 class="h6 mb-1 fw-semibold">How to use this workspace</h2>
+                <p class="mb-0 small">Start by checking your seat usage and invitation codes on the left. Review approvals and active members on the right. Each card contains quick tips to guide the next step.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-lg-end">
+          <span class="badge bg-dark-subtle text-dark-emphasis tm-chip px-3 py-2">Organization ID</span>
+          <div class="display-6 fw-bolder text-dark mt-2">{{ organization.id }}</div>
+          <p class="text-muted small mb-3">Share this ID with internal admins for quick reference.</p>
+          <a class="btn btn-gradient btn-lg btn-primary shadow-sm" href="{{ url_for('expenseai_web.manage_billing') }}" data-bs-toggle="tooltip" data-bs-placement="left" title="Opens billing controls in a new view">
+            <i class="bi bi-credit-card-2-front me-2"></i>Manage billing & upgrades
+          </a>
+        </div>
+      </div>
+      {% if usage.limit_reached %}
+        <div class="alert alert-warning d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mt-4" role="alert">
+          <div class="d-flex align-items-center gap-2"><i class="bi bi-exclamation-triangle-fill fs-4"></i><span>{{ limit_message }}</span></div>
+          <a class="btn btn-warning" href="{{ url_for('expenseai_web.manage_billing') }}"><i class="bi bi-arrow-up-right-square-fill me-1"></i>Upgrade plan</a>
+        </div>
+      {% endif %}
+    </section>
+
+    <div class="row g-4">
+      <div class="col-xl-5">
+        <section class="tm-shadow-xl rounded-4 tm-subtle-card p-4">
+          <h2 class="h5 fw-semibold text-uppercase text-primary mb-3"><i class="bi bi-graph-up-arrow me-2"></i>Seat usage</h2>
+          <div class="alert alert-primary bg-primary-subtle border-0 text-primary-emphasis" role="alert">
+            <div class="d-flex align-items-start gap-2">
+              <span class="fs-5">📊</span>
+              <p class="small mb-0">Track how many teammates occupy your plan seats. Use this insight before approving new members.</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 mb-3">
+            {% if organization.is_premium %}
+              <span class="badge bg-success-subtle text-success-emphasis">Premium</span>
+            {% else %}
+              <span class="badge bg-secondary-subtle text-secondary-emphasis">Free tier</span>
+            {% endif %}
+            <span class="small text-muted">Limit: {{ organization.user_limit }} users</span>
+          </div>
+          <dl class="row gy-2 small mb-4">
+            <dt class="col-7 text-muted">Active members</dt>
+            <dd class="col-5 text-end fw-semibold fs-5">{{ usage.active }}</dd>
+            <dt class="col-7 text-muted">Pending approvals</dt>
+            <dd class="col-5 text-end fw-semibold fs-5">{{ usage.pending }}</dd>
+            <dt class="col-7 text-muted">Remaining seats</dt>
+            <dd class="col-5 text-end fw-semibold fs-5">{{ usage.remaining }}</dd>
+          </dl>
+          <a class="btn btn-outline-primary w-100" href="{{ url_for('expenseai_web.manage_billing') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Adjust your plan or purchase additional seats">
+            <i class="bi bi-credit-card me-1"></i>Manage upgrades
+          </a>
+        </section>
+
+        <section class="tm-shadow-xl rounded-4 tm-subtle-card p-4 mt-4">
+          <h2 class="h5 fw-semibold text-uppercase text-primary mb-3"><i class="bi bi-key-fill me-2"></i>Generate invitation code</h2>
+          <div class="alert alert-info bg-info-subtle border-0 text-info-emphasis" role="alert">
+            <div class="d-flex align-items-start gap-2">
+              <span class="fs-5">💡</span>
+              <p class="small mb-0">Choose how long the invite stays valid and how many times it can be used. Send the generated code to teammates you want to onboard.</p>
+            </div>
+          </div>
+          <form method="post" novalidate class="needs-validation">
+            <input type="hidden" name="_form_name" value="invite">
+            {{ invite_form.hidden_tag() }}
+            {{ render_field(invite_form.expires_in_hours, icon='clock-history', disabled=usage.limit_reached) }}
+            {{ render_field(invite_form.max_uses, icon='123', disabled=usage.limit_reached) }}
+            {{ invite_form.submit(class_='btn btn-primary w-100 py-2', disabled=usage.limit_reached, **{'data-bs-toggle': 'tooltip', 'data-bs-placement': 'top', 'title': 'Create a new invitation code'}) }}
+          </form>
+          <p class="text-muted small mt-3">
+            Leave the fields blank to use default settings. Sharing an invite code outside your organization grants access once you approve the request.
+          </p>
+          {% if usage.limit_reached %}
+            <div class="alert alert-warning small mb-0" role="alert">
+              <i class="bi bi-info-circle me-1"></i>{{ limit_message }}
+            </div>
+          {% endif %}
+        </section>
+
+        <section class="tm-shadow-xl rounded-4 tm-subtle-card p-4 mt-4">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h2 class="h5 fw-semibold text-uppercase text-primary mb-0"><i class="bi bi-qr-code me-2"></i>Active invites</h2>
+            <span class="badge bg-primary-subtle text-primary-emphasis">Live monitor</span>
+          </div>
+          <div class="alert alert-secondary bg-secondary-subtle border-0 text-secondary-emphasis" role="alert">
+            <div class="d-flex align-items-start gap-2">
+              <span class="fs-5">🛂</span>
+              <p class="small mb-0">Keep an eye on codes that are about to expire or have hit their usage limit. Inactive rows are highlighted to prompt quick action.</p>
+            </div>
+          </div>
+          {% if invites %}
+            <div class="table-responsive rounded-3 overflow-hidden">
+              <table class="table table-sm align-middle mb-0">
+                <thead class="table-light text-uppercase small">
+                  <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col" class="text-center">Uses</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Expires</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white">
+                  {% for invite in invites %}
+                    <tr class="{% if not invite.can_be_used() %}table-warning{% endif %}">
+                      <td><code>{{ invite.code }}</code></td>
+                      <td class="text-center">
+                        <span class="badge bg-light text-dark">{{ invite.use_count }}{% if invite.max_uses %}/{{ invite.max_uses }}{% endif %}</span>
+                      </td>
+                      <td>
+                        {% if invite.can_be_used() %}
+                          <span class="badge bg-success-subtle text-success-emphasis">Active</span>
+                        {% else %}
+                          <span class="badge bg-secondary-subtle text-secondary-emphasis">Inactive</span>
+                        {% endif %}
+                      </td>
+                      <td>
+                        {% if invite.expires_at %}
+                          {{ invite.expires_at.strftime('%Y-%m-%d %H:%M') }}
+                        {% else %}
+                          <span class="text-muted">No expiry</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <p class="text-muted mb-0">Generate your first code to invite teammates.</p>
+          {% endif %}
+        </section>
+      </div>
+
+      <div class="col-xl-7">
+        <section class="tm-shadow-xl rounded-4 tm-subtle-card p-4 ">
+          <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3">
+            <h2 class="h5 fw-semibold text-uppercase text-primary mb-0"><i class="bi bi-hourglass-split me-2"></i>Pending approvals ({{ usage.pending }})</h2>
+            <span class="badge bg-warning-subtle text-warning-emphasis">Action required</span>
+          </div>
+          <div class="alert alert-warning bg-warning-subtle border-0 text-warning-emphasis" role="alert">
+            <div class="d-flex align-items-start gap-2">
+              <span class="fs-5">⏳</span>
+              <p class="small mb-0">Review each request carefully. Approving a user reserves a seat immediately. Decline directly from the member detail page if needed.</p>
+            </div>
+          </div>
+          {% if pending_users %}
+            <div class="list-group list-group-flush">
+              {% for user in pending_users %}
+                <div class="list-group-item list-group-item-action rounded-4 my-2 p-3 p-lg-4 border-0 shadow-sm tm-glass-card">
+                  <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+                    <div>
+                      <div class="fw-semibold fs-5">{{ user.full_name }}</div>
+                      <div class="small text-muted">{{ user.email }}</div>
+                      <div class="small text-muted">Requested: {{ user.created_at.strftime('%Y-%m-%d %H:%M') }} UTC</div>
+                    </div>
+                    <form method="post" class="ms-sm-3 w-100 w-sm-auto" novalidate>
+                      <input type="hidden" name="_form_name" value="approve">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <input type="hidden" name="user_id" value="{{ user.id }}">
+                      <button type="submit" class="btn btn-success w-100" data-bs-toggle="tooltip" data-bs-placement="top" title="Approve {{ user.full_name }} and allocate a seat">
+                        <i class="bi bi-check-circle me-1"></i>Approve
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="text-center py-4">
+              <p class="text-muted mb-2">No pending members. Share a code to invite teammates.</p>
+              <a class="btn btn-outline-secondary" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Generate an invite to bring colleagues onboard">
+                <i class="bi bi-send-check me-1"></i>Share an invite code
+              </a>
+            </div>
+          {% endif %}
+        </section>
+
+        <section class="tm-shadow-xl rounded-4 tm-subtle-card p-4 mt-4">
+          <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3">
+            <h2 class="h5 fw-semibold text-uppercase text-primary mb-0"><i class="bi bi-people-fill me-2"></i>Active members ({{ usage.active }})</h2>
+            <span class="badge bg-success-subtle text-success-emphasis">Healthy roster</span>
+          </div>
+          <div class="alert alert-success bg-success-subtle border-0 text-success-emphasis" role="alert">
+            <div class="d-flex align-items-start gap-2">
+              <span class="fs-5">🤝</span>
+              <p class="small mb-0">View every teammate currently enjoying access. Need to remove someone? Head to their profile from the members directory.</p>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            {% for user in active_users %}
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 border-bottom border-light py-3">
+                <div>
+                  <div class="fw-semibold">{{ user.full_name }}</div>
+                  <div class="small text-muted">{{ user.email }}</div>
+                </div>
+                <span class="badge bg-success-subtle text-success-emphasis">Active</span>
+              </li>
+            {% else %}
+              <li class="list-group-item text-muted border-0 py-4">No active members yet.</li>
+            {% endfor %}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

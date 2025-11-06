@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% from 'macros/forms.html' import render_field %}
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  .otp-viewport {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, rgba(14, 165, 233, 0.24), rgba(99, 102, 241, 0.18));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .otp-card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 25px 70px -35px rgba(59, 130, 246, 0.5);
+    border-radius: 2rem;
+  }
+
+  .otp-chip {
+    border-radius: 9999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .otp-instruction {
+    border-left: 4px solid rgba(59, 130, 246, 0.5);
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(99, 102, 241, 0.12));
+  }
+
+  .btn-gradient-primary {
+    background: linear-gradient(135deg, #2563eb, #0ea5e9);
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-gradient-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -30px rgba(37, 99, 235, 0.65);
+  }
+
+  .otp-helper {
+    backdrop-filter: blur(12px);
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    border-radius: 1.25rem;
+  }
+
+  @media (max-width: 575.98px) {
+    .otp-card {
+      border-radius: 1.5rem;
+      padding: 2.25rem !important;
+    }
+  }
+</style>
+
+<div>
+  <div class="container">
+    <div class="row justify-content-center animate-fade-up">
+      <div class="">
+        <div class="otp-card p-4 p-md-5">
+          <div class="text-center mb-4">
+            <span class="badge bg-primary-subtle text-primary-emphasis otp-chip px-3 py-2">Identity check</span>
+            <h1 class="display-6 fw-bold mt-3">{{ purpose_label }}</h1>
+            <p class="text-muted mb-0">
+              We sent a 6-digit code to <strong>{{ masked_email or form.email.data }}</strong>. Enter it below. This code expires in {{ expiry_minutes }} minute{% if expiry_minutes|int != 1 %}s{% endif %}.
+            </p>
+          </div>
+
+          <div class="alert otp-instruction border-0 shadow-sm" role="alert">
+            <div class="d-flex gap-3 align-items-start">
+              <span class="fs-4">🧭</span>
+              <div>
+                <h2 class="h6 mb-1 fw-semibold">Need a hint?</h2>
+                <p class="mb-0 small">Check spam folders if the email is missing. The code is valid once and enters automatically on mobile if you allow autofill.</p>
+              </div>
+            </div>
+          </div>
+
+          {% if attempts_remaining is not none %}
+            <div class="alert alert-light border small" role="status">
+              Attempts remaining: <strong>{{ attempts_remaining }}</strong>
+            </div>
+          {% endif %}
+
+          <form method="post" novalidate data-loading-form class="mt-4" data-otp-form>
+            {{ form.hidden_tag() }}
+            {{ form.email(type='hidden') }}
+            {{ form.purpose(type='hidden') }}
+            {{ render_field(form.otp, icon='grid-fill', placeholder='Enter your 6-digit code', autocomplete='one-time-code', **{'data-bs-toggle': 'tooltip', 'data-bs-placement': 'left', 'title': 'Enter the code from your email. It expires soon.'}) }}
+            <button type="submit" class="btn btn-gradient-primary w-100 btn-lg text-white d-flex align-items-center justify-content-center gap-2 mt-3" data-loading-button>
+              <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" data-loading-spinner></span>
+              <span data-loading-label>{{ cta_label }}</span>
+            </button>
+          </form>
+
+          <div class="row g-3 mt-4">
+            <div class="col-12 col-md-6">
+              <div class="otp-helper p-3 h-100">
+                <div class="d-flex gap-2">
+                  <span class="fs-4">⏱️</span>
+                  <div>
+                    <h3 class="h6 fw-semibold mb-1">Code expired?</h3>
+                    <p class="small mb-0">Request a new one below. You can try again after the cooldown window ends.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="otp-helper p-3 h-100">
+                <div class="d-flex gap-2">
+                  <span class="fs-4">📮</span>
+                  <div>
+                    <h3 class="h6 fw-semibold mb-1">Wrong inbox?</h3>
+                    <p class="small mb-0">Confirm you’re checking the mailbox linked to your Finvela account.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 text-center" data-resend-feedback role="status"></div>
+          <div class="mt-3 d-flex justify-content-center">
+            <button class="btn btn-outline-secondary d-flex align-items-center gap-2" type="button" data-resend-button
+                    data-resend-url="{{ url_for('expenseai_auth.resend_otp') }}"
+                    data-email="{{ form.email.data }}"
+                    data-purpose="{{ form.purpose.data }}"
+                    data-throttle="{{ resend_throttle }}"
+                    data-cooldown="{{ resend_cooldown }}">
+              <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" data-loading-spinner></span>
+              <span data-loading-label>Resend code</span>
+            </button>
+          </div>
+
+          <p class="text-center text-muted small mt-4 mb-0">
+            Having trouble? Contact support at <a href="mailto:{{ current_app.config['EMAIL_FROM'] }}">{{ current_app.config['EMAIL_FROM'] }}</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="{{ url_for('expenseai_web.static', filename='js/otp.js') }}" defer></script>
+{% endblock %}

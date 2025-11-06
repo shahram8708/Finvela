@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+{% block title %}Market Benchmarks{% endblock %}
+{% block admin_content %}
+<div class="container py-4">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="h3">External Benchmark Catalog</h1>
+      <p class="text-muted">Upload curated median/MAD references to strengthen market outlier scoring.</p>
+    </div>
+  </div>
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <form action="{{ url_for('expenseai_benchmark_admin.upload_benchmarks') }}" method="post" enctype="multipart/form-data" class="card">
+        {{ form.csrf_token }}
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="benchmark-file" class="form-label">CSV File</label>
+            {{ form.file(class="form-control", id="benchmark-file", accept=".csv") }}
+            {% if form.file.errors %}
+              <div class="text-danger small mt-1">{{ form.file.errors[0] }}</div>
+            {% endif %}
+            <div class="form-text">
+              Required columns: <code>text_norm</code>, <code>currency</code>, <code>median_price</code>, <code>mad</code>, <code>n</code>, <code>source</code>, <code>effective_from</code>, <code>effective_to</code>.
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <a href="{{ url_for('expenseai_benchmark_admin.download_sample') }}" class="btn btn-outline-secondary">Download sample CSV</a>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4">
+      <div class="card border-0 bg-light h-100">
+        <div class="card-body">
+          <h2 class="h5">Catalog status</h2>
+          <p class="mb-1">Records: <strong>{{ stats.count }}</strong></p>
+          {% if stats.last_updated %}
+            <p class="text-muted small mb-0">Last updated: {{ stats.last_updated }}</p>
+          {% else %}
+            <p class="text-muted small mb-0">No benchmark data uploaded yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

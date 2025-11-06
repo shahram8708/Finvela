@@ -1,0 +1,15 @@
+{{ app_name }} verification code
+
+Hi {{ name }},
+
+{{ headline }}.
+
+Your one-time code: {{ otp }}
+This code expires in {{ expiry_minutes }} minute{% if expiry_minutes|int != 1 %}s{% endif %}.
+
+Open this link to continue:
+{{ action_url }}
+
+If you did not request this code you can ignore this email.
+
+Need help? Contact {{ support_email }}.

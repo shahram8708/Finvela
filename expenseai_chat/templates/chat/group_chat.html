@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block page_title %}Group Chat · {{ organization.name if organization else 'Finvela' }}{% endblock %}
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('expenseai_chat.static', filename='chat/css/chat.css') }}">
+{% endblock %}
+{% block content %}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="chat-shell">
+    <div class="chat-container" data-chat-root data-mode="group" data-fetch-url="{{ url_for('expenseai_chat.get_group_messages') }}" data-send-url="{{ url_for('expenseai_chat.send_group_message') }}" data-poll-interval="3000">
+      <div class="chat-header bg-success text-white d-flex align-items-center justify-content-between gap-3">
+        <div class="d-flex align-items-center gap-3">
+          <a class="btn btn-light btn-sm" href="{{ url_for('expenseai_chat.member_list') }}" title="Back to members"><i class="bi bi-arrow-left"></i></a>
+          <div>
+            <div class="fw-semibold">{{ organization.name if organization else 'Organization' }} Room</div>
+            <div class="small text-white-50">Message everyone in your organization.</div>
+          </div>
+        </div>
+        <span class="badge rounded-pill text-bg-light text-success-emphasis">
+          <i class="bi bi-people-fill me-1"></i>{{ organization.users|length if organization else 0 }} members
+        </span>
+      </div>
+      <div class="chat-body" data-chat-box>
+        {% for message in initial_messages %}
+          <div class="message-bubble {% if message.sender_is_self %}sent{% else %}received{% endif %}" data-message-id="{{ message.id }}">
+            {% if not message.sender_is_self %}
+              <div class="message-author">{{ message.sender_name }}</div>
+            {% endif %}
+            <div class="message-text">{{ message.message }}</div>
+            <div class="message-meta">{{ message.timestamp }}</div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="chat-footer border-top">
+        <form class="chat-form" data-chat-form novalidate>
+          <div class="input-group">
+            <input type="text" class="form-control" data-chat-input placeholder="Share an update with everyone...">
+            <button class="btn btn-success" type="submit" title="Send message">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+          <div class="chat-feedback" data-chat-feedback hidden></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script id="initial-chat-data" type="application/json">{{ initial_messages|tojson }}</script>
+{% endblock %}
+{% block page_scripts %}
+  <script type="module" src="{{ url_for('expenseai_chat.static', filename='chat/js/chat.js') }}"></script>
+{% endblock %}

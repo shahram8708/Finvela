@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block page_title %}Contact Us · {{ app_name }}{% endblock %}
+{% block meta_description %}Reach the {{ app_name }} team for support, partnerships, or product feedback.{% endblock %}
+{% block content %}
+<section class="page-hero py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <h1 class="display-5 fw-bold mb-3">We would love to hear from you</h1>
+        <p class="lead text-secondary">Submit your request and our team will respond within one business day. Choose a category so we can route your message to the right specialists.</p>
+      </div>
+      <div class="col-lg-5">
+        <div class="card shadow-sm border-0 bg-gradient-info text-white">
+          <div class="card-body">
+            <h2 class="h4 mb-3">Need help urgently?</h2>
+            <p class="mb-3">Email us at <a href="mailto:{{ current_app.config.get('ADMIN_EMAIL') }}" class="text-white fw-semibold">{{ current_app.config.get('ADMIN_EMAIL') }}</a> for priority assistance.</p>
+            <div class="d-flex align-items-center gap-2 small">
+              <i class="bi bi-clock-history"></i>
+              <span>Live support: Monday–Friday, 9am–6pm IST</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="row g-5">
+    <div class="col-lg-7">
+      <div class="card contact-card shadow-sm">
+        <div class="card-body p-4 p-lg-5">
+          <h2 class="h4 mb-3">Send us a message</h2>
+          <p class="text-secondary mb-4">All fields are required. We only use this information to respond to your request.</p>
+
+          <div class="alert alert-success d-none" role="status" data-contact-success>
+            <i class="bi bi-check-circle-fill me-2"></i><span></span>
+          </div>
+          <div class="alert alert-danger d-none" role="alert" data-contact-error>
+            <i class="bi bi-exclamation-triangle-fill me-2"></i><span>Something went wrong. Please try again.</span>
+          </div>
+
+          <form id="contactForm" method="post" action="{{ url_for('expenseai_web.submit_contact') }}" class="needs-validation" novalidate data-contact-form data-loading-form>
+            {{ form.hidden_tag() }}
+            <div class="visually-hidden">
+              {{ form.honeypot(label='Leave this field empty', class_='form-control') }}
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="contactFullName" class="form-label">{{ form.full_name.label }}</label>
+                {{ form.full_name(class_='form-control', id='contactFullName', required=True) }}
+                <div class="invalid-feedback" data-error-for="full_name"></div>
+              </div>
+              <div class="col-md-6">
+                <label for="contactEmail" class="form-label">{{ form.email.label }}</label>
+                {{ form.email(class_='form-control', id='contactEmail', type='email', required=True) }}
+                <div class="invalid-feedback" data-error-for="email"></div>
+              </div>
+              <div class="col-12">
+                <label for="contactSubject" class="form-label">{{ form.subject.label }}</label>
+                {{ form.subject(class_='form-control', id='contactSubject', required=True) }}
+                <div class="invalid-feedback" data-error-for="subject"></div>
+              </div>
+              <div class="col-12">
+                <label for="contactCategory" class="form-label">{{ form.category.label }}</label>
+                {{ form.category(class_='form-select', id='contactCategory', required=True) }}
+                <div class="invalid-feedback" data-error-for="category"></div>
+              </div>
+              <div class="col-12">
+                <label for="contactMessage" class="form-label">{{ form.message.label }}</label>
+                {{ form.message(class_='form-control', id='contactMessage', required=True) }}
+                <div class="invalid-feedback" data-error-for="message"></div>
+              </div>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg" data-loading-button>
+                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" data-loading-spinner></span>
+                <span data-loading-label>Send Message</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="row g-4">
+        <div class="col-12">
+          <div class="card shadow-sm h-100">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="icon-circle bg-primary-subtle text-primary"><i class="bi bi-life-preserver"></i></span>
+                <div>
+                  <h3 class="h5 mb-1">Support Channels</h3>
+                  <p class="text-secondary mb-0">Rapid answers from product specialists.</p>
+                </div>
+              </div>
+              <ul class="list-unstyled small text-secondary mb-0">
+                <li class="mb-2"><i class="bi bi-envelope-open me-2 text-primary"></i>support@expenseai.io</li>
+                <li class="mb-2"><i class="bi bi-telephone me-2 text-primary"></i>+91 80471 23456</li>
+                <li><i class="bi bi-chat-dots me-2 text-primary"></i>In-app chat (Enterprise plans)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card shadow-sm h-100">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="icon-circle bg-success-subtle text-success"><i class="bi bi-briefcase"></i></span>
+                <div>
+                  <h3 class="h5 mb-1">Office</h3>
+                  <p class="text-secondary mb-0">Come say hello at our HQ.</p>
+                </div>
+              </div>
+              <address class="mb-0 text-secondary small">
+                Finvela HQ<br>
+                221B Residency Road<br>
+                Ahmedabad, Gujarat<br>
+                India
+              </address>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card shadow-sm h-100 bg-body-secondary">
+            <div class="card-body p-4">
+              <h3 class="h5 mb-2">Stay in the loop</h3>
+              <p class="text-secondary small mb-3">Get product updates, roadmap previews, and finance automation insights.</p>
+              <a href="https://updates.expenseai.io" class="btn btn-outline-primary btn-sm" target="_blank" rel="noreferrer"><i class="bi bi-newspaper me-2"></i>Subscribe to updates</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block page_scripts %}
+<script type="module" src="{{ url_for('expenseai_web.static', filename='js/contact.js') }}"></script>
+{% endblock %}

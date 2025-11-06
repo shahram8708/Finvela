@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% from 'macros/forms.html' import render_field %}
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  .register-viewport {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(140deg, rgba(16, 185, 129, 0.16), rgba(59, 130, 246, 0.16));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .register-card {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 30px 80px -40px rgba(14, 116, 144, 0.55);
+    border-radius: 2rem;
+  }
+
+  .register-chip {
+    border-radius: 9999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .register-instruction {
+    border-left: 4px solid rgba(59, 130, 246, 0.5);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.1));
+  }
+
+  .register-helper {
+    backdrop-filter: blur(12px);
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.18);
+    border-radius: 1.25rem;
+  }
+
+  .btn-gradient-success {
+    background: linear-gradient(135deg, #10b981, #2563eb);
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-gradient-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -30px rgba(16, 185, 129, 0.55);
+  }
+
+  .account-flow .alert {
+    border-radius: 1rem;
+  }
+
+  @media (max-width: 575.98px) {
+    .register-card {
+      border-radius: 1.5rem;
+      padding: 2.25rem !important;
+    }
+  }
+</style>
+
+<div>
+  <div class="container">
+    <div class="row justify-content-center animate-fade-up">
+      <div class="">
+        <div class="register-card p-4 p-md-5">
+          <div class="text-center mb-4">
+            <span class="badge bg-success-subtle text-success-emphasis register-chip px-3 py-2">Join Finvela</span>
+            <h1 class="display-6 fw-bold mt-3">Create your account</h1>
+            <p class="text-muted mb-0">Choose how you’re joining so we can unlock the right onboarding path and permissions.</p>
+          </div>
+
+          <div class="alert register-instruction border-0 shadow-sm" role="alert">
+            <div class="d-flex gap-3 align-items-start">
+              <span class="fs-4">🧭</span>
+              <div>
+                <h2 class="h6 mb-1 fw-semibold">Quick orientation</h2>
+                <p class="mb-0 small">Admins create organizations and invite teammates. Members join an existing workspace with an invite code from their admin.</p>
+              </div>
+            </div>
+          </div>
+
+          <form method="post" novalidate data-registration-form data-account-type-field="{{ form.account_type.name }}" data-loading-form class="mt-4">
+            {{ form.hidden_tag() }}
+            <div class="mb-4">
+              <label class="form-label fw-semibold">{{ form.account_type.label.text }}</label>
+              <div class="btn-group w-100" role="group" aria-label="Select registration type">
+                {% for value, label in form.account_type.choices %}
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="{{ form.account_type.name }}"
+                    id="account-type-{{ value }}"
+                    value="{{ value }}"
+                    {% if selected_account_type == value %}checked{% endif %}
+                  >
+                  <label class="btn btn-outline-primary{% if selected_account_type == value %} active{% endif %}" for="account-type-{{ value }}">{{ label }}</label>
+                {% endfor %}
+              </div>
+              {% if form.account_type.errors %}
+                <div class="text-danger small mt-2">{{ form.account_type.errors[0] }}</div>
+              {% endif %}
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                {{ render_field(form.full_name, icon='person-lines-fill') }}
+              </div>
+              <div class="col-12 col-md-6">
+                {{ render_field(form.email, icon='envelope-plus-fill') }}
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                {{ render_field(form.password, icon='shield-lock-fill') }}
+              </div>
+              <div class="col-12 col-md-6">
+                {{ render_field(form.confirm_password, icon='shield-fill-check') }}
+              </div>
+            </div>
+
+            {% if allow_admin_signup %}
+              <div class="account-flow{% if selected_account_type != 'admin' %} d-none{% endif %} mt-4" data-account-type="admin" data-account-type-section {% if selected_account_type != 'admin' %}hidden{% endif %}>
+                {{ render_field(form.organization_name, icon='building') }}
+                <div class="alert alert-info" role="status">
+                  <i class="bi bi-rocket-takeoff-fill me-2"></i>You will become the primary admin for this organization. Keep your credentials secure and invite teammates from the team settings screen after signing in.
+                </div>
+              </div>
+            {% endif %}
+
+            {% if allow_member_signup %}
+              <div class="account-flow{% if selected_account_type != 'member' %} d-none{% endif %} mt-4" data-account-type="member" data-account-type-section {% if selected_account_type != 'member' %}hidden{% endif %}>
+                {{ render_field(form.invite_code, icon='key-fill') }}
+                <div class="alert alert-warning" role="status">
+                  <i class="bi bi-key-fill me-2"></i>Only your organization admin can give you the invitation code. Enter it exactly as shared to route your request correctly.
+                </div>
+              </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-gradient-success w-100 btn-lg text-white d-flex align-items-center justify-content-center gap-2 mt-4" data-loading-button>
+              <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" data-loading-spinner></span>
+              <span data-loading-label>Create account</span>
+            </button>
+          </form>
+
+          <div class="row g-3 mt-4">
+            {% if allow_admin_signup %}
+              <div class="col-12 col-md-6">
+                <div class="register-helper p-3 h-100">
+                  <div class="d-flex gap-2">
+                    <span class="fs-4">🚀</span>
+                    <div>
+                      <h3 class="h6 fw-semibold mb-1">Admin checklist</h3>
+                      <p class="small mb-0">Prepare your company name and billing details. You can add teammates once inside the dashboard.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {% if allow_member_signup %}
+              <div class="col-12 col-md-6">
+                <div class="register-helper p-3 h-100">
+                  <div class="d-flex gap-2">
+                    <span class="fs-4">📨</span>
+                    <div>
+                      <h3 class="h6 fw-semibold mb-1">Need a code?</h3>
+                      <p class="small mb-0">Ask your Finvela administrator to send an invite code or generate a fresh one.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <p class="text-center text-muted mt-4 mb-0">Already registered? <a href="{{ url_for('expenseai_auth.login') }}">Sign in</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('expenseai_web.static', filename='js/register.js') }}" defer></script>
+{% endblock %}

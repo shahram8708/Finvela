@@ -1,0 +1,52 @@
+{% extends "admin/base.html" %}
+{% block title %}GST HSN/SAC Rates{% endblock %}
+{% block admin_content %}
+<div class="container py-4">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="h3">GST HSN/SAC Rate Import</h1>
+      <p class="text-muted">Upload a CSV export of GST HSN/SAC rates to keep compliance checks accurate.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+  <form id="hsn-upload-form" action="{{ url_for('expenseai_compliance_admin.hsn_upload') }}" method="post" enctype="multipart/form-data" class="card">
+        {{ form.csrf_token }}
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="hsn-file" class="form-label">CSV File</label>
+            {{ form.file(class="form-control", id="hsn-file", accept=".csv") }}
+            {% if form.file.errors %}
+            <div class="text-danger small mt-1">
+              {{ form.file.errors[0] }}
+            </div>
+            {% endif %}
+            <div class="form-text">Expected columns: <code>code</code>, <code>gst_rate</code>, <code>effective_from</code>, optional <code>effective_to</code>, <code>description</code>.</div>
+          </div>
+          <div class="form-check">
+            {{ form.replace_existing(class="form-check-input", id="replace-existing") }}
+            <label class="form-check-label" for="replace-existing">Replace existing rates</label>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{{ url_for('expenseai_compliance_admin.sample_hsn_csv') }}" class="btn btn-outline-secondary">Download sample CSV</a>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4">
+      <div class="card border-0 bg-light">
+        <div class="card-body">
+          <h2 class="h5">Data status</h2>
+          <p class="mb-1">Records loaded: <strong>{{ stats.count }}</strong></p>
+          {% if stats.latest_effective_from %}
+          <p class="text-muted small mb-0">Latest effective date: {{ stats.latest_effective_from }}</p>
+          {% else %}
+          <p class="text-muted small mb-0">Upload data to enable HSN/SAC validation.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

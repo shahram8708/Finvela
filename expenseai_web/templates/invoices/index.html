@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  .invoice-browser-viewport {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), rgba(16, 185, 129, 0.12));
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+
+  .browser-card {
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 2rem;
+    box-shadow: 0 30px 85px -50px rgba(30, 64, 175, 0.4);
+  }
+
+  .browser-chip {
+    border-radius: 9999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .instruction-alert {
+    border-left: 4px solid rgba(59, 130, 246, 0.45);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.14), rgba(16, 185, 129, 0.12));
+  }
+
+  .btn-gradient-primary {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-gradient-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -30px rgba(79, 70, 229, 0.6);
+  }
+
+  .filter-panel {
+    border-radius: 1.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(248, 250, 252, 0.9);
+  }
+
+  .invoice-table thead th {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    color: rgba(71, 85, 105, 0.9);
+  }
+
+  .avatar-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(59, 130, 246, 0.1);
+    color: rgba(37, 99, 235, 0.85);
+  }
+
+  .table-row-link {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .table-row-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 45px -40px rgba(30, 64, 175, 0.5);
+  }
+
+  @media (max-width: 575.98px) {
+    .browser-card {
+      border-radius: 1.5rem;
+    }
+
+    .filter-panel {
+      border-radius: 1rem;
+    }
+  }
+</style>
+
+<div>
+  <div class="container-xxl">
+    <nav aria-label="breadcrumb" class="animate-fade-up mb-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('expenseai_web.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Invoices</li>
+      </ol>
+    </nav>
+
+    <section class="alert instruction-alert border-0 shadow-sm animate-fade-up" role="alert">
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+        <div class="d-flex gap-3 align-items-start">
+          <span class="fs-3">🧭</span>
+          <div>
+            <h1 class="h6 fw-semibold mb-1 text-uppercase text-muted">Invoice browser overview</h1>
+            <p class="small mb-0">Use the filters below to narrow results by status, file type, or dates. Click any row to jump into the detailed AI review for that invoice.</p>
+          </div>
+        </div>
+        <span class="badge bg-primary-subtle text-primary-emphasis browser-chip px-3 py-2">Workspace index</span>
+      </div>
+    </section>
+
+    <section class="browser-card card border-0 animate-fade-up">
+      <div class="card-header bg-transparent border-0">
+        <div class="row g-3 align-items-center">
+          <div class="col-lg-7">
+            <h2 class="h4 fw-bold mb-1 d-flex align-items-center gap-2"><i class="bi bi-collection"></i>Invoice browser</h2>
+            <p class="text-muted small mb-0">Search, filter, and sort uploaded invoices in one place.</p>
+          </div>
+          <div class="col-lg-5 text-lg-end">
+            <a class="btn btn-gradient-primary text-white" href="{{ url_for('expenseai_web.dashboard') }}" {% if not invoices %}aria-disabled="true" tabindex="-1"{% endif %} data-bs-toggle="tooltip" data-bs-placement="left" title="Upload a file from the dashboard to populate this library">
+              <i class="bi bi-plus-circle me-1"></i>Upload new
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-info bg-info-subtle border-0 text-info-emphasis mb-4" role="alert">
+          <div class="d-flex align-items-start gap-2">
+            <span class="fs-5">💡</span>
+            <p class="small mb-0">Combine search text with status filters for the most precise results. The table updates once you click Apply.</p>
+          </div>
+        </div>
+
+        <form class="row g-3 mb-4 filter-panel p-3 p-md-4" id="invoiceFilterForm" method="get" action="{{ url_for('expenseai_invoices.list_invoices') }}">
+          <div class="col-md-4">
+            <label class="form-label" for="searchInput">Search</label>
+            <input type="search" class="form-control" id="searchInput" name="q" value="{{ filter_values.q }}" placeholder="Vendor, invoice no, filename" autocomplete="off" aria-describedby="searchHelp">
+            <div class="form-text" id="searchHelp">Live search uses server-side filtering.</div>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="statusSelect">Status</label>
+            <select class="form-select" id="statusSelect" name="status">
+              <option value="">All</option>
+              {% for status in statuses %}
+                <option value="{{ status }}" {% if filter_values.status == status %}selected{% endif %}>{{ status.title() }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="mimeSelect">MIME</label>
+            <select class="form-select" id="mimeSelect" name="mime">
+              <option value="">All</option>
+              <option value="application/pdf" {% if filter_values.mime == 'application/pdf' %}selected{% endif %}>PDF</option>
+              <option value="image/jpeg" {% if filter_values.mime == 'image/jpeg' %}selected{% endif %}>JPEG</option>
+              <option value="image/png" {% if filter_values.mime == 'image/png' %}selected{% endif %}>PNG</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="startDate">Start</label>
+            <input type="date" class="form-control" id="startDate" name="start" value="{{ filter_values.start }}">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="endDate">End</label>
+            <input type="date" class="form-control" id="endDate" name="end" value="{{ filter_values.end }}">
+          </div>
+          <div class="col-12 d-flex justify-content-end gap-2">
+            <input type="hidden" name="sort" value="{{ filter_values.sort }}">
+            <input type="hidden" name="dir" value="{{ filter_values.dir }}">
+            <button class="btn btn-outline-secondary" type="reset" id="resetFilters"><i class="bi bi-eraser me-1"></i>Reset</button>
+            <button class="btn btn-primary" type="submit"><i class="bi bi-funnel me-1"></i>Apply</button>
+          </div>
+        </form>
+
+        <div class="alert alert-secondary bg-secondary-subtle border-0 text-secondary-emphasis" role="alert">
+          <div class="d-flex align-items-start gap-2">
+            <span class="fs-5">📄</span>
+            <p class="small mb-0">Click anywhere in a row to open the invoice detail view. Risk dots indicate AI-detected anomalies: green is low, amber is medium, red is high.</p>
+          </div>
+        </div>
+
+        <div class="table-responsive mt-4" id="invoiceTableWrapper" data-search-endpoint="{{ url_for('expenseai_invoices.search_invoices') }}">
+          <table class="table table-hover align-middle invoice-table">
+            <thead>
+              <tr>
+                <th scope="col">Preview</th>
+                <th scope="col">Vendor / Invoice</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Risk</th>
+                <th scope="col" class="text-end">Amounts</th>
+              </tr>
+            </thead>
+            <tbody id="invoiceTableBody">
+              {% if invoices %}
+                {% for invoice in invoices %}
+                  <tr class="table-row-link" tabindex="0" data-href="{{ url_for('expenseai_invoices.invoice_detail', invoice_id=invoice.id) }}">
+                    <td class="position-relative">
+                      {% if invoice.thumbnail_url() %}
+                        <img src="{{ invoice.thumbnail_url() }}" alt="Thumbnail" width="48" height="48" class="rounded object-fit-cover">
+                      {% else %}
+                        <span class="avatar-circle" aria-hidden="true"><i class="bi bi-file-earmark-text"></i></span>
+                      {% endif %}
+                      <a class="stretched-link" href="{{ url_for('expenseai_invoices.invoice_detail', invoice_id=invoice.id) }}" aria-label="View invoice {{ invoice.invoice_no or invoice.id }}"></a>
+                    </td>
+                    <td class="position-relative">
+                      <div class="fw-semibold text-truncate" title="{{ invoice.original_filename }}">{{ invoice.original_filename }}</div>
+                      <div class="small text-muted">{{ invoice.vendor_gst or '—' }} · {{ invoice.invoice_no or '—' }}</div>
+                      <a class="stretched-link" href="{{ url_for('expenseai_invoices.invoice_detail', invoice_id=invoice.id) }}" aria-hidden="true" tabindex="-1"></a>
+                    </td>
+                    <td>
+                      <div>{{ invoice.invoice_date.strftime('%b %d, %Y') if invoice.invoice_date else invoice.created_at.strftime('%b %d, %Y') }}</div>
+                      <div class="small text-muted">Opened {{ ((now() - invoice.created_at).total_seconds() // 60) | int }} mins ago</div>
+                    </td>
+                    <td><span class="badge status-badge status-{{ invoice.processing_status|lower }}">{{ invoice.processing_status.title() }}</span></td>
+                    <td>
+                      {% set composite = invoice.risk_score.composite if invoice.risk_score else None %}
+                      {% if composite is not none %}
+                        {% if composite < 0.25 %}
+                          {% set risk_level = 'low' %}
+                          {% set risk_label = 'Low' %}
+                        {% elif composite <= 0.6 %}
+                          {% set risk_level = 'medium' %}
+                          {% set risk_label = 'Medium' %}
+                        {% else %}
+                          {% set risk_level = 'high' %}
+                          {% set risk_label = 'High' %}
+                        {% endif %}
+                        <span class="risk-dot risk-{{ risk_level }}" aria-hidden="true"></span>
+                        <span class="small text-muted" aria-label="{{ risk_label }} risk">{{ (composite * 100) | round(0) }}%</span>
+                      {% elif invoice.risk_status == 'IN_PROGRESS' %}
+                        <span class="spinner-border spinner-border-sm text-muted" role="status" aria-hidden="true"></span>
+                        <span class="visually-hidden">Risk run in progress</span>
+                      {% else %}
+                        {% set status_label = invoice.risk_status.replace('_', ' ').title() if invoice.risk_status else '—' %}
+                        <span class="text-muted small">{{ status_label }}</span>
+                      {% endif %}
+                    </td>
+                    <td class="text-end small text-muted">
+                      <div>Subtotal: {{ invoice.subtotal or '—' }}</div>
+                      <div>Tax: {{ invoice.tax_total or '—' }}</div>
+                      <div>Total: {{ invoice.grand_total or '—' }}</div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="6" class="text-center py-5 text-muted">
+                    <i class="bi bi-inbox fs-4 d-block mb-2"></i>No invoices match your filters.
+                  </td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+
+        {% if pagination.pages > 1 %}
+          <nav aria-label="Invoice pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+              <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('expenseai_invoices.list_invoices', page=pagination.prev_num, **filter_values) if pagination.has_prev else '#' }}" tabindex="{% if not pagination.has_prev %}-1{% else %}0{% endif %}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {% for page_num in pagination.iter_pages() %}
+                {% if page_num %}
+                  <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('expenseai_invoices.list_invoices', page=page_num, **filter_values) }}">{{ page_num }}</a>
+                  </li>
+                {% else %}
+                  <li class="page-item disabled"><span class="page-link">…</span></li>
+                {% endif %}
+              {% endfor %}
+              <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('expenseai_invoices.list_invoices', page=pagination.next_num, **filter_values) if pagination.has_next else '#' }}" tabindex="{% if not pagination.has_next %}-1{% else %}0{% endif %}" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        {% endif %}
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+.ai-chat-grid {
+  min-height: clamp(70vh, 78vh, 85vh);
+}
+
+.chat-upload-region {
+  background: var(--bs-body-bg);
+  border: 2px dashed var(--bs-border-color);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.chat-upload-region.drag-active {
+  border-color: var(--bs-primary);
+  background: color-mix(in srgb, var(--bs-primary) 6%, transparent);
+}
+
+.chat-upload-region .upload-instructions label {
+  cursor: pointer;
+}
+
+.chat-upload-region .upload-progress,
+.chat-upload-region .upload-summary {
+  min-height: 6rem;
+}
+
+.chat-messages {
+  background: color-mix(in srgb, var(--bs-body-bg) 92%, var(--bs-primary-bg-subtle));
+  max-height: 60vh;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--bs-secondary-bg-subtle);
+  border-radius: 0.5rem;
+}
+
+.chat-message {
+  max-width: 85%;
+  padding: 1rem 1.25rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: rgba(15, 23, 42, 0.08) 0 10px 30px -12px;
+  line-height: 1.55;
+}
+
+.chat-message-user {
+  margin-left: auto;
+  background: var(--bs-primary);
+  color: #fff;
+}
+
+.chat-message-assistant {
+  margin-right: auto;
+  background: var(--bs-body-bg);
+  border: 1px solid color-mix(in srgb, var(--bs-border-color) 60%, transparent);
+}
+
+.chat-message .chat-timestamp {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+.chat-message pre,
+.chat-message code {
+  font-family: "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  background: color-mix(in srgb, var(--bs-body-bg) 85%, var(--bs-primary) 5%);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.chat-message table {
+  width: 100%;
+  margin-top: 0.75rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.chat-message table th,
+.chat-message table td {
+  border: 1px solid color-mix(in srgb, var(--bs-border-color) 65%, transparent);
+  padding: 0.5rem 0.75rem;
+}
+
+.chat-message table th {
+  background: color-mix(in srgb, var(--bs-primary) 8%, transparent);
+  font-weight: 600;
+}
+
+.chat-input textarea {
+  resize: vertical;
+}
+
+.chat-session-item {
+  cursor: pointer;
+  border: 0;
+  border-bottom: 1px solid var(--bs-border-color);
+  padding: 0.9rem 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.chat-session-item.active,
+.chat-session-item:hover {
+  background: color-mix(in srgb, var(--bs-primary) 12%, transparent);
+  color: inherit;
+}
+
+.chat-session-item .session-title {
+  font-weight: 600;
+}
+
+.chat-session-item .session-meta {
+  font-size: 0.8rem;
+  color: var(--bs-secondary-color);
+}
+
+@media (max-width: 991px) {
+  .chat-messages {
+    max-height: none;
+  }
+
+  .chat-message {
+    max-width: 100%;
+  }
+}

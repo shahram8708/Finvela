@@ -1,0 +1,77 @@
+:root {
+  /* Brand palette */
+  --brand-primary: #2563eb;
+  --brand-primary-dark: #1d4ed8;
+  --brand-accent: #38bdf8;
+  --brand-surface: #f8fafc;
+  --brand-border: rgba(15, 23, 42, 0.1);
+  --brand-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+
+  /* Semantic colors */
+  --color-ok: #16a34a;
+  --color-warn: #f59e0b;
+  --color-fail: #dc2626;
+  --color-info: #0ea5e9;
+  --color-live: #22c55e;
+
+  /* Text colors */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  /* Surface colors */
+  --surface-base: #ffffff;
+  --surface-alt: #f1f5f9;
+  --surface-elevated: #f8fafc;
+
+  /* Radii */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Spacing scale */
+  --space-2xs: 0.125rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Elevation */
+  --elevation-xs: 0 2px 4px rgba(15, 23, 42, 0.08);
+  --elevation-sm: 0 6px 16px rgba(15, 23, 42, 0.1);
+  --elevation-md: 0 12px 32px rgba(15, 23, 42, 0.12);
+  --elevation-lg: 0 20px 40px rgba(15, 23, 42, 0.18);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.35);
+
+  /* Typography */
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --brand-surface: #0f172a;
+  --brand-border: rgba(148, 163, 184, 0.2);
+  --brand-shadow: 0 12px 24px rgba(15, 23, 42, 0.55);
+
+  --color-ok: #4ade80;
+  --color-warn: #facc15;
+  --color-fail: #f87171;
+  --color-info: #38bdf8;
+  --color-live: #4ade80;
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #cbd5f5;
+  --text-muted: #94a3b8;
+
+  --surface-base: #0f172a;
+  --surface-alt: #111c2f;
+  --surface-elevated: #1e293b;
+
+  color-scheme: dark;
+}

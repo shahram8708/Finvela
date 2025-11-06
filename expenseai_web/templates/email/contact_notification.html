@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>New Contact Submission · {{ app_name }}</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f4f6fb;font-family:'Segoe UI',Arial,sans-serif;color:#1f2937;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6fb;padding:24px 0;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 12px 32px rgba(15,23,42,0.12);">
+            <tr>
+              <td style="background:linear-gradient(135deg,#2563eb,#9333ea);padding:24px 32px;color:#ffffff;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="font-size:20px;font-weight:600;">{{ app_name }}</td>
+                    <td align="right" style="font-size:12px;opacity:0.85;">{{ submission.submitted_at.strftime('%B %d, %Y • %H:%M %Z') if submission.submitted_at else now().strftime('%B %d, %Y • %H:%M %Z') }}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="padding-top:8px;font-size:16px;">New Contact Form Submission – {{ submission.category }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:32px 32px 16px 32px;">
+                <h1 style="font-size:22px;margin:0 0 16px 0;color:#111827;">Someone reached out via the website</h1>
+                <p style="margin:0 0 24px 0;color:#4b5563;font-size:15px;line-height:1.6;">Please review the details below and respond at your earliest convenience. This notification was triggered automatically by {{ app_name }}.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 32px 24px 32px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background-color:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;">
+                  <tr>
+                    <td style="padding:16px 18px;font-size:14px;font-weight:600;color:#6b7280;width:35%;border-bottom:1px solid #e5e7eb;">Sender</td>
+                    <td style="padding:16px 18px;font-size:15px;color:#111827;border-bottom:1px solid #e5e7eb;">{{ submission.name }}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 18px;font-size:14px;font-weight:600;color:#6b7280;width:35%;border-bottom:1px solid #e5e7eb;">Email</td>
+                    <td style="padding:16px 18px;font-size:15px;color:#2563eb;border-bottom:1px solid #e5e7eb;"><a href="mailto:{{ submission.email }}" style="color:#2563eb;text-decoration:none;">{{ submission.email }}</a></td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 18px;font-size:14px;font-weight:600;color:#6b7280;width:35%;border-bottom:1px solid #e5e7eb;">Category</td>
+                    <td style="padding:16px 18px;font-size:15px;color:#111827;border-bottom:1px solid #e5e7eb;">{{ submission.category }}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 18px;font-size:14px;font-weight:600;color:#6b7280;width:35%;border-bottom:1px solid #e5e7eb;">Subject</td>
+                    <td style="padding:16px 18px;font-size:15px;color:#111827;border-bottom:1px solid #e5e7eb;">{{ submission.subject }}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px 18px;font-size:14px;font-weight:600;color:#6b7280;width:35%;vertical-align:top;">Message</td>
+                    <td style="padding:16px 18px;font-size:15px;color:#111827;line-height:1.6;">{{ submission.message|e|nl2br }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 32px 32px 32px;">
+                <p style="margin:0;font-size:13px;color:#6b7280;">If the request requires escalation, please log it in the CX tracker and loop in the appropriate squad.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color:#111827;padding:20px 32px;color:#9ca3af;font-size:13px;text-align:center;">
+                <p style="margin:0 0 8px 0;color:#e5e7eb;">This message was generated automatically by {{ app_name }}.</p>
+                <p style="margin:0;">Finvela · 221B Residency Road · Ahmedabad, India</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ app_name }} Update</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f5f5f5;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#f5f5f5;padding:24px 0;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="560" cellspacing="0" cellpadding="0" style="max-width:560px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(16,24,40,0.08);">
+            <tr>
+              <td style="padding:24px 32px;background-color:#198754;color:#ffffff;text-align:center;">
+                <h1 style="margin:0;font-size:20px;letter-spacing:0.5px;">{{ app_name }}</h1>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:32px;">
+                <p style="margin:0 0 16px;font-size:16px;">Hi {{ name }},</p>
+                <p style="margin:0 0 24px;font-size:16px;line-height:1.5;">{{ message }}</p>
+                <p style="margin:0 0 32px;text-align:center;">
+                  <a href="{{ cta_url }}" style="display:inline-block;padding:14px 32px;background-color:#198754;color:#ffffff;text-decoration:none;font-weight:600;border-radius:999px;">
+                    {{ cta_label }}
+                  </a>
+                </p>
+                <p style="margin:0;font-size:15px;line-height:1.5;">If you did not expect this update please contact support right away.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:20px 32px;background-color:#f8fafc;font-size:13px;color:#667085;text-align:center;">
+                Need help? Email <a href="mailto:{{ support_email }}" style="color:#198754;text-decoration:none;">{{ support_email }}</a>.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

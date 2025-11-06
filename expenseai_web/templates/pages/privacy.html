@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block page_title %}Privacy Policy · {{ app_name }}{% endblock %}
+{% block meta_description %}Read the {{ app_name }} privacy policy covering data collection, usage, and your rights.{% endblock %}
+{% block content %}
+<section class="page-hero py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center justify-content-between g-4">
+      <div class="col-lg-8">
+        <h1 class="display-5 fw-bold mb-3">Privacy Policy</h1>
+        <p class="lead text-secondary">We are committed to protecting your personal information while delivering trustworthy automation. This policy outlines how {{ app_name }} handles, stores, and shares data.</p>
+      </div>
+      <div class="col-lg-3 text-lg-end">
+        <span class="badge text-bg-light text-dark px-4 py-2">Last updated {{ now().strftime('%B %d, %Y') }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="row justify-content-center">
+    <div class="col-xl-9 col-lg-10">
+      <article class="policy-card shadow-sm">
+        <div class="policy-section">
+          <h2 class="h3">1. Introduction</h2>
+          <p>Welcome to {{ app_name }}. This Privacy Policy describes how we collect, use, disclose, and safeguard your information when you use our web and mobile applications, APIs, and related services (collectively, the “Services”). By accessing or using the Services, you acknowledge that you have read, understood, and agreed to this policy.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">2. Data We Collect</h2>
+          <p>We collect data to provide and improve the Services. This includes:</p>
+          <h3 class="h5 mt-4">2.1 Information You Provide</h3>
+          <ul>
+            <li>Account details such as name, business email, and organization information.</li>
+            <li>Expense artifacts, receipts, invoices, and supporting documents uploaded to the platform.</li>
+            <li>Support requests, product feedback, survey responses, and interaction logs.</li>
+          </ul>
+          <h3 class="h5 mt-4">2.2 Information Collected Automatically</h3>
+          <ul>
+            <li>Device identifiers, IP addresses, browser type, and operating system.</li>
+            <li>Usage analytics including page views, feature adoption, and error diagnostics.</li>
+            <li>Authentication metadata, security events, and audit trails for compliance purposes.</li>
+          </ul>
+          <h3 class="h5 mt-4">2.3 Third-Party Sources</h3>
+          <p>With your authorization, we may collect data from connected financial systems, ERPs, or productivity suites to deliver integrations and automations.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">3. How We Use Your Data</h2>
+          <p>Your information is processed for the following legitimate purposes:</p>
+          <ul>
+            <li>Delivering core product functionality, including AI-driven extraction, risk scoring, and benchmarking.</li>
+            <li>Providing customer support, incident response, and service notifications.</li>
+            <li>Improving the Services through analytics, research, and product roadmap planning.</li>
+            <li>Maintaining security, preventing fraud, and enforcing our Terms &amp; Conditions.</li>
+            <li>Complying with legal, regulatory, and audit obligations in jurisdictions where we operate.</li>
+          </ul>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">4. Cookies and Tracking Technologies</h2>
+          <p>We use cookies, pixel tags, and similar technologies to remember preferences, secure sessions, and measure performance. You can control cookies through browser settings, however disabling them may affect certain features.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">5. Data Security</h2>
+          <p>We implement administrative, technical, and physical safeguards designed to protect your information. This includes encryption in transit and at rest, strict role-based access controls, continuous monitoring, and regular penetration testing.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">6. User Rights</h2>
+          <p>You may exercise the following rights subject to applicable law:</p>
+          <ul>
+            <li>Request access to, correction of, or deletion of your personal data.</li>
+            <li>Export your data or transfer it to another service provider.</li>
+            <li>Withdraw consent or object to processing where lawful basis is legitimate interest.</li>
+            <li>Appeal automated decisions that produce legal or similarly significant effects.</li>
+          </ul>
+          <p>To submit a privacy request, contact us using the details provided in the <strong>Contact Information</strong> section.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">7. Changes to this Policy</h2>
+          <p>We may update this policy from time to time to reflect operational, legal, or regulatory changes. When we do, we will revise the “Last updated” date above and provide additional notice where required.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">8. Contact Information</h2>
+          <p>If you have questions about this policy or our privacy practices, please reach out to our Data Protection Office:</p>
+          <ul class="list-unstyled mb-0">
+            <li><i class="bi bi-envelope me-2"></i><a href="mailto:{{ current_app.config.get('ADMIN_EMAIL') }}" class="link-primary">{{ current_app.config.get('ADMIN_EMAIL') }}</a></li>
+            <li><i class="bi bi-geo-alt me-2"></i>Finvela Privacy Office, 221B Residency Road, Ahmedabad, India</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}

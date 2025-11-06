@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block page_title %}Chat with {{ teammate.full_name }} · {{ organization.name if organization else 'Finvela' }}{% endblock %}
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('expenseai_chat.static', filename='chat/css/chat.css') }}">
+{% endblock %}
+{% block content %}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="chat-shell">
+  {% set name_parts = teammate.full_name.split(' ') if teammate.full_name else [] %}
+  {% set first_initial = teammate.full_name|trim|first|upper %}
+  {% set last_initial = name_parts[-1]|first|upper if name_parts|length > 1 else '' %}
+  {% set fallback_initial = teammate.email|trim|first|upper if teammate.email else '?' %}
+  <div class="chat-container" data-chat-root data-mode="direct" data-fetch-url="{{ url_for('expenseai_chat.get_messages', receiver_id=teammate.id) }}" data-send-url="{{ url_for('expenseai_chat.send_message') }}" data-receiver-id="{{ teammate.id }}" data-poll-interval="3000">
+      <div class="chat-header bg-success text-white d-flex align-items-center justify-content-between gap-3">
+        <div class="d-flex align-items-center gap-3">
+          <a class="btn btn-light btn-sm" href="{{ url_for('expenseai_chat.member_list') }}" title="Back to members"><i class="bi bi-arrow-left"></i></a>
+          <div class="avatar-circle bg-success-subtle text-success fw-semibold">
+            {% if first_initial %}{{ first_initial }}{{ last_initial }}{% else %}{{ fallback_initial }}{% endif %}
+          </div>
+          <div>
+            <div class="fw-semibold">{{ teammate.full_name }}</div>
+            <div class="small text-white-50">{{ organization.name if organization else 'Organization chat' }}</div>
+          </div>
+        </div>
+        <span class="badge rounded-pill text-bg-light text-success-emphasis">
+          <i class="bi bi-circle-fill me-1"></i>Active now
+        </span>
+      </div>
+      <div class="chat-body" data-chat-box>
+        {% for message in initial_messages %}
+          <div class="message-bubble {% if message.sender_is_self %}sent{% else %}received{% endif %}" data-message-id="{{ message.id }}">
+            <div class="message-text">{{ message.message }}</div>
+            <div class="message-meta">{{ message.timestamp }}</div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="chat-footer border-top">
+        <form class="chat-form" data-chat-form novalidate>
+          <div class="input-group">
+            <input type="text" class="form-control" data-chat-input placeholder="Type a message...">
+            <button class="btn btn-success" type="submit" title="Send message">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+          <div class="chat-feedback" data-chat-feedback hidden></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script id="initial-chat-data" type="application/json">{{ initial_messages|tojson }}</script>
+{% endblock %}
+{% block page_scripts %}
+  <script type="module" src="{{ url_for('expenseai_chat.static', filename='chat/js/chat.js') }}"></script>
+{% endblock %}

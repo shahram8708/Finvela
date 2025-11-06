@@ -1,0 +1,44 @@
+{% macro render_field(field, icon=None, placeholder=None, autocomplete=None, disabled=False, input_class=None, inputmode=None) %}
+  <div class="mb-3">
+    <label for="{{ field.id }}" class="form-label fw-semibold">{{ field.label.text }}</label>
+    <div class="input-group">
+      {% if icon %}
+        <span class="input-group-text bg-body-secondary"><i class="bi bi-{{ icon }}"></i></span>
+      {% endif %}
+      {% set classes = input_class or 'form-control form-control-lg' %}
+      {% set placeholder_text = placeholder if placeholder is not none else field.label.text %}
+  {{ field(class_=classes, placeholder=placeholder_text, autocomplete=autocomplete, disabled=disabled, inputmode=inputmode) }}
+    </div>
+    {% if field.errors %}
+      <div class="text-danger small mt-1">
+        {{ field.errors[0] }}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro render_select(field, icon=None, help_text=None, disabled=False, input_class=None) %}
+  <div class="mb-3">
+    <label for="{{ field.id }}" class="form-label fw-semibold">{{ field.label.text }}</label>
+    <div class="input-group">
+      {% if icon %}
+        <span class="input-group-text bg-body-secondary"><i class="bi bi-{{ icon }}"></i></span>
+      {% endif %}
+      {% set classes = input_class or 'form-select form-select-lg' %}
+      {{ field(class_=classes, disabled=disabled) }}
+    </div>
+    {% if help_text %}
+      <div class="form-text">{{ help_text }}</div>
+    {% endif %}
+    {% if field.errors %}
+      <div class="text-danger small mt-1">{{ field.errors[0] }}</div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro render_submit(button_id, text, icon=None, loading_text='Processing...') %}
+  <button id="{{ button_id }}" class="btn btn-primary w-100" type="submit" data-loading-text="{{ loading_text }}">
+    {% if icon %}<i class="bi bi-{{ icon }} me-1"></i>{% endif %}{{ text }}
+    <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+  </button>
+{% endmacro %}

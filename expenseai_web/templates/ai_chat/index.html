@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('expenseai_web.static', filename='css/ai_chat.css') }}">
+<input type="hidden" id="chatCsrfToken" value="{{ csrf_token() }}">
+<script type="application/json" id="chatInitialSessions">{{ sessions|tojson }}</script>
+<script type="application/json" id="chatActiveSession">{{ active_session|tojson }}</script>
+<script type="application/json" id="chatInitialMessages">{{ active_messages|tojson }}</script>
+<script type="application/json" id="chatHistoryLimit">{{ history_limit|tojson }}</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  .ai-chat-viewport {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, rgba(110, 139, 255, 0.35), rgba(76, 0, 130, 0.15));
+    min-height: 100vh;
+  }
+
+  .ai-hero {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(37, 99, 235, 0.28));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto -120px -120px auto;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+    transform: rotate(25deg);
+  }
+
+  .ai-chip {
+    border-radius: 9999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ai-instruction {
+    border-left: 4px solid rgba(37, 99, 235, 0.5);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(16, 185, 129, 0.08));
+  }
+
+  .ai-glass-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    backdrop-filter: blur(12px);
+  }
+
+  .ai-glow-shadow {
+    box-shadow: 0 25px 60px -30px rgba(30, 64, 175, 0.55);
+  }
+
+  .btn-gradient {
+    background: linear-gradient(135deg, #2563eb, #9333ea);
+    border: none;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #1d4ed8, #7e22ce);
+  }
+
+  .chat-upload-region {
+    background: rgba(255, 255, 255, 0.85);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .chat-upload-region:hover {
+    border-color: rgba(37, 99, 235, 0.4);
+    box-shadow: 0 20px 35px -25px rgba(59, 130, 246, 0.6);
+    transform: translateY(-4px);
+  }
+
+  .chat-messages {
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+  }
+
+  .list-group-item-action {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .list-group-item-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -20px rgba(37, 99, 235, 0.45);
+  }
+
+  @media (max-width: 991.98px) {
+    .ai-hero {
+      text-align: center;
+    }
+
+    .ai-hero::after {
+      display: none;
+    }
+  }
+</style>
+
+<div>
+  <div class="container-xxl">
+    <section class="ai-hero ai-glass-card ai-glow-shadow rounded-4 p-4 p-lg-5 mb-5">
+      <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-4 position-relative">
+        <div>
+          <span class="badge bg-primary-subtle text-primary-emphasis ai-chip px-3 py-2">Invoice Intelligence Hub</span>
+          <h1 class="display-6 fw-bold mt-3 mb-2">AI Invoice Copilot</h1>
+          <p class="lead text-secondary mb-3">Collaborate with the AI assistant to verify, compare, and audit invoices in real time. One chat keeps every document and insight together.</p>
+          <div class="alert ai-instruction border-0 shadow-sm" role="alert">
+            <div class="d-flex gap-3 align-items-start">
+              <span class="fs-4">🧭</span>
+              <div>
+                <h2 class="h6 mb-1 fw-semibold">How this workspace flows</h2>
+                <p class="mb-0 small">Select or start a chat from the panel, upload the invoice, then ask targeted questions. The AI remembers the chat history to build a detailed audit trail.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-lg-end w-100 w-lg-auto">
+          <div class="d-inline-flex flex-column gap-2 align-items-lg-end">
+            <span class="badge bg-light text-dark ai-chip px-3 py-2"><i class="bi bi-cpu me-2"></i>Model</span>
+            <span class="fs-4 fw-bold text-dark">Finvela</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-gradient btn-lg shadow-sm mt-3" id="newChatButton" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Begin a fresh invoice conversation">
+        <i class="bi bi-plus-lg me-2"></i>New chat
+      </button>
+    </section>
+
+    <div class="row g-4 ai-chat-grid">
+      <div class="col-12 col-lg-4 col-xl-3">
+        <div class="card shadow-sm border-0 h-100 d-flex flex-column ai-glass-card">
+          <div class="card-header bg-transparent border-0">
+            <h2 class="h5 fw-bold mb-1"><i class="bi bi-journal-text me-2"></i>Saved conversations</h2>
+            <p class="text-muted small mb-0">Every chat stores the associated invoice and findings.</p>
+          </div>
+          <div class="card-body pt-0 pb-3">
+            <div class="alert alert-info bg-info-subtle border-0 text-info-emphasis" role="alert">
+              <div class="d-flex align-items-start gap-2">
+                <span class="fs-5">🗂️</span>
+                <p class="small mb-0">Tap a session to reopen its audit trail. The newest chats appear on top, and you can rename sessions inside the app.</p>
+              </div>
+            </div>
+          </div>
+          <div class="list-group list-group-flush overflow-auto flex-grow-1" id="chatSessionList" role="listbox" aria-label="Saved chats">
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-8 col-xl-9">
+        <div class="card shadow-sm border-0 h-100 d-flex flex-column ai-glass-card">
+          <div class="card-body d-flex flex-column gap-4">
+            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+              <div>
+                <h2 class="h4 fw-semibold mb-1" id="chatSessionTitle">Invoice workspace</h2>
+                <div class="text-muted small" id="chatSessionMeta">Ready to analyse your first invoice.</div>
+              </div>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="badge text-bg-info" id="chatModelName"><i class="bi bi-cpu me-1"></i>Finvela</span>
+                <span class="badge text-bg-secondary" id="chatStatusBadge" data-bs-toggle="tooltip" data-bs-placement="left" title="Status updates as files process"><i class="bi bi-cloud-arrow-up me-1"></i>Waiting for file</span>
+              </div>
+            </div>
+
+            <div class="alert alert-secondary bg-secondary-subtle border-0 text-secondary-emphasis" role="alert">
+              <div class="d-flex align-items-start gap-2">
+                <span class="fs-5">📄</span>
+                <p class="small mb-0">Upload one invoice per chat to keep validation clean. The AI highlights tax anomalies, line-item mismatches, and compliance issues once the document is processed.</p>
+              </div>
+            </div>
+
+            <div id="chatUploadRegion" class="chat-upload-region border border-dashed rounded-4 p-4 text-center position-relative">
+              <div class="upload-instructions">
+                <i class="bi bi-file-earmark-arrow-up display-6 text-primary mb-2"></i>
+                <p class="fw-semibold mb-1">Drop a PDF or image here</p>
+                <p class="text-muted small mb-3">One file per chat. Supported types: PDF, JPG, PNG.</p>
+                <label class="btn btn-outline-primary mb-0" for="chatFileInput"><i class="bi bi-folder2-open me-1"></i>Browse</label>
+                <input class="visually-hidden" type="file" id="chatFileInput" accept=".pdf,.png,.jpg,.jpeg">
+              </div>
+              <div class="upload-progress" id="chatUploadProgress" hidden>
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                  <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+                  <div class="text-start">
+                    <div class="fw-semibold" id="chatUploadFilename">Uploading…</div>
+                    <div class="text-muted small">This may take a moment while we run OCR.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="upload-summary d-none" id="chatUploadSummary">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                  <div>
+                    <div class="fw-semibold" id="chatUploadedFileName"></div>
+                    <div class="text-muted small" id="chatUploadedFileMeta"></div>
+                  </div>
+                  <span class="badge text-bg-success" id="chatUploadBadge"><i class="bi bi-check-circle me-1"></i>Ready</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-messages flex-grow-1 rounded-4 p-3 overflow-auto" id="chatMessages" aria-live="polite" aria-label="Conversation transcript">
+            </div>
+
+            <div class="alert alert-primary bg-primary-subtle border-0 text-primary-emphasis" role="alert">
+              <div class="d-flex align-items-start gap-2">
+                <span class="fs-5">💬</span>
+                <p class="small mb-0">Ask clear, action-oriented questions. Try “Compare this invoice with last month” or “Highlight suspicious GST entries.” The AI replies once the file has finished processing.</p>
+              </div>
+            </div>
+
+            <form id="chatMessageForm" class="chat-input d-flex flex-column flex-lg-row gap-3" autocomplete="off">
+              <div class="flex-grow-1 position-relative">
+                <textarea class="form-control form-control-lg" id="chatMessageInput" rows="2" placeholder="Ask about anomalies, GST validation, duplicates…" aria-label="Message the AI" disabled></textarea>
+                <div class="invalid-feedback" id="chatMessageError"></div>
+              </div>
+              <button class="btn btn-primary btn-lg align-self-end" id="chatSendButton" type="submit" disabled data-bs-toggle="tooltip" data-bs-placement="top" title="Send your prompt to the AI">
+                <i class="bi bi-send-fill me-1"></i>Send
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.4/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script type="module" src="{{ url_for('expenseai_web.static', filename='js/ai_chat.js') }}"></script>
+{% endblock %}

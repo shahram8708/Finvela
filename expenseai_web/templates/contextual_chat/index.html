@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<input type="hidden" id="contextChatCsrfToken" value="{{ csrf_token() }}">
+<script type="application/json" id="contextChatInvoiceSessions">{{ invoice_sources|tojson }}</script>
+<script type="application/json" id="contextChatSessions">{{ sessions|tojson }}</script>
+<script type="application/json" id="contextChatActiveSession">{{ active_session|tojson }}</script>
+<script type="application/json" id="contextChatActiveMessages">{{ active_messages|tojson }}</script>
+<script type="application/json" id="contextChatHistoryLimit">{{ history_limit|tojson }}</script>
+
+<style>
+  .context-page {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .context-hero {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.2));
+    border-radius: 1.5rem;
+    color: black;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .context-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto -140px -140px auto;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+    transform: rotate(18deg);
+    pointer-events: none;
+  }
+
+  .context-card {
+    border-radius: 1.25rem;
+    border: none;
+    box-shadow: 0 18px 45px -28px rgba(30, 64, 175, 0.45);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+  }
+
+  .context-invoice-list {
+    max-height: 360px;
+    overflow-y: auto;
+  }
+
+  .context-session-list {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
+  .context-messages {
+    height: 520px;
+    overflow-y: auto;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, #ffffff 80%);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .context-message {
+    max-width: 92%;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 12px 30px -20px rgba(15, 23, 42, 0.35);
+    position: relative;
+    animation: fade-in-up 0.25s ease-in;
+  }
+
+  .context-message-user {
+    background: linear-gradient(135deg, #2563eb, #10b981);
+    color: #ffffff;
+    margin-left: auto;
+    border-bottom-right-radius: 0.4rem;
+  }
+
+  .context-message-assistant {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom-left-radius: 0.4rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+  }
+
+  .context-message-header {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .context-message-body {
+    font-size: 0.95rem;
+  }
+
+  .context-empty {
+    text-align: center;
+    color: rgba(15, 23, 42, 0.55);
+    padding: 4rem 1rem;
+  }
+
+  .context-empty i {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .context-badge {
+    background: rgba(59, 130, 246, 0.1);
+    color: #1d4ed8;
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    margin-right: 0.35rem;
+    margin-bottom: 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .context-form textarea {
+    resize: vertical;
+    min-height: 90px;
+    border-radius: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+  }
+
+  .context-form textarea:focus {
+    border-color: rgba(37, 99, 235, 0.45);
+    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.2);
+  }
+
+  .context-form .btn-send {
+    border-radius: 999px;
+    padding-inline: 1.75rem;
+  }
+
+  @media (max-width: 991.98px) {
+    .context-messages {
+      height: 420px;
+    }
+  }
+</style>
+
+<div class="context-page">
+  <section class="context-hero p-4 p-lg-5 mb-5 text-dark position-relative">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <span class="badge bg-light text-dark text-uppercase fw-semibold px-3 py-2">Finvela</span>
+        <h1 class="display-6 fw-bold mt-3 mb-2">Context-Aware Copilot</h1>
+        <p class="lead mb-3">Blend insights from prior invoice chats with new prompts. The copilot stitches the first Finvela responses together for you, then keeps only the latest conversation turns in view.</p>
+        <div class="d-flex flex-column flex-md-row gap-3">
+          <div class="d-flex align-items-center gap-3 bg-white bg-opacity-25 rounded-4 px-3 py-2">
+            <i class="bi bi-collection" aria-hidden="true"></i>
+            <span class="small">Select invoice chats to seed context.</span>
+          </div>
+          <div class="d-flex align-items-center gap-3 bg-white bg-opacity-25 rounded-4 px-3 py-2">
+            <i class="bi bi-diagram-2" aria-hidden="true"></i>
+            <span class="small">First reply uses combined Finvela outputs.</span>
+          </div>
+          <div class="d-flex align-items-center gap-3 bg-white bg-opacity-25 rounded-4 px-3 py-2">
+            <i class="bi bi-clock-history" aria-hidden="true"></i>
+            <span class="small">Later turns keep the last five messages.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 text-lg-end">
+        <div class="bg-white bg-opacity-15 rounded-4 p-4">
+          <h2 class="h5 fw-semibold mb-2">Workflow</h2>
+          <ol class="small mb-0">
+            <li>Pick invoice chats with rich Finvela answers.</li>
+            <li>Name the session and generate the starting context.</li>
+            <li>Chat normally—Markdown renders in real time.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="row g-4">
+    <div class="col-12 col-lg-4 d-flex flex-column gap-4">
+      <div class="card context-card h-100">
+        <div class="card-body d-flex flex-column gap-3">
+          <div class="d-flex align-items-start justify-content-between">
+            <div>
+              <h2 class="h5 fw-semibold mb-1">Invoice chat sources</h2>
+              <p class="text-muted small mb-0">Select chats to merge their first Finvela replies.</p>
+            </div>
+            <button class="btn btn-outline-primary btn-sm" id="contextRefreshInvoices" type="button">
+              <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="alert alert-info bg-info-subtle border-0 text-info-emphasis" role="status">
+            <div class="d-flex align-items-start gap-2">
+              <i class="bi bi-info-circle" aria-hidden="true"></i>
+              <p class="small mb-0">Only chats with at least one Finvela response appear here. Re-run invoice analysis if you need a richer seed.</p>
+            </div>
+          </div>
+          <div id="contextInvoiceList" class="context-invoice-list"></div>
+          <div class="mt-2">
+            <small class="text-muted">Selected <span id="contextSelectedCount">0</span> sources</small>
+          </div>
+          <div class="d-grid gap-2">
+            <input type="text" class="form-control" id="contextSessionName" placeholder="Optional session title">
+            <button class="btn btn-success" id="contextCreateButton" type="button" disabled>
+              <i class="bi bi-magic" aria-hidden="true"></i> Start context chat
+            </button>
+            <div class="text-danger small" id="contextCreateError" role="alert" hidden></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card context-card">
+        <div class="card-body d-flex flex-column gap-3">
+          <div class="d-flex align-items-start justify-content-between">
+            <div>
+              <h2 class="h5 fw-semibold mb-1">Context sessions</h2>
+              <p class="text-muted small mb-0">Open a session to continue the conversation.</p>
+            </div>
+          </div>
+          <div id="contextSessionList" class="context-session-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-8">
+      <div class="card context-card h-100">
+        <div class="card-body d-flex flex-column gap-4">
+          <div class="d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
+            <div>
+              <h2 class="h4 fw-semibold mb-1" id="contextSessionTitle">Start a Finvela-powered chat</h2>
+              <div class="text-muted small" id="contextSessionMeta">Choose invoice chats to unlock insights.</div>
+            </div>
+            <div>
+              <span class="badge text-bg-primary"><i class="bi bi-cpu me-1" aria-hidden="true"></i>Finvela</span>
+            </div>
+          </div>
+          <div id="contextSessionSources" class="d-flex flex-wrap"></div>
+          <div id="contextMessages" class="context-messages" aria-live="polite" aria-label="Conversation transcript"></div>
+          <div class="context-form">
+            <form id="contextChatForm" class="d-flex flex-column flex-lg-row gap-3" autocomplete="off">
+              <div class="flex-grow-1">
+                <textarea class="form-control" id="contextChatInput" placeholder="Ask follow-up questions or request deeper analysis…" aria-label="Message the AI"></textarea>
+                <div class="invalid-feedback d-block" id="contextChatError" style="display: none;"></div>
+              </div>
+              <button class="btn btn-primary btn-send align-self-lg-end" id="contextSendButton" type="submit">
+                <i class="bi bi-send-fill me-1" aria-hidden="true"></i>Send
+              </button>
+            </form>
+            <p class="text-muted small mt-2 mb-0">Only the first reply uses combined invoice context. Later replies see the latest {{ history_limit }} messages.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.4/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script type="module" src="{{ url_for('expenseai_web.static', filename='js/contextual_chat.js') }}"></script>
+{% endblock %}

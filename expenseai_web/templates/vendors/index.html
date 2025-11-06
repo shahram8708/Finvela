@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav aria-label="breadcrumb" class="animate-fade-up">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('expenseai_web.dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Vendors</li>
+  </ol>
+</nav>
+
+<section class="card shadow-sm border-0 animate-fade-up">
+  <div class="card-header bg-transparent border-0">
+    <div class="row g-3 align-items-center">
+      <div class="col-lg-8">
+        <h1 class="h4 fw-bold mb-0"><i class="bi bi-buildings me-2"></i>Vendor intelligence</h1>
+        <p class="text-muted small mb-0">Browse vendor fingerprints, sample depth, and recent drift observations.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <span class="badge text-bg-light text-uppercase">{{ pagination.total }} tracked vendors</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <form class="row g-3 mb-4" method="get" action="{{ url_for('expenseai_vendor.list_vendors') }}">
+      <div class="col-md-6 col-xl-4">
+        <label class="form-label" for="vendorSearch">Search vendors</label>
+        <input type="search" class="form-control" id="vendorSearch" name="q" value="{{ search_term }}" placeholder="GST number or summary keyword" autocomplete="off">
+        <div class="form-text">Search is case-insensitive and matches GST or summary text.</div>
+      </div>
+      <div class="col-md-3 col-xl-2">
+        <label class="form-label" for="perPageSelect">Page size</label>
+        <select class="form-select" id="perPageSelect" name="per_page">
+          {% for size in [10, 20, 40, 80] %}
+            <option value="{{ size }}" {% if pagination.per_page == size %}selected{% endif %}>{{ size }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-12 d-flex align-items-end gap-2">
+        <button class="btn btn-outline-secondary" type="reset"><i class="bi bi-eraser me-1"></i>Reset</button>
+        <button class="btn btn-primary" type="submit"><i class="bi bi-funnel me-1"></i>Apply</button>
+      </div>
+    </form>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Vendor</th>
+            <th scope="col" class="text-center">Samples</th>
+            <th scope="col" class="text-center">Avg price</th>
+            <th scope="col" class="text-center">Price MAD</th>
+            <th scope="col">Last updated</th>
+            <th scope="col">Latest drift</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if vendors %}
+            {% for vendor in vendors %}
+              {% set vector = vendor.vector_values() %}
+              {% set drift = latest_drift.get(vendor.vendor_gst) %}
+              <tr>
+                <td>
+                  <div class="fw-semibold">{{ vendor.vendor_gst }}</div>
+                  <div class="small text-muted text-truncate" style="max-width: 360px;" title="{{ vendor.text_norm_summary or 'No summary captured yet.' }}">
+                    {{ vendor.text_norm_summary or 'No summary captured yet.' }}
+                  </div>
+                  <div class="small text-muted">Embedding length: {{ vector|length if vector else 0 }}</div>
+                </td>
+                <td class="text-center">
+                  <span class="badge text-bg-secondary">{{ vendor.n_samples }}</span>
+                </td>
+                <td class="text-center">
+                  {% if vendor.avg_unit_price is not none %}
+                    ₹ {{ '%.2f'|format(vendor.avg_unit_price) }}
+                  {% else %}
+                    <span class="text-muted">—</span>
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% if vendor.price_mad is not none %}
+                    ₹ {{ '%.2f'|format(vendor.price_mad) }}
+                  {% else %}
+                    <span class="text-muted">—</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <div>{{ vendor.last_updated.strftime('%b %d, %Y %H:%M') if vendor.last_updated else '—' }}</div>
+                  <div class="small text-muted">Created {{ vendor.created_at.strftime('%b %d, %Y') if vendor.created_at else '—' }}</div>
+                </td>
+                <td>
+                  {% if drift %}
+                    {% set drift_pct = (drift.drift_score * 100) | round(1) %}
+                    {% if drift.drift_score >= 0.6 %}
+                      {% set drift_class = 'text-bg-danger' %}
+                    {% elif drift.drift_score >= 0.3 %}
+                      {% set drift_class = 'text-bg-warning' %}
+                    {% else %}
+                      {% set drift_class = 'text-bg-success' %}
+                    {% endif %}
+                    <span class="badge {{ drift_class }}">{{ drift_pct }}%</span>
+                    <div class="small text-muted">{{ drift.created_at.strftime('%b %d, %Y %H:%M') }}</div>
+                  {% else %}
+                    <span class="text-muted small">No drift records</span>
+                  {% endif %}
+                </td>
+                <td class="text-end">
+                  <a class="btn btn-outline-primary btn-sm" href="{{ url_for('expenseai_vendor.vendor_detail', vendor_gst=vendor.vendor_gst) }}">
+                    <i class="bi bi-search"></i>
+                    <span class="visually-hidden">View {{ vendor.vendor_gst }}</span>
+                    <span aria-hidden="true">View</span>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="7" class="text-center py-5 text-muted">
+                <i class="bi bi-building-slash fs-4 d-block mb-2"></i>No vendors found for the selected filters.
+              </td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if pagination.pages > 1 %}
+      <nav aria-label="Vendor pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('expenseai_vendor.list_vendors', page=pagination.prev_num, q=search_term, per_page=pagination.per_page) if pagination.has_prev else '#' }}" aria-label="Previous" {% if not pagination.has_prev %}tabindex="-1"{% endif %}>
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% for page_num in pagination.iter_pages() %}
+            {% if page_num %}
+              <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('expenseai_vendor.list_vendors', page=page_num, q=search_term, per_page=pagination.per_page) }}">{{ page_num }}</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">…</span></li>
+            {% endif %}
+          {% endfor %}
+          <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('expenseai_vendor.list_vendors', page=pagination.next_num, q=search_term, per_page=pagination.per_page) if pagination.has_next else '#' }}" aria-label="Next" {% if not pagination.has_next %}tabindex="-1"{% endif %}>
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

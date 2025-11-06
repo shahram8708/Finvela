@@ -1,0 +1,936 @@
+{% extends 'base.html' %}
+{% block content %}
+{% set counterfact = namespace(lines=[]) %}
+{% if line_items %}
+{% for item in line_items %}
+{% set _ = counterfact.lines.append({
+'line_no': item.line_no,
+'description': item.description_raw or '',
+'hsn_sac': item.hsn_sac or '',
+'qty': item.qty|string if item.qty is not none else '',
+'unit_price': item.unit_price|string if item.unit_price is not none else '',
+'gst_rate': item.gst_rate|string if item.gst_rate is not none else ''
+}) %}
+{% endfor %}
+{% endif %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  .invoice-viewport {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), rgba(99, 102, 241, 0.12));
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+
+  .invoice-card {
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 1.75rem;
+    box-shadow: 0 30px 80px -45px rgba(30, 64, 175, 0.35);
+  }
+
+  .invoice-chip {
+    border-radius: 9999px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .instruction-alert {
+    border-left: 4px solid rgba(59, 130, 246, 0.45);
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.14), rgba(99, 102, 241, 0.12));
+  }
+
+  .btn-gradient-primary {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-gradient-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -30px rgba(79, 70, 229, 0.6);
+  }
+
+  .invoice-preview,
+  .invoice-preview-image {
+    border-radius: 1.25rem;
+  }
+
+  .timeline-table-wrapper {
+    max-height: 70vh;
+    overflow-y: auto;
+    border-radius: 1.25rem;
+  }
+
+  .list-group-item-action {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .list-group-item-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -35px rgba(30, 64, 175, 0.4);
+  }
+
+  .counterfactual-line {
+    border-radius: 1rem;
+    border: 1px solid rgba(13, 110, 253, 0.12);
+    background: var(--bs-body-bg);
+    padding: 1rem;
+  }
+
+  .counterfactual-line+.counterfactual-line {
+    margin-top: 0.75rem;
+  }
+
+  .counterfactual-line .form-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .counterfactual-summary-table th,
+  .counterfactual-summary-table td {
+    vertical-align: middle;
+  }
+
+  .counterfactual-summary-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .counterfactual-result-card {
+    border-radius: 1rem;
+    border: 1px solid rgba(13, 110, 253, 0.08);
+    background: rgba(13, 110, 253, 0.04);
+    padding: 1rem;
+  }
+
+  .counterfactual-result-card+.counterfactual-result-card {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 575.98px) {
+    .counterfactual-line .row>* {
+      margin-top: 0.75rem;
+    }
+
+    .invoice-card {
+      border-radius: 1.5rem;
+    }
+  }
+</style>
+<div>
+  <div class="container-xxl">
+    <nav aria-label="breadcrumb" class="animate-fade-up mb-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('expenseai_web.dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('expenseai_invoices.list_invoices') }}">Invoices</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Invoice #{{ invoice.id }}</li>
+      </ol>
+    </nav>
+
+    <section class="alert instruction-alert border-0 shadow-sm animate-fade-up" role="alert">
+      <div class="d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
+        <div class="d-flex align-items-start gap-3">
+          <span class="fs-3">🧭</span>
+          <div>
+            <h1 class="h6 fw-semibold mb-1 text-uppercase text-muted">Invoice command center</h1>
+            <p class="mb-0 small">Preview the uploaded file, inspect AI events, and drive actions like parsing, GST
+              checks, and risk scoring. Each panel below highlights the next recommended step.</p>
+          </div>
+        </div>
+        <span class="badge bg-primary-subtle text-primary-emphasis invoice-chip px-3 py-2">Invoice {{ invoice.id
+          }}</span>
+      </div>
+    </section>
+
+    <div class="" data-invoice-id="{{ invoice.id }}">
+      <div class="row g-4 tri-panel animate-fade-up">
+        <div class="col-12 col-xl-6">
+          <div class="card h-100 invoice-card border-0">
+            <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-start gap-3">
+              <div>
+                <h2 class="h5 fw-bold mb-1 d-flex align-items-center gap-2"><i class="bi bi-eye"></i>Preview</h2>
+                <p class="text-muted small mb-0">Inline viewer with file and metadata.</p>
+              </div>
+              <span class="badge status-badge status-{{ invoice.processing_status|lower }}" id="invoiceStatusBadge">
+                {{ invoice.processing_status.title() }}
+              </span>
+            </div>
+            <div class="card-body position-relative">
+              <div class="alert instruction-alert border-0 mb-4" role="alert">
+                <div class="d-flex gap-2 align-items-start">
+                  <span class="fs-5">👁️</span>
+                  <p class="small mb-0">Verify the file rendering and metadata before taking action. PDFs appear inline;
+                    other formats can be opened in a new tab.</p>
+                </div>
+              </div>
+              {% if invoice.mime_type == 'application/pdf' %}
+              <iframe src="{{ invoice.public_url() }}" class="invoice-preview" title="Invoice preview"
+                loading="lazy"></iframe>
+              {% elif invoice.mime_type.startswith('image/') %}
+              <img src="{{ invoice.public_url() }}" alt="Invoice image"
+                class="img-fluid rounded mb-3 shadow-sm invoice-preview-image">
+              {% else %}
+              <div class="alert alert-info" role="status">
+                <i class="bi bi-file-earmark-text me-2"></i>Preview not available for this format. <a
+                  href="{{ invoice.public_url() }}" target="_blank">Open file</a>
+              </div>
+              {% endif %}
+              <div class="parsing-overlay" id="previewParsingOverlay" {% if invoice.processing_status not in
+                ['PARSING', 'QUEUED' ] %}hidden{% endif %}>
+                <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+                <span class="fw-semibold ms-2">Processing with Finvela…</span>
+              </div>
+              <dl class="row small mb-0">
+                <dt class="col-5">Filename</dt>
+                <dd class="col-7 text-truncate" title="{{ invoice.original_filename }}">{{ invoice.original_filename }}
+                </dd>
+                <dt class="col-5">MIME</dt>
+                <dd class="col-7">{{ invoice.mime_type }}</dd>
+                <dt class="col-5">Size</dt>
+                <dd class="col-7">{{ (invoice.filesize_bytes / 1024) | round(1) }} KB</dd>
+                <dt class="col-5">Uploaded</dt>
+                <dd class="col-7">{{ invoice.created_at.strftime('%b %d, %Y %H:%M') }}</dd>
+                {% if invoice.vendor_gst %}<dt class="col-5">Vendor GST</dt>
+                <dd class="col-7">{{ invoice.vendor_gst }}</dd>{% endif %}
+                {% if invoice.invoice_no %}<dt class="col-5">Invoice No.</dt>
+                <dd class="col-7">{{ invoice.invoice_no }}</dd>{% endif %}
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-xl-6">
+          <div class="card h-100 invoice-card border-0">
+            <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-start gap-3">
+              <div>
+                <h2 class="h5 fw-bold mb-1 d-flex align-items-center gap-2"><i class="bi bi-clock-history"></i>Timeline
+                </h2>
+                <p class="text-muted small mb-0">Reverse chronological invoice events with structured payloads.</p>
+              </div>
+              <span class="badge bg-secondary-subtle text-secondary-emphasis invoice-chip px-3 py-2">History</span>
+            </div>
+            <div class="card-body" id="timelineContainer">
+              <div class="alert instruction-alert border-0 mb-4" role="alert">
+                <div class="d-flex gap-2 align-items-start">
+                  <span class="fs-5">🗂️</span>
+                  <p class="small mb-0">Use this feed to audit each automation step. Click “View payload” for structured
+                    JSON that confirms extraction, checks, or integrations.</p>
+                </div>
+              </div>
+              {% if events %}
+              <div class="table-responsive timeline-table-wrapper">
+                <table class="table table-sm table-hover align-middle mb-0" id="invoiceTimelineTable">
+                  <thead class="bg-body-secondary text-uppercase small text-muted">
+                    <tr>
+                      <th scope="col" style="width: 4rem;">#</th>
+                      <th scope="col">Event</th>
+                      <th scope="col">Payload summary</th>
+                      <th scope="col" class="text-end">Recorded</th>
+                      <th scope="col" class="text-end" style="width: 8rem;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for event in events %}
+                    {% set payload = event.payload %}
+                    {% set is_mapping = payload is mapping %}
+                    {% set is_sequence = payload is sequence and payload is not string %}
+                    {% set payload_keys = payload.keys() | list if is_mapping else [] %}
+                    {% if is_mapping %}
+                    {% set note_text = payload.get('notes') or payload.get('note') %}
+                    {% set summary = payload.get('message') or note_text or payload.get('status') %}
+                    {% else %}
+                    {% set summary = None %}
+                    {% endif %}
+                    {% set has_payload = payload not in (None, {}, [], '') %}
+                    <tr id="event-{{ event.id }}">
+                      <td class="text-muted small">{{ loop.index }}</td>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          <span class="badge text-bg-light text-uppercase small">{{ event.event_type }}</span>
+                          {% if summary %}<span class="text-muted small">{{ summary }}</span>{% endif %}
+                        </div>
+                      </td>
+                      <td>
+                        {% if payload_keys %}
+                        <div class="d-flex flex-wrap gap-1">
+                          {% for key in payload_keys[:6] %}
+                          <span class="badge rounded-pill text-bg-secondary text-uppercase small">{{ key }}</span>
+                          {% endfor %}
+                          {% if payload_keys | length > 6 %}
+                          <span class="badge rounded-pill text-bg-secondary small">+{{ payload_keys | length - 6
+                            }}</span>
+                          {% endif %}
+                        </div>
+                        {% if note_text %}
+                        <div class="small text-muted mt-1">Note: {{ note_text }}</div>
+                        {% endif %}
+                        {% elif is_sequence %}
+                        <span class="badge rounded-pill text-bg-secondary small">List ({{ payload | length }})</span>
+                        {% elif payload is not none %}
+                        <span class="text-muted small">{{ payload | string }}</span>
+                        {% else %}
+                        <span class="text-muted">No payload</span>
+                        {% endif %}
+                      </td>
+                      <td class="text-end">
+                        <span class="text-muted small">{{ event.created_at.strftime('%b %d, %Y %H:%M:%S') }}</span>
+                      </td>
+                      <td class="text-end">
+                        <button class="btn btn-outline-primary btn-sm" type="button" data-payload-modal-trigger
+                          data-event-id="{{ event.id }}" data-event-type="{{ event.event_type }}"
+                          data-event-created="{{ event.created_at.strftime('%b %d, %Y %H:%M:%S') }}"
+                          data-payload='{{ payload | tojson | safe }}' {% if not has_payload %}disabled{% endif %}>
+                          <i class="bi bi-table"></i>
+                          <span class="ms-1">View payload</span>
+                        </button>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% else %}
+              <div class="text-center text-muted py-5">
+                <i class="bi bi-hourglass-split mb-2 d-block fs-4"></i>No activity yet.
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xl-12 mt-4">
+        <div class="card h-100 invoice-card">
+          <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-start gap-3">
+            <div>
+              <h2 class="h5 fw-bold mb-1 d-flex align-items-center gap-2"><i class="bi bi-sliders"></i>Actions</h2>
+              <p class="text-muted small mb-0">Update status, assign reviewers, capture notes.</p>
+            </div>
+            <span class="badge rounded-pill text-bg-light text-uppercase small" id="aiStatusIndicator">{{
+              invoice.processing_status }}</span>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <div class="alert instruction-alert border-0 mb-4" role="alert">
+              <div class="d-flex gap-2 align-items-start">
+                <span class="fs-5">⚙️</span>
+                <p class="small mb-0">Work top-down: run AI parsing, review insights, benchmark pricing, verify GST,
+                  then
+                  assign reviewers or finalize status.</p>
+              </div>
+            </div>
+            {% set parseSummary = parse_summary or {} %}
+            {% set analysis = parseSummary.get('analysis') if parseSummary else None %}
+            <div class="mb-4">
+              <button
+                class="btn btn-gradient-primary w-100 d-flex justify-content-center align-items-center gap-2 text-white"
+                type="button" id="parseWithAIButton" data-invoice-id="{{ invoice.id }}" {% if invoice.processing_status
+                in ['PARSING', 'QUEUED' ] %}disabled{% endif %} data-bs-toggle="tooltip" data-bs-placement="left"
+                title="Extract headers and line items with the Finvela model">
+                <i class="bi bi-magic"></i>
+                <span>Parse with AI (Finvela)</span>
+                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"
+                  id="parseSpinner"></span>
+              </button>
+              <div class="form-text mt-2">Runs Finvela extraction for header fields and line items.</div>
+              <div class="alert alert-danger small mt-2 d-none" id="parseError" role="alert"></div>
+            </div>
+            <div class="mb-4" id="extractionSummary" data-confidence="{{ invoice.extraction_confidence or '' }}">
+              <h3 class="h6 fw-semibold mb-2">Extraction Summary</h3>
+              <ul class="list-unstyled mb-3 {% if not header_fields %}d-none{% endif %}" id="extractionSummaryList">
+                <li><strong>Invoice No:</strong> <span data-summary-field="invoice_no">{{ invoice.invoice_no or '—'
+                    }}</span></li>
+                <li><strong>Invoice Date:</strong> <span data-summary-field="invoice_date">{{
+                    invoice.invoice_date.strftime('%Y-%m-%d') if invoice.invoice_date else '—' }}</span></li>
+                <li><strong>Vendor GST:</strong> <span data-summary-field="vendor_gst">{{ invoice.vendor_gst or '—'
+                    }}</span></li>
+                <li><strong>Company GST:</strong> <span data-summary-field="company_gst">{{ invoice.company_gst or '—'
+                    }}</span></li>
+                <li><strong>Totals:</strong> <span data-summary-field="totals">{{ invoice.subtotal or '—' }} / {{
+                    invoice.tax_total or '—' }} / {{ invoice.grand_total or '—' }}</span></li>
+              </ul>
+              <div class="mb-3 {% if not header_fields %}d-none{% endif %}" id="extractionConfidenceBadge">
+                <span class="badge text-bg-info" id="confidenceBadgeLabel">Mean confidence: {{
+                  (invoice.extraction_confidence * 100) | round(1) if invoice.extraction_confidence else 'n/a'
+                  }}%</span>
+              </div>
+              <div class="alert alert-secondary small {% if header_fields %}d-none{% endif %}" role="status"
+                id="extractionPlaceholder">
+                Extraction details will appear here once parsing finishes.
+              </div>
+            </div>
+            {% if parseSummary %}
+            {% set header_mean = parseSummary.get('header_confidence_mean') %}
+            {% set pages_parsed = parseSummary.get('pages_parsed') or invoice.pages_parsed %}
+            {% set line_item_count = parseSummary.get('line_items') %}
+            <div class="mb-4" id="parseOverview" data-parse-summary='{{ parseSummary | tojson | safe }}'>
+              <h3 class="h6 fw-semibold mb-2">Parse Overview</h3>
+              <dl class="row row-cols-2 small g-2 mb-0">
+                {% if pages_parsed %}<dt class="col">Pages parsed</dt>
+                <dd class="col text-end">{{ pages_parsed }}</dd>{% endif %}
+                {% if line_item_count is not none %}<dt class="col">Line items parsed</dt>
+                <dd class="col text-end">{{ line_item_count }}</dd>{% endif %}
+                {% if header_mean is not none %}
+                {% set header_pct = (header_mean | float) * 100 %}
+                <dt class="col">Header confidence</dt>
+                <dd class="col text-end">{{ header_pct | round(1) }}%</dd>
+                {% endif %}
+                {% if invoice.extracted_at %}<dt class="col">Last extracted</dt>
+                <dd class="col text-end">{{ invoice.extracted_at.strftime('%b %d, %Y %H:%M') }}</dd>{% endif %}
+              </dl>
+            </div>
+            {% endif %}
+            {% if analysis %}
+            {% set est_accuracy = analysis.get('estimated_accuracy') %}
+            {% set duplicate = analysis.get('duplicate_check') %}
+            {% set gst_validation = analysis.get('gst_validation') %}
+            {% set hsn_rate = analysis.get('hsn_rate_check') %}
+            {% set arithmetic_check = analysis.get('arithmetic_check') %}
+            {% set price_outlier = analysis.get('price_outlier_check') %}
+            <div class="mb-4" id="analysisSection" data-analysis='{{ analysis | tojson | safe }}'>
+              <h3 class="h6 fw-semibold mb-2">AI Analysis Insights</h3>
+              {% if est_accuracy is not none %}
+              {% set accuracy_pct = (est_accuracy | float) * 100 %}
+              {% set accuracy_bar = accuracy_pct %}
+              {% if accuracy_bar > 100 %}{% set accuracy_bar = 100 %}{% endif %}
+              {% if accuracy_bar < 0 %}{% set accuracy_bar=0 %}{% endif %} <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center small fw-semibold">
+                  <span class="text-uppercase text-muted">Estimated Accuracy</span>
+                  <span>{{ accuracy_pct | round(1) }}%</span>
+                </div>
+                <div class="progress progress-thin" data-confidence="{{ accuracy_bar | round(1) }}" role="progressbar"
+                  aria-valuenow="{{ accuracy_pct | round(1) }}" aria-valuemin="0" aria-valuemax="100">
+                  <div
+                    class="progress-bar {% if accuracy_pct >= 80 %}bg-success{% elif accuracy_pct >= 60 %}bg-warning{% else %}bg-danger{% endif %}"
+                    data-progress-bar="true" style="width: 0%;"></div>
+                </div>
+            </div>
+            {% endif %}
+            <div class="list-group list-group-flush small">
+              {% if duplicate %}
+              {% set duplicate_status = (duplicate.get('status') or 'unknown') | lower %}
+              {% if duplicate_status == 'clear' %}
+              {% set duplicate_badge = 'text-bg-success' %}
+              {% elif duplicate_status == 'flagged' %}
+              {% set duplicate_badge = 'text-bg-danger' %}
+              {% else %}
+              {% set duplicate_badge = 'text-bg-warning' %}
+              {% endif %}
+              <div class="list-group-item px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-semibold">Duplicate Check</span>
+                  <span class="badge {{ duplicate_badge }} text-uppercase">{{ duplicate_status }}</span>
+                </div>
+                {% if duplicate.get('rationale') %}
+                <p class="mb-1 mt-2">{{ duplicate.get('rationale') }}</p>
+                {% endif %}
+                {% if duplicate.get('matches') %}
+                <ul class="mb-0 ps-3">
+                  {% for match in duplicate.get('matches') %}
+                  <li>
+                    <span class="fw-semibold">{{ match.get('invoice_reference') or 'Unknown reference' }}</span>
+                    {% if match.get('similarity') is not none %}
+                    <span class="text-muted">&middot; Similarity {{ (match.get('similarity') | float * 100) | round(1)
+                      }}%</span>
+                    {% endif %}
+                    {% if match.get('reason') %}
+                    <div class="text-muted">{{ match.get('reason') }}</div>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <div class="text-muted">No similar invoices detected.</div>
+                {% endif %}
+              </div>
+              {% endif %}
+              {% if gst_validation %}
+              <div class="list-group-item px-0">
+                <div class="fw-semibold mb-2">GST Validation</div>
+                <div class="d-flex flex-column gap-2">
+                  {% for key in ['vendor', 'company'] %}
+                  {% set entry = gst_validation.get(key) %}
+                  <div class="border rounded px-3 py-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span class="text-uppercase text-muted">{{ key }} GST</span>
+                      {% if entry and entry.get('valid') is not none %}
+                      <span class="badge {% if entry.get('valid') %}text-bg-success{% else %}text-bg-danger{% endif %}">
+                        {{ 'Valid' if entry.get('valid') else 'Invalid' }}
+                      </span>
+                      {% endif %}
+                    </div>
+                    <div class="mt-1">
+                      <div><span class="fw-semibold">Number:</span> {{ entry.get('gst_number') if entry else '—' }}
+                      </div>
+                      {% if entry and entry.get('confidence') is not none %}
+                      <div class="text-muted">Confidence {{ (entry.get('confidence') | float * 100) | round(1) }}%</div>
+                      {% endif %}
+                      {% if entry and entry.get('source') %}
+                      <div class="text-muted">Source: {{ entry.get('source') | replace('_', ' ') | title }}</div>
+                      {% endif %}
+                      {% if entry and entry.get('detail') %}
+                      <div class="small mt-1">{{ entry.get('detail') }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+              {% if hsn_rate %}
+              {% set hsn_status = (hsn_rate.get('status') or 'unknown') | lower %}
+              {% if hsn_status == 'aligned' %}
+              {% set hsn_badge = 'text-bg-success' %}
+              {% elif hsn_status == 'mismatch' %}
+              {% set hsn_badge = 'text-bg-danger' %}
+              {% else %}
+              {% set hsn_badge = 'text-bg-secondary' %}
+              {% endif %}
+              <div class="list-group-item px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-semibold">HSN/SAC Rate Check</span>
+                  <span class="badge {{ hsn_badge }} text-uppercase">{{ hsn_status }}</span>
+                </div>
+                {% if hsn_rate.get('confidence') is not none %}
+                <div class="text-muted">Confidence {{ (hsn_rate.get('confidence') | float * 100) | round(1) }}%</div>
+                {% endif %}
+                {% if hsn_rate.get('violations') %}
+                <ul class="mb-0 ps-3 mt-2">
+                  {% for violation in hsn_rate.get('violations') %}
+                  <li>
+                    <span class="fw-semibold">Line {{ violation.get('line_no') or '—' }}:</span>
+                    {% if violation.get('description') %} {{ violation.get('description') }}{% endif %}
+                    {% if violation.get('billed_rate') is not none or violation.get('expected_rate') is not none %}
+                    <div class="text-muted">
+                      Billed {{ violation.get('billed_rate') or '—' }} vs Expected {{ violation.get('expected_rate') or
+                      '—' }}
+                    </div>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <div class="text-muted">No rate mismatches detected.</div>
+                {% endif %}
+              </div>
+              {% endif %}
+              {% if arithmetic_check %}
+              {% set arithmetic_pass = arithmetic_check.get('passes') %}
+              {% if arithmetic_pass is none %}
+              {% set arithmetic_badge = 'text-bg-secondary' %}
+              {% set arithmetic_label = 'Unknown' %}
+              {% elif arithmetic_pass %}
+              {% set arithmetic_badge = 'text-bg-success' %}
+              {% set arithmetic_label = 'Balanced' %}
+              {% else %}
+              {% set arithmetic_badge = 'text-bg-danger' %}
+              {% set arithmetic_label = 'Mismatch' %}
+              {% endif %}
+              <div class="list-group-item px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-semibold">Arithmetic Check</span>
+                  <span class="badge {{ arithmetic_badge }} text-uppercase">{{ arithmetic_label }}</span>
+                </div>
+                {% if arithmetic_check.get('confidence') is not none %}
+                <div class="text-muted">Confidence {{ (arithmetic_check.get('confidence') | float * 100) | round(1) }}%
+                </div>
+                {% endif %}
+                {% if arithmetic_check.get('recomputed_totals') %}
+                <div class="mt-2">
+                  <div class="text-muted text-uppercase small">Recomputed totals</div>
+                  <ul class="mb-2 ps-3">
+                    {% for key, value in arithmetic_check.get('recomputed_totals').items() %}
+                    <li>{{ key | replace('_', ' ') | title }}: {{ value if value is not none else '—' }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% endif %}
+                {% if arithmetic_check.get('discrepancies') %}
+                <div class="text-muted text-uppercase small">Discrepancies</div>
+                <ul class="mb-0 ps-3">
+                  {% for discrepancy in arithmetic_check.get('discrepancies') %}
+                  <li>
+                    <span class="fw-semibold">{{ discrepancy.get('field') | replace('_', ' ') | title }}</span>
+                    {% if discrepancy.get('difference') is not none %}
+                    <span class="text-muted">&middot; Δ {{ discrepancy.get('difference') }}</span>
+                    {% endif %}
+                    {% if discrepancy.get('note') %}
+                    <div class="small">{{ discrepancy.get('note') }}</div>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+              {% endif %}
+              {% if price_outlier %}
+              <div class="list-group-item px-0">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-semibold">Price Outliers</span>
+                  {% if price_outlier.get('confidence') is not none %}
+                  <span class="badge text-bg-info">Confidence {{ (price_outlier.get('confidence') | float * 100) |
+                    round(1) }}%</span>
+                  {% endif %}
+                </div>
+                {% if price_outlier.get('method') %}
+                <div class="text-muted">Method: {{ price_outlier.get('method') | replace('_', ' ') | title }}</div>
+                {% endif %}
+                {% if price_outlier.get('outliers') %}
+                <ul class="mb-0 ps-3 mt-2">
+                  {% for outlier in price_outlier.get('outliers') %}
+                  <li>
+                    <span class="fw-semibold">Line {{ outlier.get('line_no') or '—' }}:</span>
+                    {{ outlier.get('description') or 'Unnamed item' }}
+                    {% if outlier.get('delta_percent') is not none %}
+                    <div class="text-muted">Delta {{ (outlier.get('delta_percent') | float) | round(1) }}%</div>
+                    {% endif %}
+                    <div class="text-muted">Billed {{ outlier.get('billed_price') or '—' }} vs Market {{
+                      outlier.get('market_average') or '—' }}</div>
+                    {% if outlier.get('confidence') is not none %}
+                    <div class="text-muted">Confidence {{ (outlier.get('confidence') | float * 100) | round(1) }}%</div>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <div class="text-muted">No pricing anomalies detected.</div>
+                {% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+          <div class="mb-4" id="marketBenchmarkSection"
+            data-run-url="{{ url_for('expenseai_invoices.run_invoice_price_benchmarks', invoice_id=invoice.id) }}"
+            data-fetch-url="{{ url_for('expenseai_invoices.invoice_price_benchmarks', invoice_id=invoice.id) }}"
+            data-benchmarks='{{ price_benchmarks | tojson | safe }}'>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h3 class="h6 fw-semibold mb-0">Market Price Benchmark</h3>
+              <button class="btn btn-outline-primary btn-sm" type="button" data-benchmark-run data-bs-toggle="tooltip"
+                data-bs-placement="left" title="Fetch live market averages for each line item">
+                <span data-label>Run market check</span>
+                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"
+                  data-spinner></span>
+              </button>
+            </div>
+            <p class="text-muted small mb-3">Compares billed product prices to the average market price (using AI
+              grounding) and flags outliers.</p>
+            <div class="alert alert-danger small d-none" role="alert" data-benchmark-feedback></div>
+            <div class="small text-muted mb-2" data-benchmark-last-run>Last run —</div>
+            <div class="table-responsive small" data-benchmark-table hidden>
+              <table class="table table-sm align-middle mb-0">
+                <thead class="text-muted text-uppercase small">
+                  <tr>
+                    <th scope="col" style="width: 3rem;">Line</th>
+                    <th scope="col">Product</th>
+                    <th scope="col" class="text-end">Billed</th>
+                    <th scope="col" class="text-end">Market</th>
+                    <th scope="col" class="text-end" style="width: 5rem;">Δ%</th>
+                  </tr>
+                </thead>
+                <tbody data-benchmark-rows></tbody>
+              </table>
+            </div>
+            <div class="text-muted small" data-benchmark-empty>No market benchmark data yet. Run the check to fetch live
+              prices.</div>
+          </div>
+          <div class="mb-4" id="gstVerificationSection" data-invoice-id="{{ invoice.id }}"
+            data-gst-checks='{{ gst_checks | tojson | safe }}'
+            data-verify-url-template="{{ url_for('expenseai_invoices.verify_gst', invoice_id=invoice.id, subject='__KIND__') }}">
+            <h3 class="h6 fw-semibold mb-2">GST Verification</h3>
+            <p class="text-muted small mb-3">Validate GST registration numbers using the configured provider or local
+              test
+              fixtures.</p>
+            <div class="d-flex flex-column gap-3">
+              {% for key, label in [('vendor', 'Vendor'), ('company', 'Company')] %}
+              {% set gst_data = gst_checks.get(key) %}
+              {% set gst_number = invoice.vendor_gst if key == 'vendor' else invoice.company_gst %}
+              <div class="border rounded px-3 py-2" data-gst-card="{{ key }}"
+                data-gst-payload='{{ gst_data.details | tojson | safe if gst_data else "{}" }}'
+                data-gst-updated='{{ gst_data.updated_at if gst_data else "" }}'>
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="text-uppercase text-muted small">{{ label }} GST</div>
+                    <div class="fw-semibold" data-gst-number>{{ gst_number or '—' }}</div>
+                  </div>
+                  <span
+                    class="badge text-uppercase small {% if gst_data %}{% if gst_data.status == 'PASS' %}text-bg-success{% elif gst_data.status == 'FAIL' %}text-bg-danger{% elif gst_data.status == 'WARN' %}text-bg-warning{% else %}text-bg-secondary{% endif %}{% else %}text-bg-secondary{% endif %}"
+                    data-gst-status>
+                    {{ gst_data.status_label if gst_data else 'Unverified' }}
+                  </span>
+                </div>
+                <div class="small text-muted mt-2" data-gst-summary>
+                  {% if not gst_number %}
+                  Add a GSTIN to enable verification.
+                  {% elif gst_data and gst_data.summary %}
+                  {{ gst_data.summary }}
+                  {% else %}
+                  Verification not yet performed.
+                  {% endif %}
+                </div>
+                <div class="alert alert-danger small mt-2 d-none" role="alert" data-gst-feedback></div>
+                <div class="d-flex align-items-center gap-2 mt-3 flex-wrap">
+                  <button class="btn btn-outline-primary btn-sm" type="button" data-gst-verify-button
+                    data-gst-kind="{{ key }}" data-gst-value="{{ gst_number or '' }}" {% if not gst_number %}disabled{%
+                    endif %}>
+                    <span data-label>{{ 'Re-verify GST' if gst_data else 'Verify GST' }}</span>
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"
+                      data-spinner></span>
+                  </button>
+                  <button class="btn btn-link btn-sm text-decoration-none p-0" type="button"
+                    data-gst-view-details="{{ key }}" {% if not gst_data %}hidden{% endif %}>
+                    View details
+                  </button>
+                </div>
+                <div class="small text-muted mt-2" data-gst-last-verified>
+                  {% if gst_data and gst_data.updated_at_display %}
+                  Last verified {{ gst_data.updated_at_display }}
+                  {% else %}
+                  Last verified —
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="mb-4" id="riskSection" data-risk-status="{{ invoice.risk_status }}"
+            data-risk-initial='{{ risk_payload | tojson | safe }}'>
+            <h3 class="h6 fw-semibold mb-2 d-flex justify-content-between align-items-center">
+              <span>Composite Risk</span>
+              <span class="badge rounded-pill text-bg-secondary" id="riskBadge">{{ invoice.risk_status.title() }}</span>
+            </h3>
+            <button class="btn btn-outline-danger w-100 d-flex justify-content-center align-items-center gap-2"
+              type="button" id="computeRiskButton" data-invoice-id="{{ invoice.id }}" data-bs-toggle="tooltip"
+              data-bs-placement="top" title="Combine AI signals to generate a composite risk score">
+              <i class="bi bi-exclamation-triangle"></i>
+              <span>Compute Risk Score</span>
+              <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"
+                id="riskSpinner"></span>
+            </button>
+            <div class="form-text mt-2">Combines market benchmarks, compliance checks, and duplicate heuristics.</div>
+            <div class="alert alert-danger small mt-2 d-none" id="riskError" role="alert"></div>
+            <div class="mt-3">
+              <canvas id="riskWaterfallChart" height="220" aria-describedby="riskWaterfallSummary" hidden></canvas>
+              <div class="visually-hidden" id="riskWaterfallSummary"></div>
+            </div>
+            <div class="mt-3" id="riskContributorList" aria-live="polite"></div>
+            <div class="mt-3" id="riskOutlierList"></div>
+          </div>
+          <form id="invoiceActionForm" method="post"
+            action="{{ url_for('expenseai_invoices.invoice_action', invoice_id=invoice.id) }}" class="d-grid gap-3">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            {{ form.action(id='actionField') }}
+            {% set assignment_meta = assignment_state or {} %}
+            <div data-assignment-section data-assignment='{{ assignment_meta | tojson | safe }}'>
+              <label class="form-label" for="assigneeSelect">Assign reviewer</label>
+              <div class="alert alert-secondary d-flex justify-content-between align-items-center gap-3 mb-3"
+                data-assignment-summary {% if not assignment_state %}hidden{% endif %}>
+                <div>
+                  <div class="fw-semibold" data-assignment-name>{{ assignment_meta.get('assignee_name', '') }}</div>
+                  <div class="small text-muted" data-assignment-meta>
+                    {% if assignment_meta.get('assigned_at_display') %}Assigned {{
+                    assignment_meta.get('assigned_at_display') }}{% endif %}
+                  </div>
+                </div>
+                <button class="btn btn-outline-secondary btn-sm" type="button" data-assignment-change><i
+                    class="bi bi-arrow-repeat me-1"></i>Change</button>
+              </div>
+              <div data-assignment-control class="d-grid gap-2" {% if assignment_state %}hidden{% endif %}>
+                {{ form.assignee_id(class_='form-select', id='assigneeSelect', aria_describedby='assigneeHelp',
+                **{'data-assignment-select': 'true'}) }}
+                <div class="form-text" id="assigneeHelp">Selections emit assignment events.</div>
+                <button class="btn btn-outline-primary w-100" type="button" data-action="assign"
+                  data-assignment-submit><i class="bi bi-person-plus me-1"></i>Assign</button>
+              </div>
+            </div>
+            <div>
+              <label class="form-label" for="statusSelect">Status</label>
+              {{ form.status(class_='form-select', id='statusSelect') }}
+              <button class="btn btn-outline-secondary w-100 mt-2" type="button" data-action="status"><i
+                  class="bi bi-flag me-1"></i>Update status</button>
+            </div>
+            <div>
+              <label class="form-label" for="noteField">Notes</label>
+              {{ form.note(class_='form-control', rows='3', id='noteField', placeholder='Leave a reviewer note…') }}
+            </div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-warning" type="button" data-action="request_docs"><i
+                  class="bi bi-envelope-plus me-1"></i>Request documents</button>
+              <button class="btn btn-success" type="button" data-action="approve"><i
+                  class="bi bi-check2-circle me-1"></i>Approve</button>
+              <button class="btn btn-danger" type="button" data-action="reject"><i
+                  class="bi bi-x-octagon me-1"></i>Reject</button>
+            </div>
+            <p class="text-danger small mb-0" id="actionError" hidden role="alert"></p>
+          </form>
+          <div class="mt-4" id="extractedDataAccordion">
+            <div class="accordion" id="extractedAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingExtracted">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExtracted" aria-expanded="false" aria-controls="collapseExtracted">
+                    View Extracted Data
+                  </button>
+                </h2>
+                <div id="collapseExtracted" class="accordion-collapse collapse" aria-labelledby="headingExtracted"
+                  data-bs-parent="#extractedAccordion">
+                  <div class="accordion-body">
+                    <h3 class="h6 fw-semibold">Header Fields</h3>
+                    <div class="table-responsive">
+                      <table class="table table-sm align-middle" id="extractedHeaderTable">
+                        <thead>
+                          <tr>
+                            <th scope="col">Field</th>
+                            <th scope="col">Value</th>
+                            <th scope="col" class="text-end">Confidence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for field in header_fields %}
+                          <tr>
+                            <td class="text-uppercase small">{{ field.field_name }}</td>
+                            <td>{{ field.value or '—' }}</td>
+                            <td class="text-end">
+                              <div class="progress progress-thin" role="progressbar"
+                                aria-valuenow="{{ (field.confidence * 100) | round(1) }}" aria-valuemin="0"
+                                aria-valuemax="100" data-confidence="{{ (field.confidence * 100) | round(1) }}">
+                                <div class="progress-bar" style="width: 0%;" data-progress-bar="true"></div>
+                              </div>
+                              <span class="small text-muted" data-confidence-label="true">{{ (field.confidence * 100) |
+                                round(1) }}%</span>
+                            </td>
+                          </tr>
+                          {% else %}
+                          <tr>
+                            <td colspan="3" class="small text-muted">No extracted header fields yet.</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    <h3 class="h6 fw-semibold mt-4">Line Items</h3>
+                    <div class="table-responsive">
+                      <table class="table table-sm align-middle" id="extractedLineItemsTable">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">HSN/SAC</th>
+                            <th scope="col" class="text-end">Qty</th>
+                            <th scope="col" class="text-end">Unit Price</th>
+                            <th scope="col" class="text-end">GST %</th>
+                            <th scope="col" class="text-end">Subtotal</th>
+                            <th scope="col" class="text-end">Tax</th>
+                            <th scope="col" class="text-end">Total</th>
+                            <th scope="col" class="text-end">Confidence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for item in line_items %}
+                          <tr>
+                            <td>{{ item.line_no }}</td>
+                            <td>{{ item.description_raw }}</td>
+                            <td>{{ item.hsn_sac or '—' }}</td>
+                            <td class="text-end">{{ item.qty or '—' }}</td>
+                            <td class="text-end">{{ item.unit_price or '—' }}</td>
+                            <td class="text-end">{{ item.gst_rate or '—' }}</td>
+                            <td class="text-end">{{ item.line_subtotal or '—' }}</td>
+                            <td class="text-end">{{ item.line_tax or '—' }}</td>
+                            <td class="text-end">{{ item.line_total or '—' }}</td>
+                            <td class="text-end">{{ (item.confidence * 100) | round(1) }}%</td>
+                          </tr>
+                          {% else %}
+                          <tr>
+                            <td colspan="10" class="small text-muted">No line items extracted yet.</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-top pt-4 mt-4" id="counterfactualSection"
+            data-counterfactual-endpoint="{{ url_for('expenseai_counterfactual.run_counterfactual', invoice_id=invoice.id) }}"
+            data-counterfactual-lines='{{ counterfact.lines | tojson | safe }}'
+            data-counterfactual-max-lines="{{ current_app.config.get('COUNTERFACT_MAX_LINES', 5) }}">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <h3 class="h6 fw-semibold mb-1">Counterfactual Simulator</h3>
+                <p class="text-muted small mb-0">Model proposed line edits and preview their effect on totals and risk.
+                </p>
+              </div>
+              <span class="badge text-bg-info text-uppercase small">What-if</span>
+            </div>
+            <form id="counterfactualForm" class="d-flex flex-column gap-3" autocomplete="off">
+              <div data-counterfactual-lines class="d-flex flex-column gap-2"></div>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-primary btn-sm" type="button" id="counterfactualAddLine"
+                  data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Model an adjustment up to the configured limit">
+                  <i class="bi bi-plus-circle me-1"></i>
+                  Add line adjustment
+                </button>
+                <button class="btn btn-link btn-sm text-decoration-none" type="button"
+                  id="counterfactualResetButton">Reset</button>
+              </div>
+              <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-primary flex-grow-1" type="submit" id="counterfactualRunButton">
+                  <span class="d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-sliders"></i>
+                    Run what-if
+                  </span>
+                </button>
+                <div class="spinner-border spinner-border-sm text-primary d-none" role="status" aria-hidden="true"
+                  id="counterfactualSpinner"></div>
+              </div>
+              <div class="small text-muted" id="counterfactualHint">Limit {{
+                current_app.config.get('COUNTERFACT_MAX_LINES', 5) }} lines per simulation. Leave any field blank to
+                keep
+                the current value.</div>
+            </form>
+            <div class="alert alert-danger small d-none mt-3" id="counterfactualError" role="alert"></div>
+            <div class="counterfactual-result-card d-none mt-3" id="counterfactualResult" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="payloadModal" tabindex="-1" aria-labelledby="payloadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="payloadModalLabel">Event payload</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="payloadModalMeta" class="text-muted small mb-3"></div>
+          <div class="table-responsive border rounded shadow-sm" id="payloadModalTableWrapper">
+            <table class="table table-sm table-striped table-hover align-middle mb-0" id="payloadModalTable">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" style="width: 40%;">Field</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+              <tbody id="payloadModalTableBody">
+                <tr>
+                  <td colspan="2" class="text-center text-muted">Select an event to inspect its payload.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="payloadModalEmpty" class="alert alert-secondary small mt-3 d-none" role="status">
+            No structured payload was provided for this event.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

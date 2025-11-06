@@ -1,0 +1,14 @@
+New Contact Form Submission – {{ submission.category }}
+{{ '-' * 42 }}
+
+Submitted at: {{ submission.submitted_at.strftime('%Y-%m-%d %H:%M %Z') if submission.submitted_at else now().strftime('%Y-%m-%d %H:%M %Z') }}
+Sender      : {{ submission.name }}
+Email       : {{ submission.email }}
+Category    : {{ submission.category }}
+Subject     : {{ submission.subject }}
+
+Message:
+{{ submission.message }}
+
+--
+This notification was generated automatically by {{ app_name }}.

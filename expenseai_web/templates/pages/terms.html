@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block page_title %}Terms &amp; Conditions · {{ app_name }}{% endblock %}
+{% block meta_description %}Review the Terms &amp; Conditions governing your use of {{ app_name }}.{% endblock %}
+{% block content %}
+<section class="page-hero py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h1 class="display-5 fw-bold mb-3">Terms &amp; Conditions</h1>
+        <p class="lead text-secondary">These Terms &amp; Conditions (the “Terms”) govern your access to and use of {{ app_name }} (“the Service”). By signing up, logging in, or otherwise using the Service, you agree to be bound by these Terms.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="alert alert-info shadow-sm mb-0" role="note">
+          <i class="bi bi-info-circle me-2"></i>We recommend reviewing this document regularly to stay informed about updates.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="row justify-content-center">
+    <div class="col-xl-9 col-lg-10">
+      <article class="policy-card shadow-sm">
+        <div class="policy-section">
+          <h2 class="h3">1. Acceptance of Terms</h2>
+          <p>By accessing or using {{ app_name }}, you confirm that you are of legal age and have authority to enter into these Terms on behalf of yourself or the entity you represent. If you do not agree, you must discontinue use of the Service immediately.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">2. Modification of Terms</h2>
+          <p>We may revise these Terms from time to time. Material changes will be communicated via email, in-product notifications, or release notes. Your continued use of the Service after changes become effective constitutes acceptance.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">3. User Responsibilities</h2>
+          <ul>
+            <li>Maintain the confidentiality of account credentials and promptly notify us of suspected compromise.</li>
+            <li>Ensure uploaded content is accurate, lawful, and does not infringe intellectual property or privacy rights.</li>
+            <li>Comply with applicable laws, regulations, and data protection obligations when using the Service.</li>
+          </ul>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">4. Prohibited Activities</h2>
+          <ul>
+            <li>Circumventing security controls, scanning for vulnerabilities, or interfering with other users.</li>
+            <li>Using automated scripts or bots that degrade performance or violate rate limits.</li>
+            <li>Reverse engineering, decompiling, or attempting to extract source code from our systems.</li>
+          </ul>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">5. Intellectual Property Rights</h2>
+          <p>{{ app_name }}, including all software, designs, documentation, and content, is owned by Finvela or our licensors. Subject to compliance with these Terms, we grant you a limited, non-exclusive, non-transferable license to use the Service for business purposes. All rights not expressly granted are reserved.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">6. Limitation of Liability</h2>
+          <p>To the fullest extent permitted by law, Finvela is not liable for indirect, incidental, consequential, or punitive damages, nor for loss of profits, revenue, or data. Our aggregate liability arising from these Terms will not exceed the fees paid for the Service during the twelve (12) months preceding the event giving rise to liability.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">7. Governing Law</h2>
+          <p>These Terms are governed by and construed in accordance with the laws of India, without regard to conflict-of-law principles. Any disputes shall be subject to the exclusive jurisdiction of the courts located in Ahmedabad, Gujarat.</p>
+        </div>
+        <div class="policy-section">
+          <h2 class="h3">8. Contact Details</h2>
+          <p>If you have questions about these Terms, reach us at:</p>
+          <ul class="list-unstyled mb-0">
+            <li><i class="bi bi-envelope me-2"></i><a href="mailto:{{ current_app.config.get('ADMIN_EMAIL') }}" class="link-primary">{{ current_app.config.get('ADMIN_EMAIL') }}</a></li>
+            <li><i class="bi bi-telephone me-2"></i>+91 80471 23456 (Mon–Fri, 9am–6pm IST)</li>
+            <li><i class="bi bi-geo-alt me-2"></i>Finvela HQ, 221B Residency Road, Ahmedabad, India</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}

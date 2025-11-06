@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block page_title %}About Us · {{ app_name }}{% endblock %}
+{% block meta_description %}Discover the story, mission, and team powering {{ app_name }}.{% endblock %}
+{% block content %}
+<section class="page-hero py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="badge text-bg-light text-dark mb-3">Human-centered automation</span>
+        <h1 class="display-5 fw-bold mb-3">We build trustworthy AI for finance teams everywhere.</h1>
+        <p class="lead text-secondary">{{ app_name }} combines explainable machine learning with powerful workflows so finance leaders can move faster without sacrificing control, compliance, or privacy.</p>
+        <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+          <a href="{{ url_for('expenseai_web.contact') }}" class="btn btn-primary btn-lg"><i class="bi bi-chat-left-text me-2"></i>Talk to us</a>
+          <a href="#story" class="btn btn-outline-light text-dark"><i class="bi bi-play-circle me-2"></i>Our story</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card border-0 shadow-lg gradient-card">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="icon-circle bg-primary-subtle text-primary"><i class="bi bi-rocket-takeoff"></i></div>
+              <div>
+                <h2 class="h4 mb-0">{{ milestones|length }} milestones &amp; counting</h2>
+                <small class="text-secondary">Driven by customer trust since 2019</small>
+              </div>
+            </div>
+            <ul class="list-unstyled mb-0 small text-secondary">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Global delivery with privacy-by-design architecture</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Explainable AI keeping finance teams in command</li>
+              <li><i class="bi bi-check-circle-fill text-success me-2"></i>Secure, compliant operations aligned to SOC 2 principles</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="mission">
+  <div class="row g-4 align-items-stretch">
+    <div class="col-lg-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body p-5">
+          <h2 class="h3 mb-3">Our Mission</h2>
+          <p class="text-secondary">Empower finance teams with intelligent, privacy-forward workflows that automate manual checks, uncover risk, and surface insights before they become costly surprises.</p>
+          <p class="text-secondary">We believe automation should be explainable, configurable, and respectful of every organization’s data responsibilities.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body p-5">
+          <h2 class="h3 mb-3">Our Vision</h2>
+          <p class="text-secondary">A world where finance teams orchestrate strategy rather than paperwork, with AI copilots augmenting every audit, procurement, and compliance decision.</p>
+          <p class="text-secondary">We are building the intelligent backbone for resilient, transparent finance operations across industries.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="team">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="h3 mb-1">Leadership Team</h2>
+      <p class="text-secondary mb-0">A multidisciplinary crew of operators, data scientists, and designers.</p>
+    </div>
+    <a href="{{ url_for('expenseai_web.contact') }}" class="btn btn-outline-primary btn-sm"><i class="bi bi-calendar-event me-2"></i>Book a demo</a>
+  </div>
+  <div class="row g-4">
+    {% for member in team_members %}
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card team-card h-100 text-center">
+          <div class="card-body">
+            <div class="avatar-circle mx-auto mb-3">{{ member.initials }}</div>
+            <h3 class="h5 mb-1">{{ member.name }}</h3>
+            <p class="text-secondary mb-0">{{ member.role }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="page-section" id="story">
+  <div class="row g-5 align-items-center">
+    <div class="col-lg-5">
+      <h2 class="h3 mb-3">Our Story</h2>
+      <p class="text-secondary">Founded to close the gap between financial oversight and modern workflows, {{ app_name }} has evolved alongside our customers. From automating receipt classification to orchestrating enterprise-wide risk management, our roadmap is guided by real-world finance challenges.</p>
+      <p class="text-secondary mb-0">Today we power finance operations for fast-scaling startups and global enterprises alike—earning trust through transparency, resilience, and relentless focus on user experience.</p>
+    </div>
+    <div class="col-lg-7">
+      <div class="timeline-modern">
+        {% for milestone in milestones %}
+          <div class="timeline-modern-item">
+            <div class="timeline-modern-marker"></div>
+            <div class="timeline-modern-content">
+              <span class="badge bg-primary-subtle text-primary-emphasis mb-2">{{ milestone.year }}</span>
+              <h3 class="h5 mb-2">{{ milestone.title }}</h3>
+              <p class="text-secondary mb-0">{{ milestone.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="card shadow-sm">
+    <div class="card-body p-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h2 class="h3 mb-2">Join us in shaping the future of intelligent finance.</h2>
+          <p class="text-secondary mb-0">Whether you’re exploring a partnership, evaluating our platform, or searching for your next role, we’d love to connect.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="mailto:{{ current_app.config.get('ADMIN_EMAIL') }}" class="btn btn-primary"><i class="bi bi-envelope me-2"></i>Email the team</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+{% from 'macros/forms.html' import render_field %}
+{% block content %}
+<style>
+  :root {
+    --billing-primary: #635bff;
+    --billing-secondary: #0f172a;
+    --billing-accent: #7c3aed;
+  }
+
+  #billingPage {
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    color: var(--billing-secondary);
+    background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.08), transparent 55%),
+      radial-gradient(circle at bottom left, rgba(99, 91, 255, 0.12), transparent 50%);
+  }
+
+  .billing-hero {
+    background: linear-gradient(135deg, rgba(99, 91, 255, 0.95), rgba(14, 116, 144, 0.9));
+    border-radius: 1.5rem;
+    color: #f8fafc;
+  }
+
+  .glass-card {
+    border: 1px solid rgba(99, 91, 255, 0.08);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(99, 91, 255, 0.2);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  }
+
+  .instruction-card {
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 1rem;
+    border: 1px dashed rgba(99, 91, 255, 0.3);
+  }
+
+  .pill-badge {
+    background: rgba(148, 163, 184, 0.22);
+    border-radius: 50rem;
+  }
+
+  .fade-slide {
+    animation: fadeSlideIn 0.7s ease both;
+  }
+
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .table thead th {
+    border-bottom: 0;
+    color: #475569;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .table tbody td {
+    border-color: rgba(148, 163, 184, 0.25);
+  }
+
+  .info-chip {
+    background: rgba(99, 91, 255, 0.1);
+    color: var(--billing-primary);
+    border-radius: 0.75rem;
+  }
+
+  .hoverable-row:hover {
+    background-color: rgba(99, 91, 255, 0.08);
+  }
+
+  @media (max-width: 575.98px) {
+    .billing-hero {
+      border-radius: 1rem;
+    }
+
+    .glass-card {
+      border-radius: 1.25rem;
+    }
+  }
+</style>
+<div id="billingPage">
+  <div class="billing-hero position-relative overflow-hidden p-4 p-lg-5 mb-5 shadow-lg fade-slide">
+    <div class="d-lg-flex align-items-center justify-content-between gap-4">
+      <div class="mb-4 mb-lg-0">
+        <span class="pill-badge px-3 py-1 text-uppercase fw-semibold small text-light">Billing cockpit</span>
+        <h1 class="display-6 fw-semibold mt-3 mb-3">Plan &amp; billing overview</h1>
+        <p class="lead mb-4">Track your organization usage, unlock more seats, and manage your Razorpay payments from one elegant workspace.</p>
+        <div class="instruction-card px-4 py-3 text-dark shadow-sm">
+          <div class="d-flex align-items-start">
+            <div class="me-3 fs-4 text-primary">
+              <i class="bi bi-magic"></i>
+            </div>
+            <div>
+              <h2 class="h6 fw-semibold mb-1 text-primary text-uppercase">Quick orientation</h2>
+              <p class="mb-0">Review the summary at a glance, then follow the steps below the hero banner to request more seats and confirm your payment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white text-dark rounded-4 p-4 shadow-lg glass-card">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="fw-semibold text-muted text-uppercase small">Organization</span>
+          <span class="badge text-bg-dark shadow-sm">ID: {{ organization.id }}</span>
+        </div>
+        <ul class="list-unstyled mb-0 small lh-lg">
+          <li class="d-flex align-items-center"><i class="bi bi-graph-up-arrow text-primary me-2"></i> Seat limit: <strong class="ms-1">{{ organization.user_limit }}</strong></li>
+          <li class="d-flex align-items-center"><i class="bi bi-clock-history text-primary me-2"></i> Active members: <strong class="ms-1">{{ usage.active }}</strong></li>
+          <li class="d-flex align-items-center"><i class="bi bi-hourglass-split text-primary me-2"></i> Pending approvals: <strong class="ms-1">{{ usage.pending }}</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info border-0 shadow-sm mb-5 d-lg-flex align-items-center gap-3 fade-slide" role="alert">
+    <div class="fs-4 text-primary"><i class="bi bi-compass"></i></div>
+    <div>
+      <h2 class="h6 text-uppercase fw-bold mb-1">How to navigate this page</h2>
+      <p class="mb-0">Start with the upgrade panel on the left to request additional seats, then review your live plan status and Razorpay history on the right. Each section includes tips tailored for billing managers.</p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-xl-7">
+      <div class="card glass-card shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+            <div>
+              <h2 class="h4 mb-2"><i class="bi bi-people me-2 text-primary"></i>Upgrade seats</h2>
+              <p class="text-muted mb-0">Request the total number of seats your team needs. We auto-calculate the additional seats and payment.</p>
+            </div>
+            <span class="badge text-bg-primary shadow-sm">Step 1</span>
+          </div>
+          <div class="instruction-card px-4 py-3 mb-4">
+            <div class="d-flex align-items-start">
+              <div class="me-3 text-primary fs-5"><i class="bi bi-lightbulb"></i></div>
+              <div>
+                <h3 class="h6 fw-semibold mb-1">Fill out your upgrade request</h3>
+                <p class="mb-0">Enter the total seat count you want for the entire organization. We will calculate the extra seats and the one-time payment before you confirm.</p>
+              </div>
+            </div>
+          </div>
+          {% if not billing_context.is_payment_configured %}
+            <div class="alert alert-warning border-0 shadow-sm" role="alert">
+              <i class="bi bi-info-circle me-1"></i>The Razorpay gateway is not configured. Contact support to enable online payments.
+            </div>
+          {% endif %}
+          <form method="post" novalidate class="fade-slide" style="animation-delay: 0.15s;">
+            {{ upgrade_form.hidden_tag() }}
+            <div class="row g-3 align-items-end">
+              <div class="col-md-6">
+                <label for="desiredLimitInput" class="form-label fw-semibold">Total users you need</label>
+                {{ upgrade_form.desired_user_limit(class_='form-control form-control-lg shadow-sm', id='desiredLimitInput', min=organization.user_limit, disabled=not billing_context.is_payment_configured) }}
+                {% if upgrade_form.desired_user_limit.errors %}
+                  <div class="text-danger small mt-1">{{ upgrade_form.desired_user_limit.errors[0] }}</div>
+                {% endif %}
+                <p class="small text-muted mt-2"><i class="bi bi-pencil-square me-1"></i>Tip: Choose the total seats you require after adding new members. The system ensures you never go below your current plan.</p>
+              </div>
+              <div class="col-md-6">
+                <div class="rounded bg-body-secondary bg-opacity-75 p-3 h-100 shadow-sm">
+                  <div class="small text-muted text-uppercase mb-1">Per additional seat</div>
+                  <div class="fs-4 fw-semibold" id="perUserPrice">{{ per_user_price_label }}</div>
+                  <div class="small text-muted">First {{ billing_context.free_limit }} seats are free.</div>
+                  <div class="info-chip px-3 py-2 mt-3 small"><i class="bi bi-stars me-1"></i>We auto-adjust pricing for bulk changes.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="border rounded-4 p-4 mt-4 bg-light bg-opacity-75 shadow-sm">
+              <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                <h3 class="h6 text-uppercase text-muted mb-0">Your upgrade summary</h3>
+                <span class="badge text-bg-light text-primary border border-primary">Live preview</span>
+              </div>
+              <div class="alert alert-primary bg-opacity-25 border-0 mb-4" role="alert">
+                <i class="bi bi-info-circle me-2"></i>As you edit the field above, these numbers refresh instantly so you can validate the upgrade before continuing.
+              </div>
+              <div class="row g-3 align-items-center text-center text-md-start">
+                <div class="col-sm-6 col-md-3">
+                  <div class="small text-muted text-uppercase">Current limit</div>
+                  <div class="fs-5 fw-semibold">{{ pricing_preview.current_limit }}</div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="small text-muted text-uppercase">New total</div>
+                  <div class="fs-5 fw-semibold" id="summaryDesired">{{ pricing_preview.desired_limit }}</div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="small text-muted text-uppercase">Additional seats</div>
+                  <div class="fs-5 fw-semibold" id="summaryAdditional">{{ pricing_preview.additional_users }}</div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="small text-muted text-uppercase">One-time amount</div>
+                  <div class="fs-4 fw-bold" id="summaryAmount">{{ total_amount_label if pricing_preview.total_amount_minor else zero_amount_label }}</div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100 mt-4 shadow-sm" id="startCheckoutButton" {% if not billing_context.is_payment_configured %}disabled{% endif %}>
+              <i class="bi bi-credit-card-2-front me-1"></i>Review payment
+            </button>
+            <p class="small text-muted text-center mt-3 mb-0"><i class="bi bi-shield-lock me-1"></i>Your payment session opens securely in Razorpay. You can cancel anytime before confirming.</p>
+          </form>
+          <div id="billingPaymentError" class="alert alert-danger mt-4 d-none" role="alert"></div>
+          <div id="billingPaymentInfo" class="alert alert-info mt-4 {% if not billing_context.order %}d-none{% endif %}" role="alert">
+            <i class="bi bi-lightning-charge me-1"></i>Your checkout session is ready. The Razorpay pop-up will launch shortly.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-5">
+      <div class="card glass-card shadow-sm mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0"><i class="bi bi-shield-check me-2 text-success"></i>Current plan</h2>
+            <span class="badge text-bg-success bg-opacity-75">Step 2</span>
+          </div>
+          <div class="instruction-card px-4 py-3 mb-4">
+            <div class="d-flex align-items-start">
+              <div class="me-3 text-success fs-5"><i class="bi bi-clipboard-check"></i></div>
+              <div>
+                <h3 class="h6 fw-semibold mb-1">Review your live status</h3>
+                <p class="mb-0">Confirm that your team usage matches expectations. The metrics below update in real time so you can validate the upgrade impact.</p>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 mb-3">
+            {% if organization.is_premium %}
+              <span class="badge text-bg-success">Premium</span>
+            {% else %}
+              <span class="badge text-bg-secondary">Free tier</span>
+            {% endif %}
+            <span class="small text-muted">Limit {{ organization.user_limit }} users</span>
+          </div>
+          <dl class="row small mb-0">
+            <dt class="col-6 text-muted">Active members</dt>
+            <dd class="col-6 text-end fw-semibold">{{ usage.active }}</dd>
+            <dt class="col-6 text-muted">Pending approvals</dt>
+            <dd class="col-6 text-end fw-semibold">{{ usage.pending }}</dd>
+            <dt class="col-6 text-muted">Remaining seats</dt>
+            <dd class="col-6 text-end fw-semibold">{{ usage.remaining }}</dd>
+            <dt class="col-6 text-muted">Free allowance</dt>
+            <dd class="col-6 text-end fw-semibold">{{ billing_context.free_limit }}</dd>
+          </dl>
+          {% if organization.premium_since %}
+            <div class="small text-muted text-end mt-2">Upgraded on {{ organization.premium_since.strftime('%Y-%m-%d') }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="card glass-card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0"><i class="bi bi-receipt me-2 text-primary"></i>Payment history</h2>
+            <span class="badge text-bg-info bg-opacity-75">Step 3</span>
+          </div>
+          <div class="instruction-card px-4 py-3 mb-4">
+            <div class="d-flex align-items-start">
+              <div class="me-3 text-primary fs-5"><i class="bi bi-collection"></i></div>
+              <div>
+                <h3 class="h6 fw-semibold mb-1">Audit your past payments</h3>
+                <p class="mb-0">Use this archive to reconcile invoices. Hover over rows on desktop for quick highlights or export via your finance tools.</p>
+              </div>
+            </div>
+          </div>
+          {% if transaction_rows %}
+            <div class="table-responsive rounded-4 border border-light-subtle shadow-sm">
+              <table class="table table-sm align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col" class="text-end">Seats</th>
+                    <th scope="col" class="text-end">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for row in transaction_rows %}
+                    <tr class="hoverable-row">
+                      <td>{{ row.created_at.strftime('%Y-%m-%d %H:%M') }} UTC</td>
+                      <td class="text-end">+{{ row.additional_users }}</td>
+                      <td class="text-end">{{ row.amount_label }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <div class="alert alert-secondary bg-opacity-50 border-0" role="alert">
+              <i class="bi bi-journal-x me-1"></i>No payments recorded yet. Upgrades you complete will appear here instantly.
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id="billingConfirmForm" method="post" action="{{ url_for('expenseai_web.confirm_billing') }}" class="d-none">
+    {{ confirm_form.csrf_token }}
+    {{ confirm_form.razorpay_order_id(id='confirmOrderId') }}
+    {{ confirm_form.razorpay_payment_id(id='confirmPaymentId') }}
+    {{ confirm_form.razorpay_signature(id='confirmSignature') }}
+    {{ confirm_form.desired_user_limit(id='confirmDesiredLimit') }}
+  </form>
+
+  <script id="billingContext" type="application/json">{{ billing_context | tojson }}</script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+  <script type="module" src="{{ url_for('expenseai_web.static', filename='js/billing.js') }}"></script>
+</div>
+{% endblock %}

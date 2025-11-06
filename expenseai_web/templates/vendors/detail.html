@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav aria-label="breadcrumb" class="animate-fade-up">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ url_for('expenseai_web.dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ url_for('expenseai_vendor.list_vendors') }}">Vendors</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ profile.vendor_gst }}</li>
+  </ol>
+</nav>
+
+<div class="row g-4 animate-fade-up">
+  <div class="col-12 col-xl-4">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-header bg-transparent border-0">
+        <h1 class="h5 fw-bold mb-0"><i class="bi bi-person-badge me-2"></i>Vendor profile</h1>
+        <p class="text-muted small mb-0">Fingerprint metrics captured from historical invoices.</p>
+      </div>
+      <div class="card-body d-flex flex-column gap-3">
+        <div>
+          <span class="badge text-bg-primary text-uppercase">GST</span>
+          <h2 class="h4 fw-semibold mt-2 mb-0">{{ profile.vendor_gst }}</h2>
+        </div>
+        <div>
+          <h3 class="h6 fw-semibold text-muted text-uppercase">Summary</h3>
+          <p class="mb-0">{{ profile.text_norm_summary or 'No textual summary captured for this vendor yet.' }}</p>
+        </div>
+        <dl class="row small mb-0">
+          <dt class="col-6">Samples observed</dt><dd class="col-6 text-end">{{ profile.n_samples }}</dd>
+          <dt class="col-6">Mean unit price</dt>
+          <dd class="col-6 text-end">
+            {% if profile.avg_unit_price is not none %}
+              ₹ {{ '%.2f'|format(profile.avg_unit_price) }}
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </dd>
+          <dt class="col-6">Price MAD</dt>
+          <dd class="col-6 text-end">
+            {% if profile.price_mad is not none %}
+              ₹ {{ '%.2f'|format(profile.price_mad) }}
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </dd>
+          {% set vector = profile.vector_values() %}
+          <dt class="col-6">Embedding dimensions</dt><dd class="col-6 text-end">{{ vector|length if vector else 0 }}</dd>
+          <dt class="col-6">Last updated</dt><dd class="col-6 text-end">{{ profile.last_updated.strftime('%b %d, %Y %H:%M') if profile.last_updated else '—' }}</dd>
+          <dt class="col-6">Created</dt><dd class="col-6 text-end">{{ profile.created_at.strftime('%b %d, %Y %H:%M') if profile.created_at else '—' }}</dd>
+        </dl>
+        {% if latest_drift %}
+          {% set drift_pct = (latest_drift.drift_score * 100) | round(1) %}
+          {% if latest_drift.drift_score >= 0.6 %}
+            {% set badge_class = 'text-bg-danger' %}
+            {% set drift_label = 'High variance' %}
+          {% elif latest_drift.drift_score >= 0.3 %}
+            {% set badge_class = 'text-bg-warning' %}
+            {% set drift_label = 'Moderate variance' %}
+          {% else %}
+            {% set badge_class = 'text-bg-success' %}
+            {% set drift_label = 'Stable' %}
+          {% endif %}
+          <div class="alert alert-light border d-flex align-items-center gap-3" role="status">
+            <div>
+              <span class="badge {{ badge_class }} fs-6">{{ drift_pct }}%</span>
+            </div>
+            <div>
+              <div class="fw-semibold">{{ drift_label }}</div>
+              <div class="small text-muted">Latest drift computed {{ latest_drift.created_at.strftime('%b %d, %Y %H:%M') }}</div>
+            </div>
+          </div>
+        {% else %}
+          <div class="alert alert-secondary small" role="status">
+            No drift observations have been recorded for this vendor yet.
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-xl-8">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-header bg-transparent border-0 d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div>
+          <h2 class="h5 fw-bold mb-0"><i class="bi bi-graph-up-arrow me-2"></i>Drift history</h2>
+          <p class="text-muted small mb-0">Rolling drift windows derived from recent invoice embeddings.</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge text-bg-light">Windows analysed: {{ drift_stats.count }}</span>
+          {% if drift_stats.avg is not none %}
+            <span class="badge text-bg-light">Average drift: {{ (drift_stats.avg * 100) | round(1) }}%</span>
+          {% endif %}
+          {% if drift_stats.max is not none %}
+            <span class="badge text-bg-light">Peak drift: {{ (drift_stats.max * 100) | round(1) }}%</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Window</th>
+                <th scope="col" class="text-center">Drift score</th>
+                <th scope="col" class="text-center">Samples</th>
+                <th scope="col">Computed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if drift_rows %}
+                {% for row in drift_rows %}
+                  {% set drift_pct = (row.drift_score * 100) | round(1) %}
+                  {% if row.drift_score >= 0.6 %}
+                    {% set drift_class = 'text-danger' %}
+                  {% elif row.drift_score >= 0.3 %}
+                    {% set drift_class = 'text-warning' %}
+                  {% else %}
+                    {% set drift_class = 'text-success' %}
+                  {% endif %}
+                  <tr>
+                    <td>
+                      {% if row.window_start or row.window_end %}
+                        {{ row.window_start.strftime('%b %d, %Y') if row.window_start else '—' }} → {{ row.window_end.strftime('%b %d, %Y') if row.window_end else '—' }}
+                      {% else %}
+                        <span class="text-muted">Rolling window</span>
+                      {% endif %}
+                    </td>
+                    <td class="text-center {{ drift_class }} fw-semibold">{{ drift_pct }}%</td>
+                    <td class="text-center">{{ row.n_samples }}</td>
+                    <td>{{ row.created_at.strftime('%b %d, %Y %H:%M') }}</td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="4" class="text-center py-4 text-muted">No drift metrics recorded yet.</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

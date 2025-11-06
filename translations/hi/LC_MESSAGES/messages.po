@@ -1,0 +1,2820 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Finvela 0.1\n"
+"POT-Creation-Date: 2025-11-06 03:23+0000\n"
+"PO-Revision-Date: 2025-11-06 03:23+0000\n"
+"Last-Translator: Automated Assistant <noreply@finvela.com>\n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#: expenseai_web/templates/pages/terms.html:66
+msgid "+91 80471 23456 (Mon–Fri, 9am–6pm IST)"
+msgstr "+91 80471 23456 (सोम-शुक्र, सुबह 9 बजे से शाम 6 बजे तक)"
+
+#: expenseai_web/templates/pages/terms.html:51
+msgid "including all software, designs, documentation, and content, is owned by Finvela or our licensors. Subject to compliance with these Terms, we grant you a limited, non-exclusive, non-transferable license to use the Service for business purposes. All rights not expressly granted are reserved."
+msgstr "सभी सॉफ़्टवेयर, डिज़ाइन, दस्तावेज़ीकरण और सामग्री सहित, फिनवेला या हमारे लाइसेंसकर्ताओं के स्वामित्व में है। इन शर्तों के अनुपालन के अधीन, हम आपको व्यावसायिक उद्देश्यों के लिए सेवा का उपयोग करने के लिए एक सीमित, गैर-विशिष्ट, गैर-हस्तांतरणीय लाइसेंस प्रदान करते हैं। सभी अस्पष्ट अधिकारों को स्वीकृति सुरक्षित नहीं हैं।"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:24
+msgid ", optional"
+msgstr ", वैकल्पिक"
+
+#: expenseai_web/templates/auth/verify_otp.html:68
+msgid ""
+". Enter it below. This code expires in {{ expiry_minutes }} minute{% if expiry_minutes|int != 1 %}s{% endif %}."
+msgstr ""
+". इसे नीचे दर्ज करें. यह कोड {{ expiry_minutes }} मिनट{% if expiry_minutes|int != 1 %}s{% endif %} में समाप्त हो जाता है।"
+
+#: expenseai_web/templates/auth/reset_password.html:67
+msgid ". Use at least 12 characters with a mix of letters, numbers, and symbols."
+msgstr ""
+". अक्षरों, संख्याओं और प्रतीकों के मिश्रण के साथ कम से कम 12 वर्णों का उपयोग करें।"
+
+#: expenseai_web/templates/emails/otp.html:21
+msgid ""
+". Use the one-time code below to continue. This code expires in {{ expiry_minutes }} minute{% if expiry_minutes|int != 1 %}s{% endif %}."
+msgstr ""
+". जारी रखने के लिए नीचे दिए गए एक-बार कोड का उपयोग करें। यह कोड {{ expiry_minutes }} मिनट{% if expiry_minutes|int != 1 %}s{% endif %} में समाप्त हो जाता है।"
+
+#: expenseai_web/templates/invoices/detail.html:322
+msgid "/ {{ invoice.tax_total or '—' }} /"
+msgstr "/ {{ invoice.tax_total or '—' }} /"
+
+#: expenseai_web/templates/auth/login.html:75
+msgid "1) Enter your registered email. 2) Add your password. 3) Toggle “Stay signed in” if this is a trusted device. Forgot details? Use the link below."
+msgstr "1) अपना पंजीकृत ईमेल दर्ज करें। 2) अपना पासवर्ड जोड़ें. 3) यदि यह एक विश्वसनीय उपकरण है तो \"साइन इन रहें\" टॉगल करें। विवरण भूल गए? नीचे दिए गए लिंक का उपयोग करें."
+
+#: expenseai_web/templates/auth/forgot_password.html:75
+msgid ""
+"1) Enter your registered email. 2) Check your inbox for the verification code. 3) Follow the link in the email to set a new password."
+msgstr ""
+"1) अपना पंजीकृत ईमेल दर्ज करें। 2) सत्यापन कोड के लिए अपना इनबॉक्स जांचें। 3) नया पासवर्ड सेट करने के लिए ईमेल में दिए गए लिंक का अनुसरण करें।"
+
+#: expenseai_web/templates/pages/terms.html:26
+msgid "1. Acceptance of Terms"
+msgstr "1. शर्तों की स्वीकृति"
+
+#: expenseai_web/templates/pages/privacy.html:24
+msgid "1. Introduction"
+msgstr "1 परिचय"
+
+#: expenseai_web/templates/pages/privacy.html:28
+msgid "2. Data We Collect"
+msgstr "2. डेटा हम एकत्र करते हैं"
+
+#: expenseai_web/templates/pages/terms.html:30
+msgid "2. Modification of Terms"
+msgstr "2. शर्तों में संशोधन"
+
+#: expenseai_web/templates/pages/privacy.html:30
+msgid "2.1 Information You Provide"
+msgstr "2.1 आपके द्वारा प्रदान की गई जानकारी"
+
+#: expenseai_web/templates/pages/privacy.html:36
+msgid "2.2 Information Collected Automatically"
+msgstr "2.2 जानकारी स्वचालित रूप से एकत्रित की गई"
+
+#: expenseai_web/templates/pages/privacy.html:42
+msgid "2.3 Third-Party Sources"
+msgstr "2.3 तृतीय-पक्ष स्रोत"
+
+#: expenseai_web/templates/pages/contact.html:117
+msgid "221B Residency Road"
+msgstr "221बी रेजीडेंसी रोड"
+
+#: expenseai_web/templates/pages/privacy.html:46
+msgid "3. How We Use Your Data"
+msgstr "3. हम आपके डेटा का उपयोग कैसे करते हैं"
+
+#: expenseai_web/templates/pages/terms.html:34
+msgid "3. User Responsibilities"
+msgstr "3. उपयोगकर्ता जिम्मेदारियाँ"
+
+#: expenseai_web/templates/pages/privacy.html:57
+msgid "4. Cookies and Tracking Technologies"
+msgstr "4. कुकीज़ और ट्रैकिंग तकनीकें"
+
+#: expenseai_web/templates/pages/terms.html:42
+msgid "4. Prohibited Activities"
+msgstr "4. निषिद्ध गतिविधियाँ"
+
+#: expenseai_web/templates/pages/privacy.html:61
+msgid "5. Data Security"
+msgstr "5. डेटा सुरक्षा"
+
+#: expenseai_web/templates/pages/terms.html:50
+msgid "5. Intellectual Property Rights"
+msgstr "5. बौद्धिक संपदा अधिकार"
+
+#: expenseai_web/templates/pages/terms.html:54
+msgid "6. Limitation of Liability"
+msgstr "6. दायित्व की सीमा"
+
+#: expenseai_web/templates/pages/privacy.html:65
+msgid "6. User Rights"
+msgstr "6. उपयोगकर्ता अधिकार"
+
+#: expenseai_web/templates/pages/privacy.html:76
+msgid "7. Changes to this Policy"
+msgstr "7. इस नीति में परिवर्तन"
+
+#: expenseai_web/templates/pages/terms.html:58
+msgid "7. Governing Law"
+msgstr "7. शासी कानून"
+
+#: expenseai_web/templates/pages/terms.html:62
+msgid "8. Contact Details"
+msgstr "8. संपर्क विवरण"
+
+#: expenseai_web/templates/pages/privacy.html:80
+msgid "8. Contact Information"
+msgstr "8. संपर्क जानकारी"
+
+#: expenseai_web/templates/pages/about.html:66
+msgid "A multidisciplinary crew of operators, data scientists, and designers."
+msgstr "ऑपरेटरों, डेटा वैज्ञानिकों और डिजाइनरों का एक बहु-विषयक दल।"
+
+#: expenseai_web/templates/pages/about.html:54
+msgid ""
+"A world where finance teams orchestrate strategy rather than paperwork, with AI copilots augmenting every audit, procurement, and compliance decision."
+msgstr ""
+"एक ऐसी दुनिया जहां वित्त टीमें कागजी कार्रवाई के बजाय रणनीति तैयार करती हैं, जिसमें एआई सह-पायलट हर ऑडिट, खरीद और अनुपालन निर्णय को बढ़ाते हैं।"
+
+#: expenseai_web/templates/invoices/detail.html:356
+msgid "AI Analysis Insights"
+msgstr "एआई विश्लेषण अंतर्दृष्टि"
+
+#: expenseai_web/templates/base.html:40
+msgid "AI Copilot"
+msgstr "एआई कोपायलट"
+
+#: expenseai_web/templates/ai_chat/index.html:106
+msgid "AI Invoice Copilot"
+msgstr "एआई इनवॉइस कोपायलट"
+
+#: expenseai_web/templates/base.html:111
+msgid "About Us"
+msgstr "हमारे बारे में"
+
+#: expenseai_web/templates/dashboard/index.html:208
+msgid "Accepts .pdf, .jpg, .jpeg, .png. Maximum size {{ max_upload_mb }} MB."
+msgstr ".pdf, .jpg, .jpeg, .png स्वीकार करता है। अधिकतम आकार {{ max_upload_mb }} MB."
+
+#: expenseai_web/templates/errors/403.html:6
+msgid "Access denied"
+msgstr "पहुंच अस्वीकृत"
+
+#: expenseai_web/templates/auth/login.html:67
+msgid "Access your Finvela dashboards and tools with your organizational credentials."
+msgstr "अपने संगठनात्मक क्रेडेंशियल्स के साथ अपने फिनवेला डैशबोर्ड और टूल तक पहुंचें।"
+
+#: expenseai_web/templates/pages/privacy.html:32
+msgid "Account details such as name, business email, and organization information."
+msgstr "खाता विवरण जैसे नाम, व्यावसायिक ईमेल और संगठन की जानकारी।"
+
+#: expenseai_web/templates/auth/forgot_password.html:84
+msgid "Account email"
+msgstr "खाता ई - मेल"
+
+#: expenseai_web/templates/invoices/detail.html:214
+msgid "Action"
+msgstr "कार्रवाई"
+
+#: expenseai_web/templates/admin/members.html:200
+msgid "Action required"
+msgstr "कार्रवाई आवश्यक है"
+
+#: expenseai_web/templates/invoices/detail.html:292 expenseai_web/templates/vendors/index.html:53
+msgid "Actions"
+msgstr "कार्रवाई"
+
+#: expenseai_web/templates/admin/members.html:173 expenseai_web/templates/admin/members.html:258
+msgid "Active"
+msgstr "सक्रिय"
+
+#: expenseai_web/templates/admin/members.html:144
+msgid "Active invites"
+msgstr "सक्रिय आमंत्रण"
+
+#: expenseai_web/templates/admin/billing.html:248 expenseai_web/templates/admin/members.html:105
+msgid "Active members"
+msgstr "सक्रिय सदस्य"
+
+#: expenseai_web/templates/admin/members.html:242
+msgid "Active members ({{ usage.active }})"
+msgstr "सक्रिय सदस्य ({{ usage.active }})"
+
+#: expenseai_web/templates/admin/billing.html:121
+msgid "Active members:"
+msgstr "सक्रिय सदस्य:"
+
+#: expenseai_web/templates/dashboard/index.html:336
+msgid "Activity payload"
+msgstr "गतिविधि पेलोड"
+
+#: expenseai_web/templates/dashboard/index.html:322
+msgid "Activity will appear here after your first upload."
+msgstr "आपके पहले अपलोड के बाद गतिविधि यहां दिखाई देगी."
+
+#: expenseai_web/templates/invoices/detail.html:614
+msgid ""
+"Add a GSTIN to enable verification. {% elif gst_data and gst_data.summary %} {{ gst_data.summary }} {% else %} Verification not yet performed."
+msgstr ""
+"सत्यापन सक्षम करने के लिए एक जीएसटीआईएन जोड़ें। {% elif gst_data and gst_data.summary %} {{ gst_data.summary }} {% else %} सत्यापन अभी तक नहीं किया गया है।"
+
+#: expenseai_web/templates/invoices/detail.html:800
+msgid "Add line adjustment"
+msgstr "लाइन समायोजन जोड़ें"
+
+#: expenseai_web/templates/admin/billing.html:200
+msgid "Additional seats"
+msgstr "अतिरिक्त सीटें"
+
+#: expenseai_web/templates/admin/members.html:112
+msgid "Adjust your plan or purchase additional seats"
+msgstr "अपनी योजना समायोजित करें या अतिरिक्त सीटें खरीदें"
+
+#: expenseai_web/templates/admin/base.html:7 expenseai_web/templates/base.html:47
+msgid "Admin"
+msgstr "व्यवस्थापक"
+
+#: expenseai_web/templates/auth/register.html:155
+msgid "Admin checklist"
+msgstr "व्यवस्थापक चेकलिस्ट"
+
+#: expenseai_web/templates/auth/register.html:79
+msgid ""
+"Admins create organizations and invite teammates. Members join an existing workspace with an invite code from their admin."
+msgstr ""
+"व्यवस्थापक संगठन बनाते हैं और टीम के साथियों को आमंत्रित करते हैं। सदस्य अपने व्यवस्थापक से आमंत्रण कोड के साथ मौजूदा कार्यक्षेत्र में शामिल होते हैं।"
+
+#: expenseai_web/templates/pages/contact.html:118
+msgid "Ahmedabad, Gujarat"
+msgstr "अहमदाबाद, गुजरात"
+
+#: expenseai_web/templates/invoices/index.html:140 expenseai_web/templates/invoices/index.html:149
+msgid "All"
+msgstr "सभी"
+
+#: expenseai_web/templates/pages/contact.html:34
+msgid ""
+"All fields are required. We only use this information to respond to your request."
+msgstr ""
+"सभी फ़ील्ड आवश्यक हैं। हम इस जानकारी का उपयोग केवल आपके अनुरोध का जवाब देने के लिए करते हैं।"
+
+#: expenseai_web/templates/auth/register.html:177
+msgid "Already registered?"
+msgstr "पहले से ही पंजीकृत?"
+
+#: expenseai_web/templates/admin/billing.html:285
+msgid "Amount"
+msgstr "मात्रा"
+
+#: expenseai_web/templates/invoices/index.html:187
+msgid "Amounts"
+msgstr "राशियाँ"
+
+#: expenseai_web/templates/errors/409.html:7
+msgid "Another action beat you to it. Refresh and try again."
+msgstr "एक और कार्रवाई ने आपको चौंका दिया। ताज़ा करें और पुनः प्रयास करें."
+
+#: expenseai_web/templates/pages/privacy.html:71
+msgid "Appeal automated decisions that produce legal or similarly significant effects."
+msgstr ""
+"कानूनी या समान रूप से महत्वपूर्ण प्रभाव उत्पन्न करने वाले स्वचालित निर्णयों के खिलाफ अपील करें।"
+
+#: expenseai_web/templates/invoices/index.html:167 expenseai_web/templates/vendors/index.html:39
+msgid "Apply"
+msgstr "आवेदन करना"
+
+#: expenseai_web/templates/admin/members.html:223 expenseai_web/templates/invoices/detail.html:699
+msgid "Approve"
+msgstr "मंज़ूरी देना"
+
+#: expenseai_web/templates/admin/members.html:222
+msgid "Approve {{ user.full_name }} and allocate a seat"
+msgstr "{{ user.full_name }} को स्वीकृत करें और एक सीट आवंटित करें"
+
+#: expenseai_web/templates/invoices/detail.html:491
+msgid "Arithmetic Check"
+msgstr "अंकगणितीय जाँच"
+
+#: expenseai_web/templates/admin/billing.html:188
+msgid ""
+"As you edit the field above, these numbers refresh instantly so you can validate the upgrade before continuing."
+msgstr ""
+"जैसे ही आप उपरोक्त फ़ील्ड को संपादित करते हैं, ये नंबर तुरंत ताज़ा हो जाते हैं ताकि आप जारी रखने से पहले अपग्रेड को सत्यापित कर सकें।"
+
+#: expenseai_web/templates/ai_chat/index.html:210
+msgid "Ask about anomalies, GST validation, duplicates…"
+msgstr "विसंगतियों, जीएसटी सत्यापन, डुप्लिकेट के बारे में पूछें..."
+
+#: expenseai_web/templates/ai_chat/index.html:204
+msgid ""
+"Ask clear, action-oriented questions. Try “Compare this invoice with last month” or “Highlight suspicious GST entries.” The AI replies once the file has finished processing."
+msgstr ""
+"स्पष्ट, क्रिया-उन्मुख प्रश्न पूछें। \"पिछले महीने के साथ इस चालान की तुलना करें\" या \"संदिग्ध जीएसटी प्रविष्टियों को हाइलाइट करें\" का प्रयास करें। फ़ाइल की प्रोसेसिंग पूरी होने पर AI उत्तर देता है।"
+
+#: expenseai_web/templates/auth/register.html:169
+msgid "Ask your Finvela administrator to send an invite code or generate a fresh one."
+msgstr ""
+"अपने फिनवेला व्यवस्थापक से एक आमंत्रण कोड भेजने या एक नया आमंत्रण कोड तैयार करने के लिए कहें।"
+
+#: expenseai_web/templates/invoices/detail.html:685
+msgid "Assign"
+msgstr "सौंपना"
+
+#: expenseai_web/templates/invoices/detail.html:672
+msgid "Assign reviewer"
+msgstr "समीक्षक नियुक्त करें"
+
+#: expenseai_web/templates/invoices/detail.html:677
+msgid "Assigned"
+msgstr "सौंपा गया"
+
+#: expenseai_web/templates/auth/verify_otp.html:84
+msgid "Attempts remaining:"
+msgstr "प्रयास शेष:"
+
+#: expenseai_web/templates/admin/billing.html:273
+msgid "Audit your past payments"
+msgstr "अपने पिछले भुगतानों का ऑडिट करें"
+
+#: expenseai_web/templates/pages/privacy.html:40
+msgid ""
+"Authentication metadata, security events, and audit trails for compliance purposes."
+msgstr "अनुपालन उद्देश्यों के लिए प्रमाणीकरण मेटाडेटा, सुरक्षा ईवेंट और ऑडिट ट्रेल्स।"
+
+#: expenseai_web/templates/errors/401.html:6
+msgid "Authentication required"
+msgstr "प्रमाणित करना"
+
+#: expenseai_web/templates/vendors/detail.html:90
+msgid "Average drift: {{ (drift_stats.avg * 100) | round(1) }}%"
+msgstr "औसत बहाव: {{ (drift_stats.avg * 100) | round(1) }}%"
+
+#: expenseai_web/templates/vendors/index.html:49
+msgid "Avg price"
+msgstr "औसत कीमत"
+
+#: expenseai_web/templates/auth/reset_password.html:75
+msgid ""
+"Avoid reusing old passwords. Combine uppercase, lowercase, digits, and punctuation. Password managers generate safe options instantly."
+msgstr ""
+"पुराने पासवर्ड दोबारा इस्तेमाल करने से बचें. अपरकेस, लोअरकेस, अंक और विराम चिह्न को मिलाएं। पासवर्ड प्रबंधक तुरंत सुरक्षित विकल्प उत्पन्न करते हैं।"
+
+#: expenseai_web/templates/auth/forgot_password.html:121
+msgid "Back to sign in"
+msgstr "साइन इन करने के लिए वापस जाएँ"
+
+#: expenseai_web/templates/errors/400.html:6
+msgid "Bad request"
+msgstr "खराब अनुरोध"
+
+#: expenseai_web/templates/ai_chat/index.html:125
+msgid "Begin a fresh invoice conversation"
+msgstr "नए सिरे से इनवॉइस वार्तालाप प्रारंभ करें"
+
+#: expenseai_web/templates/invoices/detail.html:580
+msgid "Billed"
+msgstr "बिल"
+
+#: expenseai_web/templates/invoices/detail.html:545
+msgid "Billed {{ outlier.get('billed_price') or '—' }} vs Market"
+msgstr "बिल किया गया {{ outlier.get('billed_price') or '—' }} बनाम बाज़ार"
+
+#: expenseai_web/templates/invoices/detail.html:466
+msgid "Billed {{ violation.get('billed_rate') or '—' }} vs Expected"
+msgstr "बिल किया गया {{ violation.get('billed_rate') or '—' }} बनाम अपेक्षित"
+
+#: expenseai_web/templates/base.html:53
+msgid "Billing"
+msgstr "बिलिंग"
+
+#: expenseai_web/templates/admin/billing.html:99
+msgid "Billing cockpit"
+msgstr "बिलिंग कॉकपिट"
+
+#: expenseai_web/templates/pages/about.html:68
+msgid "Book a demo"
+msgstr "एक डेमो बुक करें"
+
+#: expenseai_web/templates/ai_chat/index.html:175
+msgid "Browse"
+msgstr "ब्राउज़"
+
+#: expenseai_web/templates/vendors/index.html:15
+msgid "Browse vendor fingerprints, sample depth, and recent drift observations."
+msgstr "विक्रेता की उंगलियों के निशान, नमूना गहराई और हाल के बहाव अवलोकन ब्राउज़ करें।"
+
+#: expenseai_web/templates/pages/terms.html:27
+msgid ""
+"By accessing or using {{ app_name }}, you confirm that you are of legal age and have authority to enter into these Terms on behalf of yourself or the entity you represent. If you do not agree, you must discontinue use of the Service immediately."
+msgstr ""
+"{{ app_name }} तक पहुंच या उपयोग करके, आप पुष्टि करते हैं कि आप कानूनी उम्र के हैं और आपके पास अपनी या जिस इकाई का आप प्रतिनिधित्व करते हैं उसकी ओर से इन शर्तों में प्रवेश करने का अधिकार है। यदि आप सहमत नहीं हैं, तो आपको सेवा का उपयोग तुरंत बंद कर देना चाहिए।"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:17 expenseai_compliance/templates/compliance_admin/hsn_upload.html:17
+msgid "CSV File"
+msgstr "सीएसवी फ़ाइल"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:36
+msgid "Catalog status"
+msgstr "कैटलॉग स्थिति"
+
+#: expenseai_web/templates/email/contact_notification.html:43
+msgid "Category"
+msgstr "वर्ग"
+
+#: expenseai_web/templates/invoices/detail.html:680
+msgid "Change"
+msgstr "परिवर्तन"
+
+#: expenseai_web/templates/auth/forgot_password.html:101
+msgid "Check spam folders"
+msgstr "स्पैम फ़ोल्डर्स की जाँच करें"
+
+#: expenseai_web/templates/auth/verify_otp.html:77
+msgid ""
+"Check spam folders if the email is missing. The code is valid once and enters automatically on mobile if you allow autofill."
+msgstr ""
+"यदि ईमेल गायब है तो स्पैम फ़ोल्डर्स की जाँच करें। कोड एक बार मान्य होता है और यदि आप ऑटोफिल की अनुमति देते हैं तो यह स्वचालित रूप से मोबाइल पर दर्ज हो जाता है।"
+
+#: expenseai_web/templates/auth/reset_password.html:66
+msgid "Choose a new password"
+msgstr "नया पासवर्ड चुनें"
+
+#: expenseai_web/templates/dashboard/index.html:211
+msgid "Choose file"
+msgstr "फाइलें चुनें"
+
+#: expenseai_web/templates/admin/members.html:122
+msgid ""
+"Choose how long the invite stays valid and how many times it can be used. Send the generated code to teammates you want to onboard."
+msgstr ""
+"चुनें कि आमंत्रण कितने समय तक वैध रहेगा और इसका कितनी बार उपयोग किया जा सकता है। जनरेट किया गया कोड उन टीम के साथियों को भेजें जिन्हें आप शामिल करना चाहते हैं।"
+
+#: expenseai_web/templates/auth/register.html:71
+msgid ""
+"Choose how you’re joining so we can unlock the right onboarding path and permissions."
+msgstr ""
+"चुनें कि आप कैसे शामिल हो रहे हैं ताकि हम सही ऑनबोर्डिंग पथ और अनुमतियाँ अनलॉक कर सकें।"
+
+#: expenseai_web/templates/pages/terms.html:44
+msgid ""
+"Circumventing security controls, scanning for vulnerabilities, or interfering with other users."
+msgstr ""
+"सुरक्षा नियंत्रणों को दरकिनार करना, कमजोरियों की जांच करना, या अन्य उपयोगकर्ताओं के साथ हस्तक्षेप करना।"
+
+#: expenseai_web/templates/invoices/index.html:174
+msgid ""
+"Click anywhere in a row to open the invoice detail view. Risk dots indicate AI-detected anomalies: green is low, amber is medium, red is high."
+msgstr ""
+"चालान विवरण दृश्य खोलने के लिए पंक्ति में कहीं भी क्लिक करें। जोखिम बिंदु एआई-पता लगाए गए विसंगतियों को दर्शाते हैं: हरा कम है, एम्बर मध्यम है, लाल अधिक है।"
+
+#: expenseai_web/templates/dashboard/index.html:337 expenseai_web/templates/dashboard/index.html:361 expenseai_web/templates/invoices/detail.html:827 expenseai_web/templates/invoices/detail.html:851 expenseai_web/templates/macros/flash.html:10
+msgid "Close"
+msgstr "बंद करना"
+
+#: expenseai_web/templates/admin/members.html:158
+msgid "Code"
+msgstr "कोड"
+
+#: expenseai_web/templates/auth/verify_otp.html:105
+msgid "Code expired?"
+msgstr "कोड समाप्त हो गया?"
+
+#: expenseai_web/templates/ai_chat/index.html:107
+msgid ""
+"Collaborate with the AI assistant to verify, compare, and audit invoices in real time. One chat keeps every document and insight together."
+msgstr ""
+"वास्तविक समय में चालानों को सत्यापित, तुलना और ऑडिट करने के लिए एआई सहायक के साथ सहयोग करें। एक चैट हर दस्तावेज़ और जानकारी को एक साथ रखती है।"
+
+#: expenseai_web/templates/invoices/detail.html:653
+msgid "Combine AI signals to generate a composite risk score"
+msgstr "समग्र जोखिम स्कोर उत्पन्न करने के लिए एआई संकेतों को संयोजित करें"
+
+#: expenseai_web/templates/invoices/index.html:127
+msgid ""
+"Combine search text with status filters for the most precise results. The table updates once you click Apply."
+msgstr ""
+"सबसे सटीक परिणामों के लिए खोज टेक्स्ट को स्थिति फ़िल्टर के साथ संयोजित करें। लागू करें पर क्लिक करते ही तालिका अपडेट हो जाती है।"
+
+#: expenseai_web/templates/invoices/detail.html:658
+msgid "Combines market benchmarks, compliance checks, and duplicate heuristics."
+msgstr "बाजार बेंचमार्क, अनुपालन जांच और डुप्लिकेट अनुमान को जोड़ती है।"
+
+#: expenseai_web/templates/pages/contact.html:112
+msgid "Come say hello at our HQ."
+msgstr "आइए हमारे मुख्यालय पर नमस्ते कहें।"
+
+#: expenseai_web/templates/invoices/detail.html:321
+msgid "Company GST:"
+msgstr "कंपनी जीएसटी:"
+
+#: expenseai_web/templates/invoices/detail.html:571
+msgid ""
+"Compares billed product prices to the average market price (using AI grounding) and flags outliers."
+msgstr ""
+"बिल किए गए उत्पाद की कीमतों की तुलना औसत बाजार मूल्य (एआई ग्राउंडिंग का उपयोग करके) और फ़्लैग आउटलेर्स से करता है।"
+
+#: expenseai_web/templates/pages/terms.html:38
+msgid ""
+"Comply with applicable laws, regulations, and data protection obligations when using the Service."
+msgstr ""
+"सेवा का उपयोग करते समय लागू कानूनों, विनियमों और डेटा सुरक्षा दायित्वों का पालन करें।"
+
+#: expenseai_web/templates/pages/privacy.html:53
+msgid ""
+"Complying with legal, regulatory, and audit obligations in jurisdictions where we operate."
+msgstr ""
+"जहां हम काम करते हैं उन न्यायक्षेत्रों में कानूनी, विनियामक और लेखापरीक्षा दायित्वों का अनुपालन करना।"
+
+#: expenseai_web/templates/invoices/detail.html:650
+msgid "Composite Risk"
+msgstr "समग्र जोखिम"
+
+#: expenseai_web/templates/invoices/detail.html:655
+msgid "Compute Risk Score"
+msgstr "जोखिम स्कोर की गणना करें"
+
+#: expenseai_web/templates/vendors/detail.html:105
+msgid "Computed"
+msgstr "गणना"
+
+#: expenseai_web/templates/invoices/detail.html:721 expenseai_web/templates/invoices/detail.html:756
+msgid "Confidence"
+msgstr "आत्मविश्वास"
+
+#: expenseai_web/templates/invoices/detail.html:495
+msgid "Confidence {{ (arithmetic_check.get('confidence') | float * 100) | round(1) }}%"
+msgstr "आत्मविश्वास {{ (arithmetic_check.get('confidence') | float * 100) | round(1) }}%"
+
+#: expenseai_web/templates/invoices/detail.html:427
+msgid "Confidence {{ (entry.get('confidence') | float * 100) | round(1) }}%"
+msgstr "आत्मविश्वास {{ (entry.get('confidence') | float * 100) | round(1) }}%"
+
+#: expenseai_web/templates/invoices/detail.html:456
+msgid "Confidence {{ (hsn_rate.get('confidence') | float * 100) | round(1) }}%"
+msgstr "आत्मविश्वास {{ (hsn_rate.get('confidence') | float * 100) | round(1) }}%"
+
+#: expenseai_web/templates/invoices/detail.html:547
+msgid "Confidence {{ (outlier.get('confidence') | float * 100) | round(1) }}%"
+msgstr "आत्मविश्वास {{ (outlier.get('confidence') | float * 100) | round(1) }}%"
+
+#: expenseai_web/templates/invoices/detail.html:530
+msgid "Confidence {{ (price_outlier.get('confidence') | float * 100) | round(1) }}%"
+msgstr "आत्मविश्वास {{ (price_outlier.get('confidence') | float * 100) | round(1) }}%"
+
+#: expenseai_web/templates/admin/billing.html:235
+msgid ""
+"Confirm that your team usage matches expectations. The metrics below update in real time so you can validate the upgrade impact."
+msgstr ""
+"पुष्टि करें कि आपकी टीम का उपयोग अपेक्षाओं से मेल खाता है। नीचे दिए गए मेट्रिक्स वास्तविक समय में अपडेट होते हैं ताकि आप अपग्रेड प्रभाव को सत्यापित कर सकें।"
+
+#: expenseai_web/templates/auth/verify_otp.html:117
+msgid "Confirm you’re checking the mailbox linked to your Finvela account."
+msgstr "पुष्टि करें कि आप अपने फिनवेला खाते से जुड़े मेलबॉक्स की जाँच कर रहे हैं।"
+
+#: expenseai_web/templates/errors/409.html:6
+msgid "Conflict detected"
+msgstr "संघर्ष का पता चला"
+
+#: expenseai_web/templates/base.html:114
+msgid "Contact"
+msgstr "संपर्क"
+
+#: expenseai_web/templates/pages/privacy.html:73
+msgid "Contact Information"
+msgstr "संपर्क जानकारी"
+
+#: expenseai_web/templates/auth/forgot_password.html:113
+msgid "Contact your Finvela admin or reach support for manual verification."
+msgstr ""
+"अपने फिनवेला व्यवस्थापक से संपर्क करें या मैन्युअल सत्यापन के लिए सहायता तक पहुंचें।"
+
+#: expenseai_web/templates/ai_chat/index.html:198
+msgid "Conversation transcript"
+msgstr "बातचीत प्रतिलेख"
+
+#: expenseai_web/templates/invoices/detail.html:790
+msgid "Counterfactual Simulator"
+msgstr "प्रतितथ्यात्मक सिम्युलेटर"
+
+#: expenseai_web/templates/auth/register.html:144
+msgid "Create account"
+msgstr "खाता बनाएं"
+
+#: expenseai_web/templates/auth/login.html:115
+msgid "Create an account or ask an administrator to invite you to your organization."
+msgstr ""
+"एक खाता बनाएं या किसी व्यवस्थापक से आपको अपने संगठन में आमंत्रित करने के लिए कहें।"
+
+#: expenseai_web/templates/dashboard/index.html:153
+msgid ""
+"Create an account to explore AI invoice reviews, or jump into the system health page to see real-time platform diagnostics."
+msgstr ""
+"एआई इनवॉइस समीक्षाओं का पता लगाने के लिए एक खाता बनाएं, या रीयल-टाइम प्लेटफ़ॉर्म डायग्नोस्टिक्स देखने के लिए सिस्टम स्वास्थ्य पृष्ठ पर जाएं।"
+
+#: expenseai_web/templates/auth/login.html:122
+msgid "Create one"
+msgstr "एक तैयार करें"
+
+#: expenseai_web/templates/auth/register.html:70
+msgid "Create your account"
+msgstr "अपना खाता बनाएं"
+
+#: expenseai_web/templates/vendors/detail.html:48 expenseai_web/templates/vendors/index.html:88
+msgid "Created"
+msgstr "बनाया था"
+
+#: expenseai_web/templates/admin/billing.html:192
+msgid "Current limit"
+msgstr "वर्तमान सीमा"
+
+#: expenseai_web/templates/admin/billing.html:227
+msgid "Current plan"
+msgstr "वर्तमान योजना"
+
+#: expenseai_web/templates/admin/base.html:6 expenseai_web/templates/base.html:34 expenseai_web/templates/invoices/detail.html:126 expenseai_web/templates/invoices/index.html:91 expenseai_web/templates/vendors/detail.html:5 expenseai_web/templates/vendors/index.html:5
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+#: expenseai_web/templates/dashboard/index.html:146
+msgid "Invoice intelligence, ready for scale."
+msgstr "चालान खुफिया, पैमाने के लिए तैयार."
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:40
+msgid "Data status"
+msgstr "डेटा स्थिति"
+
+#: expenseai_web/templates/admin/billing.html:283 expenseai_web/templates/invoices/index.html:184
+msgid "Date"
+msgstr "तारीख"
+
+#: expenseai_web/templates/pages/privacy.html:49
+msgid ""
+"Delivering core product functionality, including AI-driven extraction, risk scoring, and benchmarking."
+msgstr ""
+"एआई-संचालित निष्कर्षण, जोखिम स्कोरिंग और बेंचमार्किंग सहित मुख्य उत्पाद कार्यक्षमता प्रदान करना।"
+
+#: expenseai_web/templates/invoices/detail.html:543
+msgid "Delta {{ (outlier.get('delta_percent') | float) | round(1) }}%"
+msgstr "डेल्टा {{ (outlier.get('delta_percent') | float) | round(1) }}%"
+
+#: expenseai_web/templates/invoices/detail.html:748
+msgid "Description"
+msgstr "विवरण"
+
+#: expenseai_web/templates/pages/privacy.html:38
+msgid "Device identifiers, IP addresses, browser type, and operating system."
+msgstr "डिवाइस पहचानकर्ता, आईपी पते, ब्राउज़र प्रकार और ऑपरेटिंग सिस्टम।"
+
+#: expenseai_web/templates/base.html:115
+msgid "Diagnostics"
+msgstr "निदान"
+
+#: expenseai_web/templates/invoices/detail.html:508
+msgid "Discrepancies"
+msgstr "विसंगतियों"
+
+#: expenseai_web/templates/auth/login.html:122
+msgid "Don’t have an account?"
+msgstr "कोई खाता नहीं है?"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:28 expenseai_compliance/templates/compliance_admin/hsn_upload.html:32
+msgid "Download sample CSV"
+msgstr "नमूना सीएसवी डाउनलोड करें"
+
+#: expenseai_web/templates/dashboard/index.html:192
+msgid "Drag and drop PDF, PNG, or JPEG files ({{ max_upload_mb }} MB max)."
+msgstr ""
+"पीडीएफ, पीएनजी, या जेपीईजी फ़ाइलें (अधिकतम {{ max_upload_mb }} एमबी) खींचें और छोड़ें।"
+
+#: expenseai_web/templates/vendors/detail.html:84
+msgid "Drift history"
+msgstr "बहाव का इतिहास"
+
+#: expenseai_web/templates/vendors/detail.html:103
+msgid "Drift score"
+msgstr "बहाव स्कोर"
+
+#: expenseai_web/templates/pages/about.html:24
+msgid "Driven by customer trust since 2019"
+msgstr "2019 से ग्राहक विश्वास द्वारा संचालित"
+
+#: expenseai_web/templates/ai_chat/index.html:173
+msgid "Drop a PDF or image here"
+msgstr "यहां एक पीडीएफ या छवि छोड़ें"
+
+#: expenseai_web/templates/dashboard/index.html:207
+msgid "Drop files here or click to browse"
+msgstr "फ़ाइलें यहां छोड़ें या ब्राउज़ करने के लिए क्लिक करें"
+
+#: expenseai_web/templates/dashboard/index.html:200
+msgid ""
+"Drop one file at a time for the cleanest audit trail. The upload button activates automatically when a file is ready."
+msgstr ""
+"सबसे साफ़ ऑडिट ट्रेल के लिए एक समय में एक फ़ाइल छोड़ें। फ़ाइल तैयार होने पर अपलोड बटन स्वचालित रूप से सक्रिय हो जाता है।"
+
+#: expenseai_web/templates/invoices/detail.html:384
+msgid "Duplicate Check"
+msgstr "डुप्लीकेट चेक"
+
+#: expenseai_web/templates/email/contact_notification.html:39
+msgid "Email"
+msgstr "ईमेल"
+
+#: expenseai_web/templates/pages/about.html:118
+msgid "Email the team"
+msgstr "टीम को ईमेल करें"
+
+#: expenseai_web/templates/pages/contact.html:16
+msgid "Email us at"
+msgstr "हमें यहां ईमेल करें"
+
+#: expenseai_web/templates/vendors/detail.html:46
+msgid "Embedding dimensions"
+msgstr "एंबेडिंग आयाम"
+
+#: expenseai_web/templates/vendors/index.html:67
+msgid "Embedding length:"
+msgstr "एम्बेडिंग लंबाई:"
+
+#: expenseai_web/templates/pages/about.html:45
+msgid ""
+"Empower finance teams with intelligent, privacy-forward workflows that automate manual checks, uncover risk, and surface insights before they become costly surprises."
+msgstr ""
+"बुद्धिमान, गोपनीयता-अग्रेषित वर्कफ़्लो के साथ वित्त टीमों को सशक्त बनाएं जो मैन्युअल जांच को स्वचालित करते हैं, जोखिम को उजागर करते हैं, और महंगी आश्चर्य बनने से पहले अंतर्दृष्टि को सतह पर लाते हैं।"
+
+#: expenseai_web/templates/auth/reset_password.html:107
+msgid "Enable MFA"
+msgstr "एमएफए सक्षम करें"
+
+#: expenseai_web/templates/invoices/index.html:160
+msgid "End"
+msgstr "अंत"
+
+#: expenseai_web/templates/base.html:121
+msgid "English"
+msgstr "अंग्रेज़ी"
+
+#: expenseai_web/templates/pages/terms.html:37
+msgid ""
+"Ensure uploaded content is accurate, lawful, and does not infringe intellectual property or privacy rights."
+msgstr ""
+"सुनिश्चित करें कि अपलोड की गई सामग्री सटीक, वैध है और बौद्धिक संपदा या गोपनीयता अधिकारों का उल्लंघन नहीं करती है।"
+
+#: expenseai_web/templates/admin/billing.html:152
+msgid ""
+"Enter the total seat count you want for the entire organization. We will calculate the extra seats and the one-time payment before you confirm."
+msgstr ""
+"पूरे संगठन के लिए इच्छित कुल सीट संख्या दर्ज करें। आपकी पुष्टि करने से पहले हम अतिरिक्त सीटों और एकमुश्त भुगतान की गणना करेंगे।"
+
+#: expenseai_web/templates/auth/verify_otp.html:92
+msgid "Enter your 6-digit code"
+msgstr "अपना 6 अंकीय कोड दर्ज करें"
+
+#: expenseai_web/templates/base.html:108
+msgid "Environment"
+msgstr "पर्यावरण"
+
+#: expenseai_web/templates/invoices/detail.html:364
+msgid "Estimated Accuracy"
+msgstr "अनुमानित सटीकता"
+
+#: expenseai_web/templates/invoices/detail.html:211
+msgid "Event"
+msgstr "आयोजन"
+
+#: expenseai_web/templates/invoices/detail.html:826
+msgid "Event payload"
+msgstr "इवेंट पेलोड"
+
+#: expenseai_web/templates/ai_chat/index.html:135
+msgid "Every chat stores the associated invoice and findings."
+msgstr "प्रत्येक चैट संबंधित चालान और निष्कर्षों को संग्रहीत करती है।"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:24
+msgid "Expected columns:"
+msgstr "अपेक्षित कॉलम:"
+
+#: expenseai_web/templates/pages/privacy.html:33
+msgid ""
+"Expense artifacts, receipts, invoices, and supporting documents uploaded to the platform."
+msgstr "व्यय कलाकृतियाँ, रसीदें, चालान और सहायक दस्तावेज़ प्लेटफ़ॉर्म पर अपलोड किए गए।"
+
+#: expenseai_web/templates/admin/members.html:161
+msgid "Expires"
+msgstr "समय-सीमा समाप्त"
+
+#: expenseai_web/templates/pages/about.html:29
+msgid "Explainable AI keeping finance teams in command"
+msgstr "वित्त टीमों को कमान में रखते हुए समझाने योग्य एआई"
+
+#: expenseai_web/templates/pages/privacy.html:69
+msgid "Export your data or transfer it to another service provider."
+msgstr "अपना डेटा निर्यात करें या किसी अन्य सेवा प्रदाता को स्थानांतरित करें।"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:7
+msgid "External Benchmark Catalog"
+msgstr "बाहरी बेंचमार्क कैटलॉग"
+
+#: expenseai_web/templates/invoices/detail.html:307
+msgid "Extract headers and line items with the Finvela model"
+msgstr "फिनलेवा मॉडल के साथ हेडर और लाइन आइटम निकालें"
+
+#: expenseai_web/templates/invoices/detail.html:316
+msgid "Extraction Summary"
+msgstr "निष्कर्षण सारांश"
+
+#: expenseai_web/templates/invoices/detail.html:328
+msgid "Extraction details will appear here once parsing finishes."
+msgstr "पार्सिंग समाप्त होने पर निष्कर्षण विवरण यहां दिखाई देंगे।"
+
+#: expenseai_web/templates/invoices/detail.html:566
+msgid "Fetch live market averages for each line item"
+msgstr "प्रत्येक पंक्ति वस्तु के लिए लाइव बाज़ार औसत प्राप्त करें"
+
+#: expenseai_web/templates/dashboard/index.html:345 expenseai_web/templates/invoices/detail.html:719 expenseai_web/templates/invoices/detail.html:835
+msgid "Field"
+msgstr "मैदान"
+
+#: expenseai_web/templates/invoices/detail.html:178
+msgid "Filename"
+msgstr "फ़ाइलनाम"
+
+#: expenseai_web/templates/admin/billing.html:151
+msgid "Fill out your upgrade request"
+msgstr "अपना अपग्रेड अनुरोध भरें"
+
+#: expenseai_web/templates/vendors/detail.html:16
+msgid "Fingerprint metrics captured from historical invoices."
+msgstr "ऐतिहासिक चालानों से फ़िंगरप्रिंट मेट्रिक्स कैप्चर किए गए।"
+
+#: expenseai_web/templates/ai_chat/index.html:121 expenseai_web/templates/ai_chat/index.html:158
+msgid "Finvela"
+msgstr "फिनलेवा"
+
+#: expenseai_web/templates/base.html:23 expenseai_web/templates/base.html:24
+msgid "Finvela"
+msgstr "फिनवेला"
+
+#: expenseai_web/templates/pages/contact.html:116
+msgid "Finvela HQ"
+msgstr "फिनवेला मुख्यालय"
+
+#: expenseai_web/templates/pages/terms.html:67
+msgid "Finvela HQ, 221B Residency Road, Ahmedabad, India"
+msgstr "फिनवेला मुख्यालय, 221बी रेजीडेंसी रोड, बेंगलुरु, भारत"
+
+#: expenseai_web/templates/dashboard/index.html:145
+msgid "Finvela Platform"
+msgstr "फिनवेला प्लेटफार्म"
+
+#: expenseai_web/templates/pages/privacy.html:84
+msgid "Finvela Privacy Office, 221B Residency Road, Ahmedabad, India"
+msgstr "फिनवेला गोपनीयता कार्यालय, 221बी रेजीडेंसी रोड, बेंगलुरु, भारत"
+
+#: expenseai_web/templates/dashboard/index.html:147
+msgid ""
+"Finvela lays the groundwork for automated invoice analysis, auditability, and collaboration. Secure, extensible, and built for modern finance teams."
+msgstr ""
+"फिनवेला स्वचालित चालान विश्लेषण, ऑडिटेबिलिटी और सहयोग के लिए आधार तैयार करता है। सुरक्षित, विस्तार योग्य और आधुनिक वित्त टीमों के लिए निर्मित।"
+
+#: expenseai_web/templates/email/contact_notification.html:65
+msgid "Finvela · 221B Residency Road · Ahmedabad, India"
+msgstr "फिनवेला · 221बी रेजीडेंसी रोड · बेंगलुरु, भारत"
+
+#: expenseai_web/templates/admin/billing.html:176
+msgid "First {{ billing_context.free_limit }} seats are free."
+msgstr "पहली {{ billing_context.free_limit }} सीटें निःशुल्क हैं।"
+
+#: expenseai_web/templates/auth/login.html:89
+msgid "Forgot password?"
+msgstr "पासवर्ड भूल गए?"
+
+#: expenseai_web/templates/pages/about.html:89
+msgid ""
+"Founded to close the gap between financial oversight and modern workflows, {{ app_name }} has evolved alongside our customers. From automating receipt classification to orchestrating enterprise-wide risk management, our roadmap is guided by real-world finance challenges."
+msgstr ""
+"वित्तीय निरीक्षण और आधुनिक वर्कफ़्लो के बीच अंतर को कम करने के लिए स्थापित, {{ app_name }} हमारे ग्राहकों के साथ विकसित हुआ है। रसीद वर्गीकरण को स्वचालित करने से लेकर उद्यम-व्यापी जोखिम प्रबंधन को व्यवस्थित करने तक, हमारा रोडमैप वास्तविक दुनिया की वित्त चुनौतियों द्वारा निर्देशित होता है।"
+
+#: expenseai_web/templates/admin/billing.html:254
+msgid "Free allowance"
+msgstr "मुफ़्त भत्ता"
+
+#: expenseai_web/templates/admin/billing.html:243 expenseai_web/templates/admin/members.html:100
+msgid "Free tier"
+msgstr "निःशुल्क स्तर"
+
+#: expenseai_web/templates/invoices/detail.html:417 expenseai_web/templates/invoices/detail.html:605 expenseai_web/templates/vendors/detail.html:20
+msgid "GST"
+msgstr "जीएसटी"
+
+#: expenseai_web/templates/invoices/detail.html:752
+msgid "GST %"
+msgstr "जीएसटी %"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:7
+msgid "GST HSN/SAC Rate Import"
+msgstr "जीएसटी एचएसएन/एसएसी दर आयात"
+
+#: expenseai_web/templates/invoices/detail.html:411
+msgid "GST Validation"
+msgstr "जीएसटी सत्यापन"
+
+#: expenseai_web/templates/invoices/detail.html:594
+msgid "GST Verification"
+msgstr "जीएसटी सत्यापन"
+
+#: expenseai_web/templates/vendors/index.html:26
+msgid "GST number or summary keyword"
+msgstr "जीएसटी नंबर या सारांश कीवर्ड"
+
+#: expenseai_web/templates/admin/members.html:233
+msgid "Generate an invite to bring colleagues onboard"
+msgstr "सहकर्मियों को जहाज पर लाने के लिए एक आमंत्रण तैयार करें"
+
+#: expenseai_web/templates/admin/members.html:118
+msgid "Generate invitation code"
+msgstr "आमंत्रण कोड जनरेट करें"
+
+#: expenseai_web/templates/admin/members.html:191
+msgid "Generate your first code to invite teammates."
+msgstr "टीम के साथियों को आमंत्रित करने के लिए अपना पहला कोड जनरेट करें।"
+
+#: expenseai_web/templates/pages/contact.html:128
+msgid "Get product updates, roadmap previews, and finance automation insights."
+msgstr "उत्पाद अपडेट, रोडमैप पूर्वावलोकन और वित्त स्वचालन अंतर्दृष्टि प्राप्त करें।"
+
+#: expenseai_web/templates/dashboard/index.html:158
+msgid "Get started"
+msgstr "शुरू हो जाओ"
+
+#: expenseai_web/templates/pages/about.html:28
+msgid "Global delivery with privacy-by-design architecture"
+msgstr "गोपनीयता-दर-डिज़ाइन वास्तुकला के साथ वैश्विक वितरण"
+
+#: expenseai_web/templates/errors/404.html:8
+msgid "Go home"
+msgstr "घर जाओ"
+
+#: expenseai_web/templates/invoices/detail.html:749
+msgid "HSN/SAC"
+msgstr "एचएसएन/एसएसी"
+
+#: expenseai_web/templates/invoices/detail.html:452
+msgid "HSN/SAC Rate Check"
+msgstr "एचएसएन/एसएसी दर की जांच"
+
+#: expenseai_web/templates/auth/verify_otp.html:138
+msgid "Having trouble? Contact support at"
+msgstr "परेशानी हो रही है? यहां सहायता से संपर्क करें"
+
+#: expenseai_web/templates/invoices/detail.html:714
+msgid "Header Fields"
+msgstr "हेडर फ़ील्ड"
+
+#: expenseai_web/templates/invoices/detail.html:342
+msgid "Header confidence"
+msgstr "हेडर आत्मविश्वास"
+
+#: expenseai_web/templates/admin/members.html:243
+msgid "Healthy roster"
+msgstr "स्वस्थ रोस्टर"
+
+#: expenseai_web/templates/emails/confirmation.html:20 expenseai_web/templates/emails/otp.html:20
+msgid "Hi {{ name }},"
+msgstr "नमस्ते {{ name }},"
+
+#: expenseai_web/templates/base.html:122
+msgid "Hindi"
+msgstr "हिंदी"
+
+#: expenseai_web/templates/invoices/detail.html:196
+msgid "History"
+msgstr "इतिहास"
+
+#: expenseai_web/templates/auth/forgot_password.html:74
+msgid "How this reset works"
+msgstr "यह रीसेट कैसे काम करता है"
+
+#: expenseai_web/templates/ai_chat/index.html:112
+msgid "How this workspace flows"
+msgstr "यह कार्यक्षेत्र कैसे प्रवाहित होता है"
+
+#: expenseai_web/templates/admin/billing.html:131
+msgid "How to navigate this page"
+msgstr "इस पेज को कैसे नेविगेट करें"
+
+#: expenseai_web/templates/admin/members.html:63
+msgid "How to use this workspace"
+msgstr "इस कार्यक्षेत्र का उपयोग कैसे करें"
+
+#: expenseai_web/templates/pages/about.html:9
+msgid "Human-centered automation"
+msgstr "मानव-केंद्रित स्वचालन"
+
+#: expenseai_web/templates/admin/billing.html:117
+msgid "ID:"
+msgstr "पहचान:"
+
+#: expenseai_web/templates/auth/verify_otp.html:65
+msgid "Identity check"
+msgstr "पहचान की जांच"
+
+#: expenseai_web/templates/emails/otp.html:31
+msgid "If the button does not work, paste this link into your browser:"
+msgstr "यदि बटन काम नहीं करता है, तो इस लिंक को अपने ब्राउज़र में पेस्ट करें:"
+
+#: expenseai_web/templates/auth/forgot_password.html:102
+msgid "If the email doesn’t arrive in 2 minutes, look in spam or Promotions."
+msgstr "यदि ईमेल 2 मिनट में नहीं आता है, तो स्पैम या प्रचार में देखें।"
+
+#: expenseai_web/templates/email/contact_notification.html:59
+msgid ""
+"If the request requires escalation, please log it in the CX tracker and loop in the appropriate squad."
+msgstr ""
+"यदि अनुरोध में वृद्धि की आवश्यकता है, तो कृपया इसे सीएक्स ट्रैकर में लॉग इन करें और उपयुक्त दस्ते में लूप करें।"
+
+#: expenseai_web/templates/emails/confirmation.html:27
+msgid "If you did not expect this update please contact support right away."
+msgstr "यदि आपको इस अपडेट की उम्मीद नहीं थी तो कृपया तुरंत सहायता से संपर्क करें।"
+
+#: expenseai_web/templates/emails/otp.html:33
+msgid "If you did not request this code, you can safely ignore this email."
+msgstr ""
+"यदि आपने इस कोड का अनुरोध नहीं किया है, तो आप इस ईमेल को सुरक्षित रूप से अनदेखा कर सकते हैं।"
+
+#: expenseai_web/templates/pages/terms.html:63
+msgid "If you have questions about these Terms, reach us at:"
+msgstr "यदि इन शर्तों के बारे में आपके कोई प्रश्न हैं, तो हमसे यहां संपर्क करें:"
+
+#: expenseai_web/templates/pages/privacy.html:81
+msgid ""
+"If you have questions about this policy or our privacy practices, please reach out to our Data Protection Office:"
+msgstr ""
+"यदि इस नीति या हमारी गोपनीयता प्रथाओं के बारे में आपके कोई प्रश्न हैं, तो कृपया हमारे डेटा संरक्षण कार्यालय से संपर्क करें:"
+
+#: expenseai_web/templates/pages/privacy.html:51
+msgid ""
+"Improving the Services through analytics, research, and product roadmap planning."
+msgstr "विश्लेषण, अनुसंधान और उत्पाद रोडमैप योजना के माध्यम से सेवाओं में सुधार करना।"
+
+#: expenseai_web/templates/pages/contact.html:100
+msgid "In-app chat (Enterprise plans)"
+msgstr "इन-ऐप चैट (उद्यम योजनाएं)"
+
+#: expenseai_web/templates/admin/members.html:175
+msgid "Inactive"
+msgstr "निष्क्रिय"
+
+#: expenseai_web/templates/pages/contact.html:119
+msgid "India"
+msgstr "भारत"
+
+#: expenseai_web/templates/invoices/detail.html:151
+msgid "Inline viewer with file and metadata."
+msgstr "फ़ाइल और मेटाडेटा के साथ इनलाइन व्यूअर।"
+
+#: expenseai_web/templates/invoices/detail.html:141
+msgid "Invoice"
+msgstr "चालान"
+
+#: expenseai_web/templates/dashboard/index.html:311 expenseai_web/templates/invoices/detail.html:128
+msgid "Invoice #"
+msgstr "चालान #"
+
+#: expenseai_web/templates/invoices/detail.html:319
+msgid "Invoice Date:"
+msgstr "चालान की तारीख:"
+
+#: expenseai_web/templates/ai_chat/index.html:105
+msgid "Invoice Intelligence Hub"
+msgstr "इनवॉइस इंटेलिजेंस हब"
+
+#: expenseai_web/templates/invoices/detail.html:183
+msgid "Invoice No."
+msgstr "चालान नंबर।"
+
+#: expenseai_web/templates/invoices/detail.html:318
+msgid "Invoice No:"
+msgstr "चालान नंबर:"
+
+#: expenseai_web/templates/invoices/index.html:113
+msgid "Invoice browser"
+msgstr "चालान ब्राउज़र"
+
+#: expenseai_web/templates/invoices/index.html:101
+msgid "Invoice browser overview"
+msgstr "इनवॉइस ब्राउज़र अवलोकन"
+
+#: expenseai_web/templates/invoices/detail.html:137
+msgid "Invoice command center"
+msgstr "चालान कमांड सेंटर"
+
+#: expenseai_web/templates/dashboard/index.html:210
+msgid "Invoice file input"
+msgstr "चालान फ़ाइल इनपुट"
+
+#: expenseai_web/templates/invoices/detail.html:167
+msgid "Invoice image"
+msgstr "चालान छवि"
+
+#: expenseai_web/templates/invoices/index.html:254
+msgid "Invoice pagination"
+msgstr "चालान पृष्ठांकन"
+
+#: expenseai_web/templates/invoices/detail.html:165
+msgid "Invoice preview"
+msgstr "चालान पूर्वावलोकन"
+
+#: expenseai_web/templates/ai_chat/index.html:154
+msgid "Invoice workspace"
+msgstr "कार्यक्षेत्र का चालान करें"
+
+#: expenseai_web/templates/base.html:37 expenseai_web/templates/invoices/detail.html:127 expenseai_web/templates/invoices/index.html:92
+msgid "Invoices"
+msgstr "चालान"
+
+#: expenseai_web/templates/invoices/index.html:151
+msgid "JPEG"
+msgstr "जेपीईजी"
+
+#: expenseai_web/templates/auth/register.html:69
+msgid "Join Finvela"
+msgstr "फिनवेला से जुड़ें"
+
+#: expenseai_web/templates/pages/about.html:114
+msgid "Join us in shaping the future of intelligent finance."
+msgstr "बुद्धिमान वित्त के भविष्य को आकार देने में हमारे साथ जुड़ें।"
+
+#: expenseai_web/templates/invoices/detail.html:180
+msgid "KB"
+msgstr "के.बी"
+
+#: expenseai_web/templates/admin/members.html:150
+msgid ""
+"Keep an eye on codes that are about to expire or have hit their usage limit. Inactive rows are highlighted to prompt quick action."
+msgstr ""
+"उन कोडों पर नज़र रखें जो समाप्त होने वाले हैं या अपनी उपयोग सीमा को पार कर चुके हैं। त्वरित कार्रवाई के लिए निष्क्रिय पंक्तियों को हाइलाइट किया जाता है।"
+
+#: expenseai_web/templates/base.html:118
+msgid "Language"
+msgstr "भाषा"
+
+#: expenseai_web/templates/invoices/detail.html:344
+msgid "Last extracted"
+msgstr "अंतिम बार निकाला गया"
+
+#: expenseai_web/templates/invoices/detail.html:573
+msgid "Last run —"
+msgstr "आखरी बार -"
+
+#: expenseai_web/templates/pages/privacy.html:13 expenseai_web/templates/vendors/detail.html:47 expenseai_web/templates/vendors/index.html:51
+msgid "Last updated"
+msgstr "आखरी अपडेट"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:39
+msgid "Last updated:"
+msgstr "आखरी अपडेट:"
+
+#: expenseai_web/templates/invoices/detail.html:639
+msgid "Last verified {{ gst_data.updated_at_display }} {% else %} Last verified —"
+msgstr ""
+"अंतिम बार सत्यापित {{ gst_data.updated_at_display }} {% else %} अंतिम बार सत्यापित —"
+
+#: expenseai_web/templates/vendors/index.html:52
+msgid "Latest drift"
+msgstr "नवीनतम बहाव"
+
+#: expenseai_web/templates/vendors/detail.html:68
+msgid "Latest drift computed"
+msgstr "नवीनतम बहाव की गणना की गई"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:43
+msgid "Latest effective date:"
+msgstr "नवीनतम प्रभावी तिथि:"
+
+#: expenseai_web/templates/dashboard/index.html:228
+msgid "Latest uploads across your workspace."
+msgstr "आपके कार्यक्षेत्र में नवीनतम अपलोड।"
+
+#: expenseai_web/templates/pages/about.html:65
+msgid "Leadership Team"
+msgstr "नेतृत्व टीम"
+
+#: expenseai_web/templates/admin/members.html:133
+msgid ""
+"Leave the fields blank to use default settings. Sharing an invite code outside your organization grants access once you approve the request."
+msgstr ""
+"डिफ़ॉल्ट सेटिंग्स का उपयोग करने के लिए फ़ील्ड को खाली छोड़ दें। अनुरोध स्वीकृत होने के बाद अपने संगठन के बाहर आमंत्रण कोड साझा करने से पहुंच मिल जाती है।"
+
+#: expenseai_web/templates/invoices/detail.html:813
+msgid ""
+"Limit {{ current_app.config.get('COUNTERFACT_MAX_LINES', 5) }} lines per simulation. Leave any field blank to keep the current value."
+msgstr ""
+"प्रति सिमुलेशन {{ current_app.config.get('COUNTERFACT_MAX_LINES', 5) }} पंक्तियों को सीमित करें। वर्तमान मान रखने के लिए किसी भी फ़ील्ड को खाली छोड़ दें।"
+
+#: expenseai_web/templates/admin/billing.html:245
+msgid "Limit {{ organization.user_limit }} users"
+msgstr "{{ organization.user_limit }} उपयोगकर्ताओं को सीमित करें"
+
+#: expenseai_web/templates/admin/members.html:102
+msgid "Limit: {{ organization.user_limit }} users"
+msgstr "सीमा: {{ organization.user_limit }} उपयोगकर्ता"
+
+#: expenseai_web/templates/invoices/detail.html:578
+msgid "Line"
+msgstr "रेखा"
+
+#: expenseai_web/templates/invoices/detail.html:742
+msgid "Line Items"
+msgstr "पंक्ति वस्तुएँ"
+
+#: expenseai_web/templates/invoices/detail.html:339
+msgid "Line items parsed"
+msgstr "पंक्ति वस्तुएँ पार्स की गईं"
+
+#: expenseai_web/templates/invoices/detail.html:540
+msgid "Line {{ outlier.get('line_no') or '—' }}:"
+msgstr "पंक्ति {{ outlier.get('line_no') or '—' }}:"
+
+#: expenseai_web/templates/invoices/detail.html:462
+msgid "Line {{ violation.get('line_no') or '—' }}:"
+msgstr "पंक्ति {{ violation.get('line_no') or '—' }}:"
+
+#: expenseai_web/templates/invoices/detail.html:252
+msgid "List ({{ payload | length }})"
+msgstr "सूची ({{ payload | length }})"
+
+#: expenseai_web/templates/dashboard/index.html:280
+msgid "Live activity"
+msgstr "सजीव गतिविधि"
+
+#: expenseai_web/templates/admin/members.html:145
+msgid "Live monitor"
+msgstr "लाइव मॉनिटर"
+
+#: expenseai_web/templates/admin/billing.html:185
+msgid "Live preview"
+msgstr "लाइव पूर्वावलोकन"
+
+#: expenseai_web/templates/invoices/index.html:135
+msgid "Live search uses server-side filtering."
+msgstr "लाइव खोज सर्वर-साइड फ़िल्टरिंग का उपयोग करती है।"
+
+#: expenseai_web/templates/pages/contact.html:19
+msgid "Live support: Monday–Friday, 9am–6pm IST"
+msgstr "लाइव समर्थन: सोमवार-शुक्रवार, भारतीय समयानुसार सुबह 9 बजे से शाम 6 बजे तक"
+
+#: expenseai_web/templates/invoices/detail.html:179 expenseai_web/templates/invoices/index.html:147
+msgid "MIME"
+msgstr "माइम"
+
+#: expenseai_web/templates/pages/terms.html:36
+msgid ""
+"Maintain the confidentiality of account credentials and promptly notify us of suspected compromise."
+msgstr ""
+"खाता क्रेडेंशियल्स की गोपनीयता बनाए रखें और संदिग्ध समझौते के बारे में हमें तुरंत सूचित करें।"
+
+#: expenseai_web/templates/pages/privacy.html:52
+msgid "Maintaining security, preventing fraud, and enforcing our Terms & Conditions."
+msgstr "सुरक्षा बनाए रखना, धोखाधड़ी को रोकना और हमारे नियम एवं शर्तों को लागू करना।"
+
+#: expenseai_web/templates/admin/members.html:74
+msgid "Manage billing & upgrades"
+msgstr "बिलिंग एवं अपग्रेड प्रबंधित करें"
+
+#: expenseai_web/templates/admin/members.html:113
+msgid "Manage upgrades"
+msgstr "उन्नयन प्रबंधित करें"
+
+#: expenseai_web/templates/invoices/detail.html:581
+msgid "Market"
+msgstr "बाज़ार"
+
+#: expenseai_web/templates/invoices/detail.html:565
+msgid "Market Price Benchmark"
+msgstr "बाज़ार मूल्य बेंचमार्क"
+
+#: expenseai_web/templates/invoices/detail.html:325
+msgid ""
+"Mean confidence: {{ (invoice.extraction_confidence * 100) | round(1) if invoice.extraction_confidence else 'n/a' }}%"
+msgstr ""
+"औसत आत्मविश्वास: {{ (invoice.extraction_confidence * 100) | round(1) if invoice.extraction_confidence else 'n/a' }}%"
+
+#: expenseai_web/templates/vendors/detail.html:29
+msgid "Mean unit price"
+msgstr "माध्य इकाई मूल्य"
+
+#: expenseai_web/templates/email/contact_notification.html:51
+msgid "Message"
+msgstr "संदेश"
+
+#: expenseai_web/templates/ai_chat/index.html:210
+msgid "Message the AI"
+msgstr "एआई को संदेश भेजें"
+
+#: expenseai_web/templates/invoices/detail.html:534
+msgid "Method:"
+msgstr "तरीका:"
+
+#: expenseai_web/templates/ai_chat/index.html:120
+msgid "Model"
+msgstr "नमूना"
+
+#: expenseai_web/templates/invoices/detail.html:798
+msgid "Model an adjustment up to the configured limit"
+msgstr "कॉन्फ़िगर की गई सीमा तक समायोजन का मॉडल बनाएं"
+
+#: expenseai_web/templates/invoices/detail.html:791
+msgid "Model proposed line edits and preview their effect on totals and risk."
+msgstr "मॉडल प्रस्तावित लाइन संपादन और कुल और जोखिम पर उनके प्रभाव का पूर्वावलोकन करें।"
+
+#: expenseai_web/templates/auth/login.html:103
+msgid "Need MFA help?"
+msgstr "एमएफए सहायता की आवश्यकता है?"
+
+#: expenseai_web/templates/auth/register.html:168
+msgid "Need a code?"
+msgstr "एक कोड की आवश्यकता है?"
+
+#: expenseai_web/templates/auth/verify_otp.html:76
+msgid "Need a hint?"
+msgstr "एक संकेत चाहिए?"
+
+#: expenseai_web/templates/pages/contact.html:15
+msgid "Need help urgently?"
+msgstr "तत्काल सहायता की आवश्यकता है?"
+
+#: expenseai_web/templates/auth/forgot_password.html:85
+msgid "Need help?"
+msgstr "मदद की ज़रूरत है?"
+
+#: expenseai_web/templates/emails/confirmation.html:32 expenseai_web/templates/emails/otp.html:39
+msgid "Need help? Email"
+msgstr "मदद की ज़रूरत है? ईमेल"
+
+#: expenseai_web/templates/email/contact_notification.html:20
+msgid "New Contact Form Submission –"
+msgstr "नया संपर्क फ़ॉर्म सबमिशन -"
+
+#: expenseai_web/templates/email/contact_notification.html:5
+msgid "New Contact Submission ·"
+msgstr "नया संपर्क सबमिशन ·"
+
+#: expenseai_web/templates/ai_chat/index.html:126
+msgid "New chat"
+msgstr "नई चैट"
+
+#: expenseai_web/templates/auth/login.html:114
+msgid "New to Finvela?"
+msgstr "फिनवेला में नए हैं?"
+
+#: expenseai_web/templates/admin/billing.html:196
+msgid "New total"
+msgstr "नया कुल"
+
+#: expenseai_web/templates/invoices/index.html:271 expenseai_web/templates/vendors/index.html:144
+msgid "Next"
+msgstr "अगला"
+
+#: expenseai_web/templates/admin/members.html:261
+msgid "No active members yet."
+msgstr "अभी तक कोई सक्रिय सदस्य नहीं है."
+
+#: expenseai_web/templates/invoices/detail.html:280
+msgid "No activity yet."
+msgstr "अभी तक कोई गतिविधि नहीं."
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:41
+msgid "No benchmark data uploaded yet."
+msgstr "अभी तक कोई बेंचमार्क डेटा अपलोड नहीं किया गया है."
+
+#: expenseai_web/templates/vendors/detail.html:134
+msgid "No drift metrics recorded yet."
+msgstr "अभी तक कोई ड्रिफ्ट मेट्रिक्स रिकॉर्ड नहीं किया गया."
+
+#: expenseai_web/templates/vendors/detail.html:73
+msgid "No drift observations have been recorded for this vendor yet."
+msgstr "इस विक्रेता के लिए अभी तक कोई बहाव अवलोकन दर्ज नहीं किया गया है।"
+
+#: expenseai_web/templates/vendors/index.html:103
+msgid "No drift records"
+msgstr "कोई बहाव रिकॉर्ड नहीं"
+
+#: expenseai_web/templates/admin/members.html:182
+msgid "No expiry"
+msgstr "कोई समाप्ति नहीं"
+
+#: expenseai_web/templates/invoices/detail.html:737
+msgid "No extracted header fields yet."
+msgstr "अभी तक कोई हेडर फ़ील्ड नहीं निकाला गया."
+
+#: expenseai_web/templates/invoices/index.html:245
+msgid "No invoices match your filters."
+msgstr "कोई भी चालान आपके फ़िल्टर से मेल नहीं खाता."
+
+#: expenseai_web/templates/dashboard/index.html:269
+msgid "No invoices yet — drag & drop a file to start."
+msgstr "अभी तक कोई चालान नहीं - प्रारंभ करने के लिए फ़ाइल को खींचें और छोड़ें।"
+
+#: expenseai_web/templates/invoices/detail.html:774
+msgid "No line items extracted yet."
+msgstr "अभी तक कोई पंक्ति वस्तु नहीं निकाली गई."
+
+#: expenseai_web/templates/invoices/detail.html:588
+msgid "No market benchmark data yet. Run the check to fetch live prices."
+msgstr ""
+"अभी तक कोई बाज़ार बेंचमार्क डेटा नहीं है। लाइव कीमतें प्राप्त करने के लिए चेक चलाएँ।"
+
+#: expenseai_web/templates/invoices/detail.html:256
+msgid "No payload"
+msgstr "कोई पेलोड नहीं"
+
+#: expenseai_web/templates/admin/billing.html:301
+msgid "No payments recorded yet. Upgrades you complete will appear here instantly."
+msgstr ""
+"अभी तक कोई भुगतान दर्ज नहीं किया गया. आपके द्वारा पूरा किया गया अपग्रेड तुरंत यहां दिखाई देगा।"
+
+#: expenseai_web/templates/admin/members.html:232
+msgid "No pending members. Share a code to invite teammates."
+msgstr "कोई लंबित सदस्य नहीं. टीम के साथियों को आमंत्रित करने के लिए एक कोड साझा करें।"
+
+#: expenseai_web/templates/invoices/detail.html:553
+msgid "No pricing anomalies detected."
+msgstr "कोई मूल्य निर्धारण संबंधी विसंगति नहीं पाई गई."
+
+#: expenseai_web/templates/invoices/detail.html:473
+msgid "No rate mismatches detected."
+msgstr "कोई दर बेमेल नहीं पाया गया."
+
+#: expenseai_web/templates/invoices/detail.html:405
+msgid "No similar invoices detected."
+msgstr "कोई समान चालान नहीं मिला."
+
+#: expenseai_web/templates/dashboard/index.html:357 expenseai_web/templates/invoices/detail.html:847
+msgid "No structured payload was provided for this event."
+msgstr "इस इवेंट के लिए कोई संरचित पेलोड प्रदान नहीं किया गया था।"
+
+#: expenseai_web/templates/vendors/index.html:118
+msgid "No vendors found for the selected filters."
+msgstr "चयनित फ़िल्टर के लिए कोई विक्रेता नहीं मिला."
+
+#: expenseai_web/templates/invoices/detail.html:249
+msgid "Note:"
+msgstr "टिप्पणी:"
+
+#: expenseai_web/templates/invoices/detail.html:694
+msgid "Notes"
+msgstr "टिप्पणियाँ"
+
+#: expenseai_web/templates/invoices/detail.html:425
+msgid "Number:"
+msgstr "संख्या:"
+
+#: expenseai_web/templates/pages/contact.html:111
+msgid "Office"
+msgstr "कार्यालय"
+
+#: expenseai_web/templates/dashboard/index.html:285
+msgid "Offline"
+msgstr "ऑफलाइन"
+
+#: expenseai_web/templates/auth/reset_password.html:108
+msgid ""
+"Once you sign in, enable multi-factor authentication for an extra layer of protection."
+msgstr ""
+"एक बार साइन इन करने के बाद, सुरक्षा की एक अतिरिक्त परत के लिए बहु-कारक प्रमाणीकरण सक्षम करें।"
+
+#: expenseai_web/templates/ai_chat/index.html:174
+msgid "One file per chat. Supported types: PDF, JPG, PNG."
+msgstr "प्रति चैट एक फ़ाइल. समर्थित प्रकार: पीडीएफ, जेपीजी, पीएनजी।"
+
+#: expenseai_web/templates/admin/billing.html:204
+msgid "One-time amount"
+msgstr "एकमुश्त राशि"
+
+#: expenseai_web/templates/auth/register.html:137
+msgid ""
+"Only your organization admin can give you the invitation code. Enter it exactly as shared to route your request correctly."
+msgstr ""
+"केवल आपका संगठन व्यवस्थापक ही आपको आमंत्रण कोड दे सकता है। अपने अनुरोध को सही ढंग से रूट करने के लिए इसे बिल्कुल साझा किए गए तरीके से दर्ज करें।"
+
+#: expenseai_web/templates/dashboard/index.html:239
+msgid ""
+"Open an invoice row to jump straight into the AI analysis view. Status badges reveal progress—processing, complete, or flagged."
+msgstr ""
+"एआई विश्लेषण दृश्य में सीधे जाने के लिए एक इनवॉइस पंक्ति खोलें। स्थिति बैज प्रगति को प्रकट करते हैं—प्रसंस्करण, पूर्ण, या ध्वजांकित।"
+
+#: expenseai_web/templates/invoices/detail.html:170
+msgid "Open file"
+msgstr "खुली फाइल"
+
+#: expenseai_web/templates/dashboard/index.html:179
+msgid "Open last upload"
+msgstr "अंतिम अपलोड खोलें"
+
+#: expenseai_web/templates/invoices/index.html:209
+msgid "Opened {{ ((now() - invoice.created_at).total_seconds() // 60) | int }} mins ago"
+msgstr ""
+"{{ ((now() - invoice.created_at).total_seconds() // 60) | int }} मिनट पहले खोला गया"
+
+#: expenseai_web/templates/admin/members.html:73
+msgid "Opens billing controls in a new view"
+msgstr "बिलिंग नियंत्रणों को एक नए दृश्य में खोलता है"
+
+#: expenseai_web/templates/admin/billing.html:116
+msgid "Organization"
+msgstr "संगठन"
+
+#: expenseai_web/templates/admin/members.html:70
+msgid "Organization ID"
+msgstr "संगठन आईडी"
+
+#: expenseai_web/templates/pages/about.html:44
+msgid "Our Mission"
+msgstr "हमारा विशेष कार्य"
+
+#: expenseai_web/templates/pages/about.html:88
+msgid "Our Story"
+msgstr "हमारी कहानी"
+
+#: expenseai_web/templates/pages/about.html:53
+msgid "Our Vision"
+msgstr "हमारा नज़रिया"
+
+#: expenseai_web/templates/pages/about.html:14
+msgid "Our story"
+msgstr "हमारी कहानी"
+
+#: expenseai_web/templates/admin/members.html:58
+msgid ""
+"Oversee every teammate joining {{ organization.name }}. Issue invites, approve requests, and keep an eye on your seat allocation."
+msgstr ""
+"{{ organization.name }} में शामिल होने वाले प्रत्येक टीम साथी की निगरानी करें। आमंत्रण जारी करें, अनुरोध स्वीकृत करें और अपनी सीट आवंटन पर नज़र रखें।"
+
+#: expenseai_web/templates/invoices/index.html:150
+msgid "PDF"
+msgstr "पीडीएफ"
+
+#: expenseai_web/templates/invoices/index.html:152
+msgid "PNG"
+msgstr "पीएनजी"
+
+#: expenseai_web/templates/errors/404.html:6
+msgid "Page not found"
+msgstr "पृष्ठ नहीं मिला"
+
+#: expenseai_web/templates/vendors/index.html:30
+msgid "Page size"
+msgstr "पृष्ठ का आकार"
+
+#: expenseai_web/templates/invoices/detail.html:338
+msgid "Pages parsed"
+msgstr "पन्ने पार्स किए गए"
+
+#: expenseai_web/templates/invoices/detail.html:336
+msgid "Parse Overview"
+msgstr "पार्स अवलोकन"
+
+#: expenseai_web/templates/invoices/detail.html:309
+msgid "Parse with AI (Gemini)"
+msgstr "एआई (मिथुन) के साथ पार्स"
+
+#: expenseai_web/templates/invoices/detail.html:212
+msgid "Payload summary"
+msgstr "पेलोड सारांश"
+
+#: expenseai_web/templates/admin/billing.html:266
+msgid "Payment history"
+msgstr "भुगतान इतिहास"
+
+#: expenseai_web/templates/vendors/detail.html:93
+msgid "Peak drift: {{ (drift_stats.max * 100) | round(1) }}%"
+msgstr "पीक ड्रिफ्ट: {{ (drift_stats.max * 100) | round(1) }}%"
+
+#: expenseai_web/templates/admin/billing.html:250 expenseai_web/templates/admin/members.html:107
+msgid "Pending approvals"
+msgstr "स्वीकृतियां लंबित हैं"
+
+#: expenseai_web/templates/admin/members.html:199
+msgid "Pending approvals ({{ usage.pending }})"
+msgstr "लंबित स्वीकृतियाँ ({{ usage.pending }})"
+
+#: expenseai_web/templates/admin/billing.html:122
+msgid "Pending approvals:"
+msgstr "लंबित स्वीकृतियाँ:"
+
+#: expenseai_web/templates/admin/billing.html:174
+msgid "Per additional seat"
+msgstr "प्रति अतिरिक्त सीट"
+
+#: expenseai_web/templates/admin/billing.html:100
+msgid "Plan & billing overview"
+msgstr "योजना एवं बिलिंग अवलोकन"
+
+#: expenseai_web/templates/email/contact_notification.html:28
+msgid ""
+"Please review the details below and respond at your earliest convenience. This notification was triggered automatically by {{ app_name }}."
+msgstr ""
+"कृपया नीचे दिए गए विवरण की समीक्षा करें और अपनी सुविधानुसार शीघ्र उत्तर दें। यह अधिसूचना {{ app_name }} द्वारा स्वचालित रूप से ट्रिगर की गई थी।"
+
+#: expenseai_web/templates/admin/billing.html:241 expenseai_web/templates/admin/members.html:98
+msgid "Premium"
+msgstr "अधिमूल्य"
+
+#: expenseai_web/templates/auth/register.html:156
+msgid ""
+"Prepare your company name and billing details. You can add teammates once inside the dashboard."
+msgstr ""
+"अपनी कंपनी का नाम और बिलिंग विवरण तैयार करें। आप डैशबोर्ड के अंदर एक बार टीम के साथियों को जोड़ सकते हैं।"
+
+#: expenseai_web/templates/invoices/detail.html:150 expenseai_web/templates/invoices/index.html:182
+msgid "Preview"
+msgstr "पूर्व दर्शन"
+
+#: expenseai_web/templates/invoices/detail.html:170
+msgid "Preview not available for this format."
+msgstr "इस प्रारूप के लिए पूर्वावलोकन उपलब्ध नहीं है."
+
+#: expenseai_web/templates/invoices/detail.html:138
+msgid ""
+"Preview the uploaded file, inspect AI events, and drive actions like parsing, GST checks, and risk scoring. Each panel below highlights the next recommended step."
+msgstr ""
+"अपलोड की गई फ़ाइल का पूर्वावलोकन करें, एआई घटनाओं का निरीक्षण करें, और पार्सिंग, जीएसटी जांच और जोखिम स्कोरिंग जैसी कार्रवाइयां करें। नीचे दिया गया प्रत्येक पैनल अगले अनुशंसित चरण पर प्रकाश डालता है।"
+
+#: expenseai_web/templates/invoices/index.html:257 expenseai_web/templates/vendors/index.html:130
+msgid "Previous"
+msgstr "पहले का"
+
+#: expenseai_web/templates/vendors/detail.html:37 expenseai_web/templates/vendors/index.html:50
+msgid "Price MAD"
+msgstr "कीमत पागल"
+
+#: expenseai_web/templates/invoices/detail.html:528
+msgid "Price Outliers"
+msgstr "मूल्य बाह्य कारक"
+
+#: expenseai_web/templates/base.html:113
+msgid "Privacy"
+msgstr "गोपनीयता"
+
+#: expenseai_web/templates/pages/privacy.html:9
+msgid "Privacy Policy"
+msgstr "गोपनीयता नीति"
+
+#: expenseai_web/templates/invoices/detail.html:175
+msgid "Processing with Gemini…"
+msgstr "मिथुन राशि के साथ प्रसंस्करण..."
+
+#: expenseai_web/templates/invoices/detail.html:579
+msgid "Product"
+msgstr "उत्पाद"
+
+#: expenseai_web/templates/pages/privacy.html:50
+msgid "Providing customer support, incident response, and service notifications."
+msgstr "ग्राहक सहायता, घटना प्रतिक्रिया और सेवा सूचनाएं प्रदान करना।"
+
+#: expenseai_web/templates/invoices/detail.html:750
+msgid "Qty"
+msgstr "मात्रा"
+
+#: expenseai_web/templates/admin/billing.html:108 expenseai_web/templates/auth/register.html:78
+msgid "Quick orientation"
+msgstr "त्वरित अभिविन्यास"
+
+#: expenseai_web/templates/auth/login.html:74
+msgid "Quick steps"
+msgstr "त्वरित कदम"
+
+#: expenseai_web/templates/pages/contact.html:94
+msgid "Rapid answers from product specialists."
+msgstr "उत्पाद विशेषज्ञों से त्वरित उत्तर।"
+
+#: expenseai_web/templates/ai_chat/index.html:193
+msgid "Ready"
+msgstr "तैयार"
+
+#: expenseai_web/templates/ai_chat/index.html:155
+msgid "Ready to analyse your first invoice."
+msgstr "आपके पहले चालान का विश्लेषण करने के लिए तैयार हैं।"
+
+#: expenseai_web/templates/dashboard/index.html:15
+msgid "Real-time invoice automation, compliance tracking, and risk monitoring."
+msgstr "वास्तविक समय चालान स्वचालन, अनुपालन ट्रैकिंग और जोखिम निगरानी।"
+
+#: expenseai_web/templates/dashboard/index.html:281
+msgid "Realtime updates stream in as events occur."
+msgstr "घटनाएँ घटित होने पर रीयलटाइम अपडेट स्ट्रीम होते हैं।"
+
+#: expenseai_web/templates/dashboard/index.html:227
+msgid "Recent invoices"
+msgstr "हाल के चालान"
+
+#: expenseai_web/templates/invoices/detail.html:499
+msgid "Recomputed totals"
+msgstr "कुल की पुनर्गणना की गई"
+
+#: expenseai_web/templates/invoices/detail.html:213
+msgid "Recorded"
+msgstr "रिकॉर्डेड"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:41
+msgid "Records loaded:"
+msgstr "रिकॉर्ड लोड किए गए:"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:37
+msgid "Records:"
+msgstr "रिकॉर्ड्स:"
+
+#: expenseai_web/templates/invoices/detail.html:700
+msgid "Reject"
+msgstr "अस्वीकार करना"
+
+#: expenseai_web/templates/admin/billing.html:252 expenseai_web/templates/admin/members.html:109
+msgid "Remaining seats"
+msgstr "शेष सीटें"
+
+#: expenseai_web/templates/auth/reset_password.html:96
+msgid "Remember this?"
+msgstr "यह याद रखना?"
+
+#: expenseai_web/templates/auth/forgot_password.html:121 expenseai_web/templates/auth/reset_password.html:116
+msgid "Remembered your password?"
+msgstr "क्या आपको अपना पासवर्ड याद है?"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:28
+msgid "Replace existing rates"
+msgstr "मौजूदा दरों को बदलें"
+
+#: expenseai_web/templates/auth/verify_otp.html:106
+msgid "Request a new one below. You can try again after the cooldown window ends."
+msgstr ""
+"नीचे एक नए का अनुरोध करें. कूलडाउन विंडो समाप्त होने के बाद आप पुनः प्रयास कर सकते हैं।"
+
+#: expenseai_web/templates/auth/login.html:89
+msgid "Request a reset code in under a minute"
+msgstr "एक मिनट से कम समय में रीसेट कोड का अनुरोध करें"
+
+#: expenseai_web/templates/pages/privacy.html:68
+msgid "Request access to, correction of, or deletion of your personal data."
+msgstr "अपने व्यक्तिगत डेटा तक पहुंच, सुधार या हटाने का अनुरोध करें।"
+
+#: expenseai_web/templates/invoices/detail.html:698
+msgid "Request documents"
+msgstr "दस्तावेज़ों का अनुरोध करें"
+
+#: expenseai_web/templates/admin/billing.html:143
+msgid ""
+"Request the total number of seats your team needs. We auto-calculate the additional seats and payment."
+msgstr ""
+"आपकी टीम को आवश्यक सीटों की कुल संख्या का अनुरोध करें। हम अतिरिक्त सीटों और भुगतान की स्वतः गणना करते हैं।"
+
+#: expenseai_web/templates/errors/504.html:6
+msgid "Request timed out"
+msgstr "अनुरोध का समय समाप्त हो गया"
+
+#: expenseai_web/templates/admin/members.html:216
+msgid "Requested: {{ user.created_at.strftime('%Y-%m-%d %H:%M') }} UTC"
+msgstr "अनुरोधित: {{ user.created_at.strftime('%Y-%m-%d %H:%M') }} UTC"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23
+msgid "Required columns:"
+msgstr "आवश्यक कॉलम:"
+
+#: expenseai_web/templates/auth/verify_otp.html:133
+msgid "Resend code"
+msgstr "पुन: कोड भेजे"
+
+#: expenseai_web/templates/invoices/detail.html:802 expenseai_web/templates/invoices/index.html:166 expenseai_web/templates/vendors/index.html:38
+msgid "Reset"
+msgstr "रीसेट करें"
+
+#: expenseai_web/templates/auth/forgot_password.html:66
+msgid "Reset your password"
+msgstr "अपना पासवर्ड रीसेट करें"
+
+#: expenseai_web/templates/auth/reset_password.html:67
+msgid "Resetting password for"
+msgstr "के लिए पासवर्ड रीसेट करना"
+
+#: expenseai_web/templates/auth/reset_password.html:116
+msgid "Return to sign in"
+msgstr "साइन इन करने के लिए वापस लौटें"
+
+#: expenseai_web/templates/invoices/detail.html:194
+msgid "Reverse chronological invoice events with structured payloads."
+msgstr "संरचित पेलोड के साथ कालानुक्रमिक चालान घटनाओं को उलटें।"
+
+#: expenseai_web/templates/pages/terms.html:46
+msgid ""
+"Reverse engineering, decompiling, or attempting to extract source code from our systems."
+msgstr "रिवर्स इंजीनियरिंग, डिकंपाइलिंग, या हमारे सिस्टम से स्रोत कोड निकालने का प्रयास।"
+
+#: expenseai_web/templates/admin/members.html:205
+msgid ""
+"Review each request carefully. Approving a user reserves a seat immediately. Decline directly from the member detail page if needed."
+msgstr ""
+"प्रत्येक अनुरोध की सावधानीपूर्वक समीक्षा करें. उपयोगकर्ता को मंजूरी देने पर तुरंत सीट आरक्षित हो जाती है। यदि आवश्यक हो तो सदस्य विवरण पृष्ठ से सीधे अस्वीकार करें।"
+
+#: expenseai_web/templates/admin/billing.html:211
+msgid "Review payment"
+msgstr "भुगतान की समीक्षा करें"
+
+#: expenseai_web/templates/dashboard/index.html:159
+msgid "Review system uptime, queue usage, and task throughput"
+msgstr "सिस्टम अपटाइम, कतार उपयोग और कार्य थ्रूपुट की समीक्षा करें"
+
+#: expenseai_web/templates/admin/billing.html:109
+msgid ""
+"Review the summary at a glance, then follow the steps below the hero banner to request more seats and confirm your payment."
+msgstr ""
+"एक नज़र में सारांश की समीक्षा करें, फिर अधिक सीटों का अनुरोध करने और अपने भुगतान की पुष्टि करने के लिए हीरो बैनर के नीचे दिए गए चरणों का पालन करें।"
+
+#: expenseai_web/templates/admin/billing.html:234
+msgid "Review your live status"
+msgstr "अपनी लाइव स्थिति की समीक्षा करें"
+
+#: expenseai_web/templates/invoices/index.html:186
+msgid "Risk"
+msgstr "जोखिम"
+
+#: expenseai_web/templates/invoices/index.html:229
+msgid "Risk run in progress"
+msgstr "जोखिम भरा काम चल रहा है"
+
+#: expenseai_web/templates/vendors/detail.html:85
+msgid "Rolling drift windows derived from recent invoice embeddings."
+msgstr "हाल के इनवॉइस एम्बेडिंग से प्राप्त रोलिंग ड्रिफ्ट विंडो।"
+
+#: expenseai_web/templates/vendors/detail.html:124
+msgid "Rolling window"
+msgstr "घूमती हुई खिड़की"
+
+#: expenseai_web/templates/invoices/detail.html:567
+msgid "Run market check"
+msgstr "बाज़ार जांच चलाएँ"
+
+#: expenseai_web/templates/invoices/detail.html:808
+msgid "Run what-if"
+msgstr "भागो क्या-क्या"
+
+#: expenseai_web/templates/invoices/detail.html:312
+msgid "Runs Finvela extraction for header fields and line items."
+msgstr "हेडर फ़ील्ड और लाइन आइटम के लिए फिनलेवा निष्कर्षण चलाता है।"
+
+#: expenseai_web/templates/vendors/detail.html:104 expenseai_web/templates/vendors/index.html:48
+msgid "Samples"
+msgstr "नमूने"
+
+#: expenseai_web/templates/vendors/detail.html:28
+msgid "Samples observed"
+msgstr "नमूनों का अवलोकन किया गया"
+
+#: expenseai_web/templates/ai_chat/index.html:145
+msgid "Saved chats"
+msgstr "सहेजी गई चैट"
+
+#: expenseai_web/templates/ai_chat/index.html:134
+msgid "Saved conversations"
+msgstr "सहेजी गई बातचीत"
+
+#: expenseai_web/templates/invoices/index.html:133
+msgid "Search"
+msgstr "खोज"
+
+#: expenseai_web/templates/vendors/index.html:27
+msgid "Search is case-insensitive and matches GST or summary text."
+msgstr "खोज केस-असंवेदनशील है और जीएसटी या सारांश पाठ से मेल खाती है।"
+
+#: expenseai_web/templates/vendors/index.html:25
+msgid "Search vendors"
+msgstr "विक्रेताओं को खोजें"
+
+#: expenseai_web/templates/invoices/index.html:114
+msgid "Search, filter, and sort uploaded invoices in one place."
+msgstr "अपलोड किए गए चालानों को एक ही स्थान पर खोजें, फ़िल्टर करें और क्रमबद्ध करें।"
+
+#: expenseai_web/templates/admin/billing.html:120
+msgid "Seat limit:"
+msgstr "सीट सीमा:"
+
+#: expenseai_web/templates/admin/members.html:89
+msgid "Seat usage"
+msgstr "सीट का उपयोग"
+
+#: expenseai_web/templates/admin/billing.html:284
+msgid "Seats"
+msgstr "सीटें"
+
+#: expenseai_web/templates/auth/forgot_password.html:65
+msgid "Secure access"
+msgstr "सुरक्षित पहुंच"
+
+#: expenseai_web/templates/auth/login.html:65
+msgid "Secure sign-in"
+msgstr "सुरक्षित साइन-इन"
+
+#: expenseai_web/templates/auth/reset_password.html:65
+msgid "Secure update"
+msgstr "सुरक्षित अद्यतन"
+
+#: expenseai_web/templates/pages/about.html:30
+msgid "Secure, compliant operations aligned to SOC 2 principles"
+msgstr "एसओसी 2 सिद्धांतों के अनुरूप सुरक्षित, अनुपालन संचालन"
+
+#: expenseai_web/templates/dashboard/index.html:232
+msgid "See the full archive of processed invoices"
+msgstr "संसाधित चालानों का पूरा संग्रह देखें"
+
+#: expenseai_web/templates/dashboard/index.html:351 expenseai_web/templates/invoices/detail.html:841
+msgid "Select an event to inspect its payload."
+msgstr "किसी इवेंट के पेलोड का निरीक्षण करने के लिए उसका चयन करें।"
+
+#: expenseai_web/templates/ai_chat/index.html:113
+msgid ""
+"Select or start a chat from the panel, upload the invoice, then ask targeted questions. The AI remembers the chat history to build a detailed audit trail."
+msgstr ""
+"पैनल से चैट चुनें या शुरू करें, इनवॉइस अपलोड करें, फिर लक्षित प्रश्न पूछें। विस्तृत ऑडिट ट्रेल बनाने के लिए एआई चैट इतिहास को याद रखता है।"
+
+#: expenseai_web/templates/auth/register.html:88
+msgid "Select registration type"
+msgstr "पंजीकरण प्रकार चुनें"
+
+#: expenseai_web/templates/dashboard/index.html:292
+msgid ""
+"Select “View payload” to open structured JSON for the event right from this panel. Ideal for debugging integrations."
+msgstr ""
+"सीधे इस पैनल से इवेंट के लिए संरचित JSON खोलने के लिए \"पेलोड देखें\" चुनें। डिबगिंग एकीकरण के लिए आदर्श।"
+
+#: expenseai_web/templates/invoices/detail.html:684
+msgid "Selections emit assignment events."
+msgstr "चयन असाइनमेंट इवेंट उत्सर्जित करते हैं।"
+
+#: expenseai_web/templates/ai_chat/index.html:214
+msgid "Send"
+msgstr "भेजना"
+
+#: expenseai_web/templates/pages/contact.html:78
+msgid "Send Message"
+msgstr "मेसेज भेजें"
+
+#: expenseai_web/templates/auth/forgot_password.html:91
+msgid "Send reset code"
+msgstr "रीसेट कोड भेजें"
+
+#: expenseai_web/templates/pages/contact.html:33
+msgid "Send us a message"
+msgstr "हमें एक संदेश भेजें"
+
+#: expenseai_web/templates/ai_chat/index.html:213
+msgid "Send your prompt to the AI"
+msgstr "अपना संकेत एआई को भेजें"
+
+#: expenseai_web/templates/email/contact_notification.html:35
+msgid "Sender"
+msgstr "प्रेषक"
+
+#: expenseai_web/templates/base.html:59
+msgid "Service health"
+msgstr "सेवा स्वास्थ्य"
+
+#: expenseai_web/templates/errors/503.html:6
+msgid "Service temporarily unavailable"
+msgstr "सेवा अस्थाई रूप से अनुपलब्ध"
+
+#: expenseai_web/templates/admin/members.html:234
+msgid "Share an invite code"
+msgstr "एक आमंत्रण कोड साझा करें"
+
+#: expenseai_web/templates/admin/members.html:72
+msgid "Share this ID with internal admins for quick reference."
+msgstr "त्वरित संदर्भ के लिए इस आईडी को आंतरिक व्यवस्थापकों के साथ साझा करें।"
+
+#: expenseai_web/templates/auth/login.html:93 expenseai_web/templates/auth/register.html:177 expenseai_web/templates/base.html:89 expenseai_web/templates/errors/401.html:8
+msgid "Sign in"
+msgstr "दाखिल करना"
+
+#: expenseai_web/templates/base.html:83
+msgid "Sign out"
+msgstr "साइन आउट"
+
+#: expenseai_web/templates/invoices/detail.html:180
+msgid "Size"
+msgstr "आकार"
+
+#: expenseai_web/templates/base.html:19
+msgid "Skip to content"
+msgstr "सामग्री पर जाएं"
+
+#: expenseai_web/templates/email/contact_notification.html:27
+msgid "Someone reached out via the website"
+msgstr "किसी ने वेबसाइट के माध्यम से संपर्क किया"
+
+#: expenseai_web/templates/errors/500.html:6
+msgid "Something went wrong"
+msgstr "कुछ गलत हो गया"
+
+#: expenseai_web/templates/pages/contact.html:40
+msgid "Something went wrong. Please try again."
+msgstr "कुछ गलत हो गया। कृपया पुन: प्रयास करें।"
+
+#: expenseai_web/templates/invoices/detail.html:430
+msgid "Source:"
+msgstr "स्रोत:"
+
+#: expenseai_web/templates/invoices/index.html:156
+msgid "Start"
+msgstr "शुरू"
+
+#: expenseai_web/templates/admin/members.html:64
+msgid ""
+"Start by checking your seat usage and invitation codes on the left. Review approvals and active members on the right. Each card contains quick tips to guide the next step."
+msgstr ""
+"बाईं ओर अपनी सीट के उपयोग और निमंत्रण कोड की जाँच करके शुरुआत करें। दाईं ओर स्वीकृतियों और सक्रिय सदस्यों की समीक्षा करें। प्रत्येक कार्ड में अगले चरण का मार्गदर्शन करने के लिए त्वरित युक्तियाँ शामिल हैं।"
+
+#: expenseai_web/templates/admin/billing.html:132
+msgid ""
+"Start with the upgrade panel on the left to request additional seats, then review your live plan status and Razorpay history on the right. Each section includes tips tailored for billing managers."
+msgstr ""
+"अतिरिक्त सीटों का अनुरोध करने के लिए बाईं ओर अपग्रेड पैनल से शुरुआत करें, फिर दाईं ओर अपने लाइव प्लान की स्थिति और रेज़रपे इतिहास की समीक्षा करें। प्रत्येक अनुभाग में बिलिंग प्रबंधकों के लिए तैयार की गई युक्तियाँ शामिल हैं।"
+
+#: expenseai_web/templates/dashboard/index.html:152
+msgid "Start your journey"
+msgstr "अपनी यात्रा शुरू करें"
+
+#: expenseai_web/templates/admin/members.html:160 expenseai_web/templates/invoices/detail.html:689 expenseai_web/templates/invoices/index.html:138 expenseai_web/templates/invoices/index.html:185
+msgid "Status"
+msgstr "स्थिति"
+
+#: expenseai_web/templates/ai_chat/index.html:159
+msgid "Status updates as files process"
+msgstr "फ़ाइलें संसाधित होने पर स्थिति अद्यतन होती है"
+
+#: expenseai_web/templates/pages/contact.html:127
+msgid "Stay in the loop"
+msgstr "लूप में रहें"
+
+#: expenseai_web/templates/auth/login.html:87
+msgid "Stay signed in"
+msgstr "साइन इन रहें"
+
+#: expenseai_web/templates/admin/billing.html:145 expenseai_web/templates/dashboard/index.html:194
+msgid "Step 1"
+msgstr "स्टेप 1"
+
+#: expenseai_web/templates/admin/billing.html:228 expenseai_web/templates/dashboard/index.html:231
+msgid "Step 2"
+msgstr "चरण दो"
+
+#: expenseai_web/templates/admin/billing.html:267 expenseai_web/templates/dashboard/index.html:284
+msgid "Step 3"
+msgstr "चरण 3"
+
+#: expenseai_web/templates/auth/forgot_password.html:112
+msgid "Still locked out?"
+msgstr "अभी भी ताला लगा हुआ है?"
+
+#: expenseai_web/templates/auth/reset_password.html:97
+msgid ""
+"Store the new password in your manager or note it down securely to avoid another reset."
+msgstr ""
+"नए पासवर्ड को अपने मैनेजर में स्टोर करें या दोबारा रीसेट से बचने के लिए इसे सुरक्षित रूप से नोट कर लें।"
+
+#: expenseai_web/templates/auth/reset_password.html:74
+msgid "Stronger password tips"
+msgstr "मजबूत पासवर्ड युक्तियाँ"
+
+#: expenseai_web/templates/email/contact_notification.html:47
+msgid "Subject"
+msgstr "विषय"
+
+#: expenseai_web/templates/pages/contact.html:10
+msgid ""
+"Submit your request and our team will respond within one business day. Choose a category so we can route your message to the right specialists."
+msgstr ""
+"अपना अनुरोध सबमिट करें और हमारी टीम एक व्यावसायिक दिन के भीतर जवाब देगी। एक श्रेणी चुनें ताकि हम आपका संदेश सही विशेषज्ञों तक पहुंचा सकें।"
+
+#: expenseai_web/templates/pages/contact.html:129
+msgid "Subscribe to updates"
+msgstr "अपडेट की सदस्यता लें"
+
+#: expenseai_web/templates/invoices/detail.html:753
+msgid "Subtotal"
+msgstr "उप-योग"
+
+#: expenseai_web/templates/invoices/index.html:236
+msgid "Subtotal:"
+msgstr "उप योग:"
+
+#: expenseai_web/templates/vendors/detail.html:24
+msgid "Summary"
+msgstr "सारांश"
+
+#: expenseai_web/templates/pages/contact.html:93
+msgid "Support Channels"
+msgstr "समर्थन चैनल"
+
+#: expenseai_web/templates/pages/privacy.html:34
+msgid "Support requests, product feedback, survey responses, and interaction logs."
+msgstr "समर्थन अनुरोध, उत्पाद प्रतिक्रिया, सर्वेक्षण प्रतिक्रियाएँ और इंटरैक्शन लॉग।"
+
+#: expenseai_web/templates/dashboard/index.html:159
+msgid "System health"
+msgstr "सिस्टम स्वास्थ्य"
+
+#: expenseai_web/templates/pages/about.html:13
+msgid "Talk to us"
+msgstr "हमसे बात करें"
+
+#: expenseai_web/templates/ai_chat/index.html:141
+msgid ""
+"Tap a session to reopen its audit trail. The newest chats appear on top, and you can rename sessions inside the app."
+msgstr ""
+"किसी सत्र के ऑडिट ट्रेल को फिर से खोलने के लिए उस पर टैप करें। नवीनतम चैट शीर्ष पर दिखाई देती हैं, और आप ऐप के अंदर सत्रों का नाम बदल सकते हैं।"
+
+#: expenseai_web/templates/invoices/detail.html:754
+msgid "Tax"
+msgstr "कर"
+
+#: expenseai_web/templates/invoices/index.html:237
+msgid "Tax:"
+msgstr "कर:"
+
+#: expenseai_web/templates/base.html:50
+msgid "Team"
+msgstr "टीम"
+
+#: expenseai_web/templates/admin/members.html:56
+msgid "Team Operations Hub"
+msgstr "टीम ऑपरेशंस हब"
+
+#: expenseai_web/templates/admin/members.html:57
+msgid "Team management"
+msgstr "टीम प्रबंधन"
+
+#: expenseai_web/templates/base.html:112
+msgid "Terms"
+msgstr "शर्तें"
+
+#: expenseai_web/templates/pages/terms.html:9
+msgid "Terms & Conditions"
+msgstr "नियम एवं शर्तें"
+
+#: expenseai_web/templates/emails/otp.html:34
+msgid "Thanks,"
+msgstr "धन्यवाद,"
+
+#: expenseai_web/templates/admin/billing.html:158
+msgid ""
+"The Razorpay gateway is not configured. Contact support to enable online payments."
+msgstr ""
+"रेज़रपे गेटवे कॉन्फ़िगर नहीं है। ऑनलाइन भुगतान सक्षम करने के लिए सहायता से संपर्क करें।"
+
+#: expenseai_web/templates/errors/504.html:7
+msgid "The operation took too long. We timed out to keep things responsive."
+msgstr ""
+"ऑपरेशन में बहुत समय लग गया. हमने चीजों को प्रतिक्रियाशील बनाए रखने के लिए समय निकाला।"
+
+#: expenseai_web/templates/errors/404.html:7
+msgid "The page you were looking for doesn’t exist or may have moved."
+msgstr "आप जिस पृष्ठ की तलाश कर रहे थे वह मौजूद नहीं है या संभवतः स्थानांतरित हो गया है।"
+
+#: expenseai_web/templates/emails/otp.html:34
+msgid "The {{ app_name }} team"
+msgstr "{{ app_name }} टीम"
+
+#: expenseai_web/templates/pages/terms.html:10
+msgid ""
+"These Terms & Conditions (the “Terms”) govern your access to and use of {{ app_name }} (“the Service”). By signing up, logging in, or otherwise using the Service, you agree to be bound by these Terms."
+msgstr ""
+"ये नियम और शर्तें (\"शर्तें\") {{ app_name }} (\"सेवा\") तक आपकी पहुंच और उपयोग को नियंत्रित करती हैं। साइन अप करके, लॉग इन करके या अन्यथा सेवा का उपयोग करके, आप इन शर्तों से बंधे होने के लिए सहमत हैं।"
+
+#: expenseai_web/templates/pages/terms.html:59
+msgid ""
+"These Terms are governed by and construed in accordance with the laws of India, without regard to conflict-of-law principles. Any disputes shall be subject to the exclusive jurisdiction of the courts located in Ahmedabad, Gujarat."
+msgstr ""
+"ये शर्तें कानूनी सिद्धांतों के टकराव की परवाह किए बिना, भारत के कानूनों के अनुसार शासित और समझी जाती हैं। कोई भी विवाद अहमदाबाद, गुजरात में स्थित अदालतों के विशेष क्षेत्राधिकार के अधीन होगा।"
+
+#: expenseai_web/templates/ai_chat/index.html:183
+msgid "This may take a moment while we run OCR."
+msgstr "OCR चलाने में हमें कुछ समय लग सकता है।"
+
+#: expenseai_web/templates/email/contact_notification.html:64
+msgid "This message was generated automatically by {{ app_name }}."
+msgstr "यह संदेश {{ app_name }} द्वारा स्वचालित रूप से उत्पन्न हुआ था।"
+
+#: expenseai_web/templates/invoices/index.html:196
+msgid "Thumbnail"
+msgstr "थंबनेल"
+
+#: expenseai_web/templates/invoices/detail.html:193
+msgid "Timeline"
+msgstr "समय"
+
+#: expenseai_web/templates/admin/billing.html:170
+msgid ""
+"Tip: Choose the total seats you require after adding new members. The system ensures you never go below your current plan."
+msgstr ""
+"टिप: नए सदस्यों को जोड़ने के बाद आपको आवश्यक कुल सीटें चुनें। सिस्टम यह सुनिश्चित करता है कि आप कभी भी अपनी वर्तमान योजना से नीचे न जाएँ।"
+
+#: expenseai_web/templates/pages/privacy.html:73
+msgid "To submit a privacy request, contact us using the details provided in the"
+msgstr ""
+"गोपनीयता अनुरोध सबमिट करने के लिए, इसमें दिए गए विवरण का उपयोग करके हमसे संपर्क करें"
+
+#: expenseai_web/templates/pages/terms.html:55
+msgid ""
+"To the fullest extent permitted by law, Finvela is not liable for indirect, incidental, consequential, or punitive damages, nor for loss of profits, revenue, or data. Our aggregate liability arising from these Terms will not exceed the fees paid for the Service during the twelve (12) months preceding the event giving rise to liability."
+msgstr ""
+"कानून द्वारा अनुमत पूर्ण सीमा तक, फिनवेला अप्रत्यक्ष, आकस्मिक, परिणामी या दंडात्मक क्षति के लिए उत्तरदायी नहीं है, न ही लाभ, राजस्व या डेटा की हानि के लिए उत्तरदायी है। इन शर्तों से उत्पन्न होने वाली हमारी कुल देनदारी, देनदारी को जन्म देने वाली घटना से पहले के बारह (12) महीनों के दौरान सेवा के लिए भुगतान की गई फीस से अधिक नहीं होगी।"
+
+#: expenseai_web/templates/pages/about.html:90
+msgid ""
+"Today we power finance operations for fast-scaling startups and global enterprises alike—earning trust through transparency, resilience, and relentless focus on user experience."
+msgstr ""
+"आज हम तेजी से आगे बढ़ने वाले स्टार्टअप और वैश्विक उद्यमों के लिए वित्त संचालन को सशक्त बनाते हैं - पारदर्शिता, लचीलेपन और उपयोगकर्ता अनुभव पर निरंतर फोकस के माध्यम से विश्वास अर्जित करते हैं।"
+
+#: expenseai_web/templates/base.html:26
+msgid "Toggle navigation"
+msgstr "टॉगल से संचालित करना"
+
+#: expenseai_web/templates/base.html:67
+msgid "Toggle theme"
+msgstr "थीम टॉगल करें"
+
+#: expenseai_web/templates/errors/429.html:6
+msgid "Too many requests"
+msgstr "बहुत सारे अनुरोध"
+
+#: expenseai_web/templates/invoices/detail.html:755
+msgid "Total"
+msgstr "कुल"
+
+#: expenseai_web/templates/admin/billing.html:165
+msgid "Total users you need"
+msgstr "आपके लिए आवश्यक कुल उपयोगकर्ता"
+
+#: expenseai_web/templates/invoices/index.html:238
+msgid "Total:"
+msgstr "कुल:"
+
+#: expenseai_web/templates/invoices/detail.html:322
+msgid "Totals:"
+msgstr "कुल:"
+
+#: expenseai_web/templates/admin/members.html:93
+msgid ""
+"Track how many teammates occupy your plan seats. Use this insight before approving new members."
+msgstr ""
+"ट्रैक करें कि आपकी योजना की सीटों पर टीम के कितने साथी बैठे हैं। नए सदस्यों को मंजूरी देने से पहले इस जानकारी का उपयोग करें।"
+
+#: expenseai_web/templates/dashboard/index.html:10
+msgid ""
+"Track uploads, AI insights, and system health in real time with Finvela's finance workspace."
+msgstr ""
+"फिनवेला के वित्त कार्यक्षेत्र के साथ वास्तविक समय में अपलोड, एआई अंतर्दृष्टि और सिस्टम स्वास्थ्य को ट्रैक करें।"
+
+#: expenseai_web/templates/admin/billing.html:101
+msgid ""
+"Track your organization usage, unlock more seats, and manage your Razorpay payments from one elegant workspace."
+msgstr ""
+"अपने संगठन के उपयोग को ट्रैक करें, अधिक सीटें अनलॉक करें, और एक शानदार कार्यक्षेत्र से अपने रेज़रपे भुगतान प्रबंधित करें।"
+
+#: expenseai_web/templates/dashboard/index.html:285
+msgid "Tracks server-sent events for ongoing processes"
+msgstr "चल रही प्रक्रियाओं के लिए सर्वर द्वारा भेजे गए ईवेंट को ट्रैक करता है"
+
+#: expenseai_web/templates/admin/billing.html:291
+msgid "UTC"
+msgstr "UTC"
+
+#: expenseai_web/templates/invoices/detail.html:751
+msgid "Unit Price"
+msgstr "यूनिट मूल्य"
+
+#: expenseai_web/templates/emails/confirmation.html:6
+msgid "Update"
+msgstr "अद्यतन"
+
+#: expenseai_web/templates/auth/reset_password.html:86
+msgid "Update password"
+msgstr "पासवर्ड अपडेट करें"
+
+#: expenseai_web/templates/invoices/detail.html:691
+msgid "Update status"
+msgstr "अद्यतन स्थिति"
+
+#: expenseai_web/templates/invoices/detail.html:293
+msgid "Update status, assign reviewers, capture notes."
+msgstr "स्थिति अपडेट करें, समीक्षक नियुक्त करें, नोट्स कैप्चर करें।"
+
+#: expenseai_web/templates/admin/members.html:81
+msgid "Upgrade plan"
+msgstr "उन्नयन योजना"
+
+#: expenseai_web/templates/admin/billing.html:142
+msgid "Upgrade seats"
+msgstr "सीटें अपग्रेड करें"
+
+#: expenseai_web/templates/admin/billing.html:258
+msgid "Upgraded on"
+msgstr "पर अपग्रेड किया गया"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:29 expenseai_compliance/templates/compliance_admin/hsn_upload.html:33
+msgid "Upload"
+msgstr "अपलोड करें"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:8
+msgid "Upload a CSV export of GST HSN/SAC rates to keep compliance checks accurate."
+msgstr ""
+"अनुपालन जांच को सटीक रखने के लिए जीएसटी एचएसएन/एसएसी दरों का सीएसवी निर्यात अपलोड करें।"
+
+#: expenseai_web/templates/invoices/index.html:117
+msgid "Upload a file from the dashboard to populate this library"
+msgstr "इस लाइब्रेरी को भरने के लिए डैशबोर्ड से एक फ़ाइल अपलोड करें"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:8
+msgid "Upload curated median/MAD references to strengthen market outlier scoring."
+msgstr ""
+"बाजार की बाहरी स्कोरिंग को मजबूत करने के लिए क्यूरेटेड मीडियन/एमएडी संदर्भ अपलोड करें।"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:45
+msgid "Upload data to enable HSN/SAC validation."
+msgstr "एचएसएन/एसएसी सत्यापन सक्षम करने के लिए डेटा अपलोड करें।"
+
+#: expenseai_web/templates/dashboard/index.html:214
+msgid "Upload file"
+msgstr "फ़ाइल अपलोड करें"
+
+#: expenseai_web/templates/dashboard/index.html:191
+msgid "Upload invoices"
+msgstr "चालान अपलोड करें"
+
+#: expenseai_web/templates/dashboard/index.html:174
+msgid ""
+"Upload invoices on the left, review AI summaries below, and monitor live events on the right. Tooltips and badges highlight each action."
+msgstr ""
+"बाईं ओर चालान अपलोड करें, नीचे AI सारांश की समीक्षा करें और दाईं ओर लाइव इवेंट की निगरानी करें। टूलटिप्स और बैज प्रत्येक क्रिया को हाइलाइट करते हैं।"
+
+#: expenseai_web/templates/invoices/index.html:118
+msgid "Upload new"
+msgstr "नया अपलोड करें"
+
+#: expenseai_web/templates/ai_chat/index.html:166
+msgid ""
+"Upload one invoice per chat to keep validation clean. The AI highlights tax anomalies, line-item mismatches, and compliance issues once the document is processed."
+msgstr ""
+"सत्यापन को साफ़ रखने के लिए प्रति चैट एक चालान अपलोड करें। दस्तावेज़ संसाधित होने के बाद एआई कर विसंगतियों, लाइन-आइटम बेमेल और अनुपालन मुद्दों पर प्रकाश डालता है।"
+
+#: expenseai_web/templates/invoices/detail.html:181
+msgid "Uploaded"
+msgstr "अपलोड किए गए"
+
+#: expenseai_web/templates/ai_chat/index.html:182
+msgid "Uploading…"
+msgstr "अपलोड हो रहा है..."
+
+#: expenseai_web/templates/errors/503.html:7
+msgid "Upstream services are down. Please retry in a moment."
+msgstr "अपस्ट्रीम सेवाएँ बंद हैं। कृपया एक क्षण में पुनः प्रयास करें."
+
+#: expenseai_web/templates/pages/privacy.html:39
+msgid "Usage analytics including page views, feature adoption, and error diagnostics."
+msgstr "पृष्ठ दृश्य, सुविधा अपनाने और त्रुटि निदान सहित उपयोग विश्लेषण।"
+
+#: expenseai_web/templates/auth/forgot_password.html:85
+msgid "Use the email you normally sign in with"
+msgstr "उस ईमेल का उपयोग करें जिससे आप सामान्य रूप से साइन इन करते हैं"
+
+#: expenseai_web/templates/invoices/index.html:102
+msgid ""
+"Use the filters below to narrow results by status, file type, or dates. Click any row to jump into the detailed AI review for that invoice."
+msgstr ""
+"स्थिति, फ़ाइल प्रकार या तिथियों के आधार पर परिणामों को सीमित करने के लिए नीचे दिए गए फ़िल्टर का उपयोग करें। उस इनवॉइस की विस्तृत AI समीक्षा देखने के लिए किसी भी पंक्ति पर क्लिक करें।"
+
+#: expenseai_web/templates/admin/billing.html:274
+msgid ""
+"Use this archive to reconcile invoices. Hover over rows on desktop for quick highlights or export via your finance tools."
+msgstr ""
+"चालानों का समाधान करने के लिए इस संग्रह का उपयोग करें। त्वरित हाइलाइट्स या अपने वित्त टूल के माध्यम से निर्यात के लिए डेस्कटॉप पर पंक्तियों पर होवर करें।"
+
+#: expenseai_web/templates/invoices/detail.html:202
+msgid ""
+"Use this feed to audit each automation step. Click “View payload” for structured JSON that confirms extraction, checks, or integrations."
+msgstr ""
+"प्रत्येक स्वचालन चरण का ऑडिट करने के लिए इस फ़ीड का उपयोग करें। संरचित JSON के लिए \"पेलोड देखें\" पर क्लिक करें जो निष्कर्षण, जांच या एकीकरण की पुष्टि करता है।"
+
+#: expenseai_web/templates/auth/login.html:104
+msgid "Use your authenticator app or ask your admin to reset multi-factor preferences."
+msgstr ""
+"अपने प्रमाणक ऐप का उपयोग करें या अपने व्यवस्थापक से बहु-कारक प्राथमिकताओं को रीसेट करने के लिए कहें।"
+
+#: expenseai_web/templates/admin/members.html:159
+msgid "Uses"
+msgstr "उपयोग"
+
+#: expenseai_web/templates/pages/terms.html:45
+msgid "Using automated scripts or bots that degrade performance or violate rate limits."
+msgstr ""
+"स्वचालित स्क्रिप्ट या बॉट का उपयोग करना जो प्रदर्शन को ख़राब करता है या दर सीमा का उल्लंघन करता है।"
+
+#: expenseai_web/templates/invoices/detail.html:595
+msgid ""
+"Validate GST registration numbers using the configured provider or local test fixtures."
+msgstr ""
+"कॉन्फ़िगर किए गए प्रदाता या स्थानीय परीक्षण फिक्स्चर का उपयोग करके जीएसटी पंजीकरण संख्या को मान्य करें।"
+
+#: expenseai_web/templates/dashboard/index.html:346 expenseai_web/templates/invoices/detail.html:720 expenseai_web/templates/invoices/detail.html:836
+msgid "Value"
+msgstr "कीमत"
+
+#: expenseai_web/templates/vendors/index.html:47
+msgid "Vendor"
+msgstr "विक्रेता"
+
+#: expenseai_web/templates/invoices/index.html:183
+msgid "Vendor / Invoice"
+msgstr "विक्रेता/चालान"
+
+#: expenseai_web/templates/invoices/detail.html:182
+msgid "Vendor GST"
+msgstr "विक्रेता जी.एस.टी"
+
+#: expenseai_web/templates/invoices/detail.html:320
+msgid "Vendor GST:"
+msgstr "विक्रेता जीएसटी:"
+
+#: expenseai_web/templates/vendors/index.html:14
+msgid "Vendor intelligence"
+msgstr "विक्रेता खुफिया"
+
+#: expenseai_web/templates/vendors/index.html:127
+msgid "Vendor pagination"
+msgstr "विक्रेता पृष्ठांकन"
+
+#: expenseai_web/templates/vendors/detail.html:15
+msgid "Vendor profile"
+msgstr "विक्रेता प्रोफ़ाइल"
+
+#: expenseai_web/templates/invoices/index.html:134
+msgid "Vendor, invoice no, filename"
+msgstr "विक्रेता, चालान संख्या, फ़ाइल नाम"
+
+#: expenseai_web/templates/base.html:43 expenseai_web/templates/vendors/detail.html:6 expenseai_web/templates/vendors/index.html:6
+msgid "Vendors"
+msgstr "विक्रेता"
+
+#: expenseai_web/templates/emails/otp.html:6
+msgid "Verification Code"
+msgstr "सत्यापन कोड"
+
+#: expenseai_web/templates/invoices/detail.html:161
+msgid ""
+"Verify the file rendering and metadata before taking action. PDFs appear inline; other formats can be opened in a new tab."
+msgstr ""
+"कार्रवाई करने से पहले फ़ाइल रेंडरिंग और मेटाडेटा को सत्यापित करें। पीडीएफ इनलाइन दिखाई देते हैं; अन्य प्रारूप एक नए टैब में खोले जा सकते हैं।"
+
+#: expenseai_web/templates/base.html:125
+msgid "Version"
+msgstr "संस्करण"
+
+#: expenseai_web/templates/vendors/index.html:109 expenseai_web/templates/vendors/index.html:110
+msgid "View"
+msgstr "देखना"
+
+#: expenseai_web/templates/invoices/detail.html:709
+msgid "View Extracted Data"
+msgstr "निकाला गया डेटा देखें"
+
+#: expenseai_web/templates/dashboard/index.html:232
+msgid "View all"
+msgstr "सभी को देखें"
+
+#: expenseai_web/templates/invoices/detail.html:634
+msgid "View details"
+msgstr "विवरण देखें"
+
+#: expenseai_web/templates/admin/members.html:248
+msgid ""
+"View every teammate currently enjoying access. Need to remove someone? Head to their profile from the members directory."
+msgstr ""
+"वर्तमान में पहुंच का आनंद ले रहे प्रत्येक टीम-साथी को देखें। किसी को हटाने की आवश्यकता है? सदस्य निर्देशिका से उनकी प्रोफ़ाइल पर जाएँ।"
+
+#: expenseai_web/templates/invoices/index.html:200
+msgid "View invoice {{ invoice.invoice_no or invoice.id }}"
+msgstr "चालान देखें {{ invoice.invoice_no or invoice.id }}"
+
+#: expenseai_web/templates/dashboard/index.html:313 expenseai_web/templates/invoices/detail.html:270
+msgid "View payload"
+msgstr "पेलोड देखें"
+
+#: expenseai_web/templates/ai_chat/index.html:159
+msgid "Waiting for file"
+msgstr "फ़ाइल का इंतज़ार है"
+
+#: expenseai_web/templates/pages/about.html:55
+msgid ""
+"We are building the intelligent backbone for resilient, transparent finance operations across industries."
+msgstr ""
+"हम उद्योगों में लचीले, पारदर्शी वित्त संचालन के लिए बुद्धिमान रीढ़ का निर्माण कर रहे हैं।"
+
+#: expenseai_web/templates/pages/privacy.html:10
+msgid ""
+"We are committed to protecting your personal information while delivering trustworthy automation. This policy outlines how {{ app_name }} handles, stores, and shares data."
+msgstr ""
+"हम भरोसेमंद स्वचालन प्रदान करते हुए आपकी व्यक्तिगत जानकारी की सुरक्षा के लिए प्रतिबद्ध हैं। यह नीति बताती है कि {{ app_name }} डेटा को कैसे प्रबंधित, संग्रहीत और साझा करता है।"
+
+#: expenseai_web/templates/admin/billing.html:177
+msgid "We auto-adjust pricing for bulk changes."
+msgstr "हम थोक परिवर्तनों के लिए मूल्य निर्धारण को स्वतः समायोजित करते हैं।"
+
+#: expenseai_web/templates/pages/about.html:46
+msgid ""
+"We believe automation should be explainable, configurable, and respectful of every organization’s data responsibilities."
+msgstr ""
+"हमारा मानना ​​है कि स्वचालन व्याख्या योग्य, विन्यास योग्य और प्रत्येक संगठन की डेटा जिम्मेदारियों के प्रति सम्मानजनक होना चाहिए।"
+
+#: expenseai_web/templates/pages/about.html:10
+msgid "We build trustworthy AI for finance teams everywhere."
+msgstr "हम हर जगह वित्त टीमों के लिए भरोसेमंद एआई का निर्माण करते हैं।"
+
+#: expenseai_web/templates/pages/privacy.html:29
+msgid "We collect data to provide and improve the Services. This includes:"
+msgstr ""
+"हम सेवाएँ प्रदान करने और उन्हें बेहतर बनाने के लिए डेटा एकत्र करते हैं। यह भी शामिल है:"
+
+#: expenseai_web/templates/errors/400.html:7
+msgid ""
+"We could not process that request. Please check the submitted data and try again."
+msgstr ""
+"हम उस अनुरोध पर कार्रवाई नहीं कर सके. कृपया सबमिट किए गए डेटा की जांच करें और पुनः प्रयास करें।"
+
+#: expenseai_web/templates/errors/500.html:7
+msgid "We hit an unexpected issue. Our team has been notified."
+msgstr ""
+"हमें एक अप्रत्याशित समस्या का सामना करना पड़ा। हमारी टीम को सूचित कर दिया गया है."
+
+#: expenseai_web/templates/pages/privacy.html:62
+msgid ""
+"We implement administrative, technical, and physical safeguards designed to protect your information. This includes encryption in transit and at rest, strict role-based access controls, continuous monitoring, and regular penetration testing."
+msgstr ""
+"हम आपकी जानकारी की सुरक्षा के लिए डिज़ाइन किए गए प्रशासनिक, तकनीकी और भौतिक सुरक्षा उपाय लागू करते हैं। इसमें पारगमन और आराम के दौरान एन्क्रिप्शन, सख्त भूमिका-आधारित पहुंच नियंत्रण, निरंतर निगरानी और नियमित प्रवेश परीक्षण शामिल हैं।"
+
+#: expenseai_web/templates/pages/terms.html:31
+msgid ""
+"We may revise these Terms from time to time. Material changes will be communicated via email, in-product notifications, or release notes. Your continued use of the Service after changes become effective constitutes acceptance."
+msgstr ""
+"हम समय-समय पर इन शर्तों को संशोधित कर सकते हैं। सामग्री परिवर्तन ईमेल, इन-प्रोडक्ट नोटिफिकेशन या रिलीज़ नोट्स के माध्यम से सूचित किए जाएंगे। परिवर्तन प्रभावी होने के बाद सेवा का आपका निरंतर उपयोग स्वीकृति माना जाएगा।"
+
+#: expenseai_web/templates/pages/privacy.html:77
+msgid ""
+"We may update this policy from time to time to reflect operational, legal, or regulatory changes. When we do, we will revise the “Last updated” date above and provide additional notice where required."
+msgstr ""
+"हम परिचालन, कानूनी या नियामक परिवर्तनों को प्रतिबिंबित करने के लिए इस नीति को समय-समय पर अद्यतन कर सकते हैं। जब हम ऐसा करेंगे, तो हम उपरोक्त \"अंतिम अद्यतन\" तिथि को संशोधित करेंगे और जहां आवश्यक हो, अतिरिक्त सूचना प्रदान करेंगे।"
+
+#: expenseai_web/templates/pages/terms.html:14
+msgid "We recommend reviewing this document regularly to stay informed about updates."
+msgstr ""
+"हम अपडेट के बारे में सूचित रहने के लिए इस दस्तावेज़ की नियमित रूप से समीक्षा करने की सलाह देते हैं।"
+
+#: expenseai_web/templates/auth/verify_otp.html:68
+msgid "We sent a 6-digit code to"
+msgstr "हमने 6 अंकों का कोड भेजा"
+
+#: expenseai_web/templates/auth/forgot_password.html:67
+msgid ""
+"We use a one-time verification code to confirm it’s really you. The process takes less than a minute."
+msgstr ""
+"हम यह पुष्टि करने के लिए एक बार के सत्यापन कोड का उपयोग करते हैं कि यह वास्तव में आप ही हैं। इस प्रक्रिया में एक मिनट से भी कम समय लगता है।"
+
+#: expenseai_web/templates/pages/privacy.html:58
+msgid ""
+"We use cookies, pixel tags, and similar technologies to remember preferences, secure sessions, and measure performance. You can control cookies through browser settings, however disabling them may affect certain features."
+msgstr ""
+"हम प्राथमिकताओं को याद रखने, सत्रों को सुरक्षित करने और प्रदर्शन को मापने के लिए कुकीज़, पिक्सेल टैग और समान तकनीकों का उपयोग करते हैं। आप ब्राउज़र सेटिंग्स के माध्यम से कुकीज़ को नियंत्रित कर सकते हैं, हालाँकि उन्हें अक्षम करने से कुछ सुविधाएँ प्रभावित हो सकती हैं।"
+
+#: expenseai_web/templates/pages/contact.html:9
+msgid "We would love to hear from you"
+msgstr "हमें आपसे सुनना प्रिय लगेगा"
+
+#: expenseai_web/templates/auth/login.html:66
+msgid "Welcome back"
+msgstr "वापसी पर स्वागत है"
+
+#: expenseai_web/templates/pages/privacy.html:25
+msgid ""
+"Welcome to {{ app_name }}. This Privacy Policy describes how we collect, use, disclose, and safeguard your information when you use our web and mobile applications, APIs, and related services (collectively, the “Services”). By accessing or using the Services, you acknowledge that you have read, understood, and agreed to this policy."
+msgstr ""
+"{{ app_name }} में आपका स्वागत है। यह गोपनीयता नीति बताती है कि जब आप हमारे वेब और मोबाइल एप्लिकेशन, एपीआई और संबंधित सेवाओं (सामूहिक रूप से, \"सेवाएं\") का उपयोग करते हैं तो हम आपकी जानकारी कैसे एकत्र, उपयोग, खुलासा और सुरक्षित करते हैं। सेवाओं तक पहुंच या उपयोग करके, आप स्वीकार करते हैं कि आपने इस नीति को पढ़, समझ लिया है और इससे सहमत हैं।"
+
+#: expenseai_web/templates/invoices/detail.html:793
+msgid "What-if"
+msgstr "क्या हो अगर"
+
+#: expenseai_web/templates/pages/about.html:115
+msgid ""
+"Whether you’re exploring a partnership, evaluating our platform, or searching for your next role, we’d love to connect."
+msgstr ""
+"चाहे आप साझेदारी तलाश रहे हों, हमारे प्लेटफ़ॉर्म का मूल्यांकन कर रहे हों, या अपनी अगली भूमिका खोज रहे हों, हमें जुड़ना अच्छा लगेगा।"
+
+#: expenseai_web/templates/vendors/detail.html:102
+msgid "Window"
+msgstr "खिड़की"
+
+#: expenseai_web/templates/vendors/detail.html:88
+msgid "Windows analysed:"
+msgstr "विंडोज़ का विश्लेषण किया गया:"
+
+#: expenseai_web/templates/pages/privacy.html:43
+msgid ""
+"With your authorization, we may collect data from connected financial systems, ERPs, or productivity suites to deliver integrations and automations."
+msgstr ""
+"आपके प्राधिकरण से, हम एकीकरण और स्वचालन प्रदान करने के लिए कनेक्टेड वित्तीय प्रणालियों, ईआरपी, या उत्पादकता सुइट्स से डेटा एकत्र कर सकते हैं।"
+
+#: expenseai_web/templates/pages/privacy.html:70
+msgid ""
+"Withdraw consent or object to processing where lawful basis is legitimate interest."
+msgstr ""
+"जहां कानूनी आधार वैध हित है, वहां सहमति वापस ले लें या प्रसंस्करण पर आपत्ति जताएं।"
+
+#: expenseai_web/templates/invoices/detail.html:301
+msgid ""
+"Work top-down: run AI parsing, review insights, benchmark pricing, verify GST, then assign reviewers or finalize status."
+msgstr ""
+"ऊपर से नीचे तक कार्य करें: एआई पार्सिंग चलाएं, अंतर्दृष्टि की समीक्षा करें, बेंचमार्क मूल्य निर्धारण, जीएसटी सत्यापित करें, फिर समीक्षकों को नियुक्त करें या स्थिति को अंतिम रूप दें।"
+
+#: expenseai_web/templates/invoices/index.html:105
+msgid "Workspace index"
+msgstr "कार्यक्षेत्र सूचकांक"
+
+#: expenseai_web/templates/dashboard/index.html:173
+msgid "Workspace overview"
+msgstr "कार्यस्थल सिंहावलोकन"
+
+#: expenseai_web/templates/auth/verify_otp.html:116
+msgid "Wrong inbox?"
+msgstr "ग़लत इनबॉक्स?"
+
+#: expenseai_web/templates/errors/429.html:7
+msgid "You are hitting the service too quickly. Wait a moment and try again."
+msgstr "आप सेवा को बहुत तेज़ी से प्रभावित कर रहे हैं. एक क्षण रुकें और पुनः प्रयास करें।"
+
+#: expenseai_web/templates/emails/otp.html:25
+msgid "You can also click the button below to continue:"
+msgstr "जारी रखने के लिए आप नीचे दिए गए बटन पर भी क्लिक कर सकते हैं:"
+
+#: expenseai_web/templates/errors/403.html:7
+msgid "You do not have permission to view this resource."
+msgstr "आपके पास इस संसाधन को देखने की अनुमति नहीं है."
+
+#: expenseai_web/templates/pages/privacy.html:66
+msgid "You may exercise the following rights subject to applicable law:"
+msgstr "आप लागू कानून के अधीन निम्नलिखित अधिकारों का प्रयोग कर सकते हैं:"
+
+#: expenseai_web/templates/errors/401.html:7
+msgid "You need to sign in before accessing this page."
+msgstr "इस पृष्ठ तक पहुँचने से पहले आपको साइन इन करना होगा।"
+
+#: expenseai_web/templates/auth/register.html:128
+msgid ""
+"You will become the primary admin for this organization. Keep your credentials secure and invite teammates from the team settings screen after signing in."
+msgstr ""
+"आप इस संगठन के प्राथमिक व्यवस्थापक बन जायेंगे. अपने क्रेडेंशियल सुरक्षित रखें और साइन इन करने के बाद टीम सेटिंग स्क्रीन से टीम के साथियों को आमंत्रित करें।"
+
+#: expenseai_web/templates/admin/billing.html:217
+msgid "Your checkout session is ready. The Razorpay pop-up will launch shortly."
+msgstr "आपका चेकआउट सत्र तैयार है. रेज़रपे पॉप-अप शीघ्र ही लॉन्च होगा।"
+
+#: expenseai_web/templates/pages/privacy.html:47
+msgid "Your information is processed for the following legitimate purposes:"
+msgstr "आपकी जानकारी निम्नलिखित वैध उद्देश्यों के लिए संसाधित की जाती है:"
+
+#: expenseai_web/templates/admin/billing.html:213
+msgid ""
+"Your payment session opens securely in Razorpay. You can cancel anytime before confirming."
+msgstr ""
+"आपका भुगतान सत्र रेज़रपे में सुरक्षित रूप से खुलता है। आप पुष्टि करने से पहले कभी भी रद्द कर सकते हैं।"
+
+#: expenseai_web/templates/admin/billing.html:184
+msgid "Your upgrade summary"
+msgstr "आपका अपग्रेड सारांश"
+
+#: expenseai_web/templates/admin/base.html:4 expenseai_web/templates/invoices/detail.html:124 expenseai_web/templates/invoices/index.html:89 expenseai_web/templates/vendors/detail.html:3 expenseai_web/templates/vendors/index.html:3
+msgid "breadcrumb"
+msgstr "ब्रेडक्रम्ब"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:24
+msgid "code"
+msgstr "कोड"
+
+#: expenseai_web/templates/pages/about.html:11
+msgid ""
+"combines explainable machine learning with powerful workflows so finance leaders can move faster without sacrificing control, compliance, or privacy."
+msgstr ""
+"शक्तिशाली वर्कफ़्लो के साथ समझाने योग्य मशीन लर्निंग को जोड़ती है ताकि वित्त नेता नियंत्रण, अनुपालन या गोपनीयता का त्याग किए बिना तेज़ी से आगे बढ़ सकें।"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23
+msgid "currency"
+msgstr "मुद्रा"
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:24
+msgid "description"
+msgstr "विवरण"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23 expenseai_compliance/templates/compliance_admin/hsn_upload.html:24
+msgid "effective_from"
+msgstr "से प्रभावी"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23 expenseai_compliance/templates/compliance_admin/hsn_upload.html:24
+msgid "effective_to"
+msgstr "प्रभावी_से"
+
+#: expenseai_web/templates/pages/contact.html:16
+msgid "for priority assistance."
+msgstr "प्राथमिकता सहायता के लिए."
+
+#: expenseai_compliance/templates/compliance_admin/hsn_upload.html:24
+msgid "gst_rate"
+msgstr "जीएसटी दर"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23
+msgid "mad"
+msgstr "पागल"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23
+msgid "median_price"
+msgstr "औसत_मूल्य"
+
+#: expenseai_web/templates/pages/about.html:23
+msgid "milestones & counting"
+msgstr "मील के पत्थर और गिनती"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23
+msgid "n"
+msgstr "एन"
+
+#: expenseai_web/templates/pages/privacy.html:73
+msgid "section."
+msgstr "अनुभाग।"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23
+msgid "source"
+msgstr "स्रोत"
+
+#: expenseai_web/templates/pages/contact.html:98
+msgid "support@expenseai.io"
+msgstr "support@expenseai.io"
+
+#: expenseai_benchmark/templates/benchmark_admin/upload.html:23
+msgid "text_norm"
+msgstr "text_norm"
+
+#: expenseai_web/templates/vendors/index.html:18
+msgid "tracked vendors"
+msgstr "ट्रैक किए गए विक्रेता"
+
+#: expenseai_web/templates/base.html:9
+msgid ""
+"{% block meta_description %}Finvela brings trustworthy expense intelligence, automated compliance, and real-time risk insights to finance teams.{% endblock %}"
+msgstr ""
+"{% block meta_description %}फिनवेला वित्त टीमों के लिए भरोसेमंद व्यय खुफिया जानकारी, स्वचालित अनुपालन और वास्तविक समय जोखिम अंतर्दृष्टि लाता है।{% endblock %}"
+
+#: expenseai_web/templates/base.html:59
+msgid "{{ _('Service health') }}"
+msgstr "__प्लेसहोल्डर_0__"
+
+#: expenseai_web/templates/dashboard/index.html:249
+msgid "{{ invoice.original_filename or 'Invoice file' }} thumbnail"
+msgstr "{{ invoice.original_filename or 'Invoice file' }} थंबनेल"
+
+#: expenseai_web/templates/dashboard/index.html:254 expenseai_web/templates/invoices/detail.html:178 expenseai_web/templates/invoices/index.html:203
+msgid "{{ invoice.original_filename }}"
+msgstr "__प्लेसहोल्डर_0__"
+
+#: expenseai_web/templates/invoices/index.html:226
+msgid "{{ risk_label }} risk"
+msgstr "{{ risk_label }} जोखिम"
+
+#: expenseai_web/templates/vendors/index.html:64
+msgid "{{ vendor.text_norm_summary or 'No summary captured yet.' }}"
+msgstr "__प्लेसहोल्डर_0__"
+
+#: expenseai_web/templates/base.html:107
+msgid "© {{ now().year }} Finvela"
+msgstr "© {{ now().year }} फिनवेला"
+
+#: expenseai_web/templates/invoices/detail.html:396
+msgid "· Similarity {{ (match.get('similarity') | float * 100) | round(1) }}%"
+msgstr "· समानता {{ (match.get('similarity') | float * 100) | round(1) }}%"
+
+#: expenseai_web/templates/dashboard/index.html:255
+msgid "· {{ (invoice.filesize_bytes / 1024) | round(1) }} KB"
+msgstr "· {{ (invoice.filesize_bytes / 1024) | round(1) }} KB"

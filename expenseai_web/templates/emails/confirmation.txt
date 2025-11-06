@@ -1,0 +1,10 @@
+{{ app_name }} update
+
+Hi {{ name }},
+
+{{ message }}
+
+Continue here:
+{{ cta_url }}
+
+Need help? Contact {{ support_email }}.
