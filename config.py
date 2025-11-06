@@ -41,7 +41,7 @@ class BaseConfig:
     VERSION = "0.1.0"
 
     SECRET_KEY = os.getenv("SECRET_KEY", "please-change-me")
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///expenseai.db")
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///finvela.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
 
