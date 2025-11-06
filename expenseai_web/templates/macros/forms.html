@@ -1,13 +1,14 @@
-{% macro render_field(field, icon=None, placeholder=None, autocomplete=None, disabled=False, input_class=None, inputmode=None) %}
+{% macro render_field(field, icon=None, placeholder=None, autocomplete=None, disabled=False, input_class=None, inputmode=None, attributes=None) %}
   <div class="mb-3">
     <label for="{{ field.id }}" class="form-label fw-semibold">{{ field.label.text }}</label>
     <div class="input-group">
       {% if icon %}
         <span class="input-group-text bg-body-secondary"><i class="bi bi-{{ icon }}"></i></span>
       {% endif %}
-      {% set classes = input_class or 'form-control form-control-lg' %}
-      {% set placeholder_text = placeholder if placeholder is not none else field.label.text %}
-  {{ field(class_=classes, placeholder=placeholder_text, autocomplete=autocomplete, disabled=disabled, inputmode=inputmode) }}
+    {% set classes = input_class or 'form-control form-control-lg' %}
+    {% set placeholder_text = placeholder if placeholder is not none else field.label.text %}
+    {% set attrs = attributes or {} %}
+  {{ field(class_=classes, placeholder=placeholder_text, autocomplete=autocomplete, disabled=disabled, inputmode=inputmode, **attrs) }}
     </div>
     {% if field.errors %}
       <div class="text-danger small mt-1">
@@ -17,15 +18,16 @@
   </div>
 {% endmacro %}
 
-{% macro render_select(field, icon=None, help_text=None, disabled=False, input_class=None) %}
+{% macro render_select(field, icon=None, help_text=None, disabled=False, input_class=None, attributes=None) %}
   <div class="mb-3">
     <label for="{{ field.id }}" class="form-label fw-semibold">{{ field.label.text }}</label>
     <div class="input-group">
       {% if icon %}
         <span class="input-group-text bg-body-secondary"><i class="bi bi-{{ icon }}"></i></span>
       {% endif %}
-      {% set classes = input_class or 'form-select form-select-lg' %}
-      {{ field(class_=classes, disabled=disabled) }}
+  {% set classes = input_class or 'form-select form-select-lg' %}
+  {% set attrs = attributes or {} %}
+  {{ field(class_=classes, disabled=disabled, **attrs) }}
     </div>
     {% if help_text %}
       <div class="form-text">{{ help_text }}</div>
