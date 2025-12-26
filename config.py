@@ -45,7 +45,7 @@ class BaseConfig:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
 
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyDa20LzWUY04hoqASDyxuE50yV7v_1vJWw")
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
     GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
     GEMINI_REQUEST_TIMEOUT = int(os.getenv("GEMINI_REQUEST_TIMEOUT", "90"))
     GEMINI_MAX_RETRIES = int(os.getenv("GEMINI_MAX_RETRIES", "3"))
@@ -158,9 +158,9 @@ class BaseConfig:
     FF_VENDOR_DRIFT_ALERTS = _bool(os.getenv("FF_VENDOR_DRIFT_ALERTS"), default=True)
     FF_WHATSAPP = _bool(os.getenv("FF_WHATSAPP"), default=True)
 
-    TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "ACe22c004acbbbef75cec10cd919dbea35")
-    TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "a244fad6a3ee4912734384f6e08988d8")
-    TWILIO_WHATSAPP_NUMBER = os.getenv("TWILIO_WHATSAPP_NUMBER", "+14155238886")
+    TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "")
+    TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
+    TWILIO_WHATSAPP_NUMBER = os.getenv("TWILIO_WHATSAPP_NUMBER", "")
     TWILIO_VALIDATE_SIGNATURE = _bool(os.getenv("TWILIO_VALIDATE_SIGNATURE"), default=True)
     WHATSAPP_SESSION_STALE_HOURS = int(os.getenv("WHATSAPP_SESSION_STALE_HOURS", "48"))
     WHATSAPP_AUTOCREATE_USERS = _bool(os.getenv("WHATSAPP_AUTOCREATE_USERS"), default=True)
@@ -256,14 +256,14 @@ class BaseConfig:
     ORG_PRICE_PER_ADDITIONAL_USER = os.getenv("ORG_PRICE_PER_ADDITIONAL_USER", "199")
     ORG_PRICE_CURRENCY = os.getenv("ORG_PRICE_CURRENCY", "INR")
 
-    RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "rzp_test_kXRfpPBzUjfJgV")
-    RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "7R38rICxIYrIUzYCQ2iGHsuw")
+    RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID", "")
+    RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET", "")
     RAZORPAY_WEBHOOK_SECRET = os.getenv("RAZORPAY_WEBHOOK_SECRET", "")
     MAIL_SERVER = os.getenv("MAIL_SERVER", "smtp.gmail.com")
     MAIL_PORT = int(os.getenv("MAIL_PORT", 587))
     MAIL_USE_TLS = os.getenv("MAIL_USE_TLS", "true").lower() == "true"
-    MAIL_USERNAME = "multimosaic.help@gmail.com"
-    MAIL_PASSWORD = "eurr xxsx brxz anrz"
+    MAIL_USERNAME = ""
+    MAIL_PASSWORD = ""
     MAIL_USE_SSL = os.getenv("MAIL_USE_SSL", "false").lower() == "true"
     MAIL_SUPPRESS_SEND = os.getenv("MAIL_SUPPRESS_SEND", "false").lower() == "true"
 
